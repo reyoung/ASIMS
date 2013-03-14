@@ -12,7 +12,7 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 
-GET     /admin/Airport/                         AdminAirport.list(page=1,pageSize=10)
+GET     /admin/Airport/                         AdminAirport.list
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
