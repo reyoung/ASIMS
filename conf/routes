@@ -11,5 +11,8 @@ GET     /favicon.ico                            404
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
+
+GET     /admin/Airport/                         AdminAirport.list(page=1,pageSize=10)
+
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
