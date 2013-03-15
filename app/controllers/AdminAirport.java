@@ -59,7 +59,8 @@ public class AdminAirport extends Controller {
             badRequest();
         }
         Logger.debug("On Remove %d Called",id);
-        renderJSON(false);
+        int rows = Airport.delete("Id",id);
+        renderJSON(rows!=0);
     }
 
     public static void edit(@Required Long id){
