@@ -1,6 +1,6 @@
 #{extends 'admin.html' /}
 #{set title:"查询飞机场" /}
-<div class="row-fluid">
+<div class="row">
     #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}}
     <li>
         <form class="form-search" style="display:inline;" method="get">

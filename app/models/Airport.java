@@ -37,7 +37,15 @@ public class Airport extends Model {
     }
 
     public String getCountry(){
-        return CountryCityTable[this.CountryId][this.CityId];
+        return CountryCityTable[this.CountryId][0];
+    }
+
+    static public String[] getAllCountry(){
+        String [] ret_val = new String[CountryCityTable.length];
+        for (int i=0;i<CountryCityTable.length;++i){
+            ret_val [i] = CountryCityTable[i][0];
+        }
+        return ret_val;
     }
 
     public Airport(String name, int cityId, int countryId) {

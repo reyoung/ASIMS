@@ -21,14 +21,14 @@
 </div>
 <div class="container">
     <div class="row-fluid">
-        <div class="span3 well">
-            <ul class="nav nav-list">
+        <div class="span2 well">
+            <ul class="nav nav-list" >
                 <li class="nav-header">机场操作</li>
                 <li id="nav_airport_list"><a href="@{AdminAirport.list}"><i class="icon-list-alt"></i>查询</a></li>
-                <li><a href="#"><i class="icon-plus"></i>新增</a></li>
+                <li id="nav_airport_create"><a href="@{AdminAirport.create}"><i class="icon-plus"></i>新增</a></li>
             </ul>
         </div>
-        <div class="span9">
+        <div class="offset1 span8">
             #{doLayout /}
         </div>
     </div>

@@ -310,3 +310,7 @@ var functools = (function(undefined){
 if(typeof module != 'undefined' && module.exports){
   module.exports = functools;
 }
+
+define([],function (){
+    return functools;
+})

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.gson.GsonBuilder;
 import models.Airport;
 import models.Page;
 import play.Logger;
@@ -30,5 +31,14 @@ public class AdminAirport extends Controller {
         long all = Airport.count();
         Page<Airport> pages = new Page<Airport>(airports,page,pageSize,all);
         render(pages);
+    }
+
+    public static void create(){
+        String[] countries = Airport.getAllCountry();
+        AdminAirport.renderArgs.put("countries",countries);
+        String tableJson= new GsonBuilder().create().toJson(Airport.CountryCityTable);
+        AdminAirport.renderArgs.put("tableJson",tableJson);
+        Logger.debug("Table Json Is "+tableJson);
+        render();
     }
 }

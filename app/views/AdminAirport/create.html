@@ -1,0 +1,39 @@
+#{extends 'admin.html' /}
+#{set title:"新建飞机场" /}
+<div class="row">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>新增机场</legend>
+            <div class="control-group">
+                <label for="Name" class="control-label">机场名:</label>
+                <input type="text" name="Name" id="Name" placeholder="白云机场"/>
+            </div>
+            <div class="control-group">
+                <label for="CountryId" class="control-label">
+                    所属国家:
+                </label>
+                <select id="CountryId" name="CountryId">
+                    %{for (i=0;i<countries.length;++i){}%
+                        <option value="${i}">${countries[i]}</option>
+                    %{}}%
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="CityId" class="control-label">
+                    所在城市:
+                </label>
+                <select id="CityId" name="CityId">
+
+                </select>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-info" style="margin-left:150px;">新建</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<pre id="table_json" style="visibility:hidden">${tableJson}</pre>
+#{js 'admin/airport/create.js' /}
