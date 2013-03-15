@@ -53,4 +53,16 @@ public class AdminAirport extends Controller {
 //        renderArgs.put("status","created");
         list(1,10,"%","created");
     }
+
+    public static void remove(@Required Long id){
+        if (id==null){
+            badRequest();
+        }
+        Logger.debug("On Remove %d Called",id);
+        renderJSON(false);
+    }
+
+    public static void edit(@Required Long id){
+
+    }
 }

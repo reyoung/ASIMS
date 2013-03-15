@@ -10,7 +10,7 @@
 </div>
 #{/if}
 <div class="row">
-    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}}
+    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}, offset:"span6 offset6"}
     <li>
         <form class="form-search" style="display:inline;" method="get">
             <input name="filter" type="text" class="input-medium search-query" placeholder="机场名">
@@ -18,17 +18,64 @@
         </form>
     </li>
     #{/pager_header}
-    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}}
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="span3">名称</th>
+                    <th class="span3">国家</th>
+                    <th class="span3">城市</th>
+                    <th class="span3">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                %{for(item in pages.Data){}%
+                <tr>
+                    <td class="span3">${item.Name}</td>
+                    <td class="span3">${item.getCountry()}</td>
+                    <td class="span3">${item.getCity()}</td>
+                    <td class="span3">
+                        <div class="btn-group">
+                            <a href="@{AdminAirport.edit(item.id)}" class="btn btn-info">修改</a>
+                            <button class="btn btn-danger" data-id="${item.id}">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                %{}}%
+            </tbody>
+        </table>
+    </div>
+    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}, offset:"span3 offset9"}
     #{/pager_header}
 </div>
 
 
 <script type="text/javascript">
 require(["admin/active"],function(active){
-    active("nav_airport_list")
-    $("#info-banner .close").click(function(){
-        console.debug("On Click")
+
+    $(function (){
+        $("table tbody tr td .btn-group .btn.btn-danger").click(function (){
+            deleteID = $(this).attr("data-id")
+            $.ajax({
+                type:"delete",
+                url:"@{AdminAirport.remove}"+deleteID,
+                error:function (){
+                    alert("Network Error")
+                },
+                success:function(p1,p2){
+                    ok = JSON.parse(p1)
+                    if(!ok){
+                        alert("Request Error")
+                    } else {
+                        location.reload()
+                    }
+                }
+            })
+        })
+        active("nav_airport_list")
+        $("#info-banner .close").click(function(){
         $("#info-banner").text("")
+        })
     })
 })
 </script>
