@@ -1,18 +1,20 @@
 
 <div class="row">
+    <div class="span6 offset6">
     <ul class="pager">
         #{if _page.hasPrev()}
-        <li class="previous"><a href="${_prev}">前一页</a></li>
+        <li ><a href="${_prev}">前一页</a></li>
         #{/if}
         #{else}
-        <li class="previous disabled"><a href="#">前一页</a></li>
+        <li class="disabled"><a href="#">前一页</a></li>
         #{/else}
         #{doBody /}
         #{if _page.hasNext()}
-        <li class="next"><a href="${_next}">下一页</a></li>
+        <li ><a href="${_next}">下一页</a></li>
         #{/if}
         #{else}
-        <li class="next disabled"><a href="#">下一页</a></li>
+        <li class="disabled"><a href="#">下一页</a></li>
         #{/else}
     </ul>
+    </div>
 </div>

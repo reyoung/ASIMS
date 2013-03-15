@@ -1,5 +1,14 @@
 #{extends 'admin.html' /}
 #{set title:"查询飞机场" /}
+#{if status=='created'}
+<div id="info-banner" class="row">
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>成功:</strong>
+        新增飞机场
+    </div>
+</div>
+#{/if}
 <div class="row">
     #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}}
     <li>
@@ -17,5 +26,9 @@
 <script type="text/javascript">
 require(["admin/active"],function(active){
     active("nav_airport_list")
+    $("#info-banner .close").click(function(){
+        console.debug("On Click")
+        $("#info-banner").text("")
+    })
 })
 </script>

@@ -36,6 +36,11 @@ public class Airport extends Model {
         return CountryCityTable[this.CountryId][this.CityId+1];
     }
 
+    static public boolean isValidCountryCity(int CountryId, int CityId){
+        return (CountryId<CountryCityTable.length)&&(CountryId>=0)
+                &&(CityId>=0)&& (CityId+1 < CountryCityTable[CountryId].length);
+    }
+
     public String getCountry(){
         return CountryCityTable[this.CountryId][0];
     }
@@ -48,7 +53,7 @@ public class Airport extends Model {
         return ret_val;
     }
 
-    public Airport(String name, int cityId, int countryId) {
+    public Airport(String name, int countryId,int cityId) {
         Name = name;
         CityId = cityId;
         CountryId = countryId;
