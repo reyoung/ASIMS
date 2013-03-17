@@ -20,5 +20,8 @@ DELETE  /admin/Airport/                         AdminAirport.remove
 GET     /admin/Airport/{id}/edit                AdminAirport.edit
 POST    /admin/Airport/edit                     AdminAirport.handleEdit
 
+
+GET     /admin/AirlinePlan/create               AdminAirlinePlan.create
+
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

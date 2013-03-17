@@ -20,15 +20,15 @@ public class Airport extends Model {
     @MinSize(2)
     @Required
     @MaxSize(255)
-    @Column(name="Name")
+    @Column(name="Name",nullable = false)
     public String Name;
 
     @Required
-    @Column(name="CityId")
+    @Column(name="CityId",nullable = false)
     public int CityId;
 
     @Required
-    @Column(name="CountryId")
+    @Column(name="CountryId",nullable = false)
     public int CountryId;
 
     static public String[][] CountryCityTable = {
