@@ -11,5 +11,14 @@ GET     /favicon.ico                            404
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
+
+GET     /admin/Airport/                         AdminAirport.list
+GET     /admin/Airport/create                   AdminAirport.create
+POST    /admin/Airport/create                   AdminAirport.handleCreate
+DELETE  /admin/Airport/{id}                     AdminAirport.remove
+DELETE  /admin/Airport/                         AdminAirport.remove
+GET     /admin/Airport/{id}/edit                AdminAirport.edit
+POST    /admin/Airport/edit                     AdminAirport.handleEdit
+
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+#*       /{controller}/{action}                  {controller}.{action}

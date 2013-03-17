@@ -1,0 +1,71 @@
+#{extends 'admin.html' /}
+#{if model==null}
+#{set title:"新建飞机场" /}
+#{/if} #{else}
+#{set title:"修改飞机场" /}
+#{/else}
+<div class="row">
+    <form class="form-horizontal" method="POST" action="
+        #{if model ==null}
+        @{AdminAirport.handleCreate}
+        #{/if} #{else}
+        @{AdminAirport.handleEdit}
+        #{/else}
+    ">
+        <fieldset>
+            <legend>
+                #{if model==null}
+                新增机场
+                #{/if} #{else}
+                修改机场
+                #{/else}
+            </legend>
+            <div class="control-group">
+                <label for="Name" class="control-label" >机场名:</label>
+                <input type="text" name="Name" id="Name" placeholder="白云机场"  #{if model!=null}value="${model.Name}"#{/if} />
+            </div>
+            <div class="control-group">
+                <label for="CountryId" class="control-label">
+                    所属国家:
+                </label>
+                <select id="CountryId" name="CountryId">
+                    %{for (i=0;i<countries.length;++i){}%
+                        #{if model!=null&&model.CountryId==i}
+                        <option value="${i}" selected>${countries[i]}</option>
+                        #{/if}#{else}
+                        <option value="${i}">${countries[i]}</option>
+                        #{/else}
+                    %{}}%
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="CityId" class="control-label">
+                    所在城市:
+                </label>
+                <select id="CityId" name="CityId">
+
+                </select>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-info" style="margin-left:150px;">
+                    #{if model==null}
+                        新建
+                    #{/if}#{else}
+                        修改
+                    #{/else}
+                    </button>
+                </div>
+            </div>
+            #{if model !=null}
+            <input type="hidden" name="id" value="${model.id}" />
+            #{/if}
+        </fieldset>
+    </form>
+</div>
+
+<pre id="table_json" style="visibility:hidden">${tableJson}</pre>
+#{if model!=null}
+<pre id="city_id_json" style="visibility:hidden;">${model.CityId}</pre>
+#{/if}
+#{js 'admin/airport/create.js' /}
