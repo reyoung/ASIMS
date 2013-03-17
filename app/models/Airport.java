@@ -5,6 +5,7 @@ import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -19,12 +20,15 @@ public class Airport extends Model {
     @MinSize(2)
     @Required
     @MaxSize(255)
+    @Column(name="Name")
     public String Name;
 
     @Required
+    @Column(name="CityId")
     public int CityId;
 
     @Required
+    @Column(name="CountryId")
     public int CountryId;
 
     static public String[][] CountryCityTable = {

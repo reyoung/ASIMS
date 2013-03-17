@@ -10,13 +10,14 @@
 </div>
 #{/if}
 <div class="row">
-    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}, offset:"span6 offset6"}
-    <li>
-        <form class="form-search" style="display:inline;" method="get">
-            <input name="filter" type="text" class="input-medium search-query" placeholder="机场名">
-            <button type="submit" class="btn">搜索</button>
-        </form>
-    </li>
+    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())},
+        offset:"span3 offset9"}
+    <!--<li>-->
+        <!--<form class="form-search" style="display:inline;" method="get">-->
+            <!--<input name="filter" type="text" class="input-medium search-query" placeholder="机场名">-->
+            <!--<button type="submit" class="btn">搜索</button>-->
+        <!--</form>-->
+    <!--</li>-->
     #{/pager_header}
     <div class="row">
         <table class="table table-bordered table-hover">
@@ -45,7 +46,8 @@
             </tbody>
         </table>
     </div>
-    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())}, offset:"span3 offset9"}
+    #{pager_header page:pages, prev:@{AdminAirport.list(pages.prev())}, next:@{AdminAirport.list(pages.next())},
+        offset:"span3 offset9"}
     #{/pager_header}
 </div>
 
