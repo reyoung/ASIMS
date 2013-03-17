@@ -1,6 +1,9 @@
 package controllers;
 
+import models.Airport;
 import play.mvc.Controller;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +14,8 @@ import play.mvc.Controller;
  */
 public class AdminAirlinePlan  extends Controller{
     public static void create(){
-        render();
+        List<Airport> airports=Airport.findAll();
+        render(airports);
     }
+
 }
