@@ -64,6 +64,26 @@ public class AdminAirport extends Controller {
     }
 
     public static void edit(@Required Long id){
-
+        Airport model = Airport.findById(id);
+        String[] countries = Airport.getAllCountry();
+        AdminAirport.renderArgs.put("countries",countries);
+        String tableJson= new GsonBuilder().create().toJson(Airport.CountryCityTable);
+        AdminAirport.renderArgs.put("tableJson",tableJson);
+        render("AdminAirport/create.html",model);
+    }
+    public static void handleEdit(@Required Long id,
+                                  @Required String Name,
+                                  @Required Integer CityId,
+                                  @Required Integer CountryId) {
+        if (validation.hasErrors()) {
+            badRequest();
+        } else {
+            Airport m = Airport.findById(id);
+            m.Name = Name;
+            m.CityId = CityId;
+            m.CountryId = CountryId;
+            m.save();
+            list(1,10,"%","");
+        }
     }
 }

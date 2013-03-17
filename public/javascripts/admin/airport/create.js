@@ -8,6 +8,7 @@ require(["admin/active","libs/functools"],function(active,f){
         },tables[countryId])
         city = $("#CityId")
         city.empty()
+//        cid = $("#city_id_json").text()
         for (i=0;i<cities.length;++i){
             city.append("<option value='"+i+"'>"+cities[i]+"</option>")
         }
@@ -15,4 +16,5 @@ require(["admin/active","libs/functools"],function(active,f){
 
     $("#CountryId").change(updateCity)
     updateCity()
+    $("#CityId")[0].selectedIndex = $("#city_id_json").text()
 })
