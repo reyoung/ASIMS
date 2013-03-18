@@ -1,3 +1,9 @@
 require(["admin/active"],function(active){
-    active("nav_airlinePlan_create")
+    $(function() {
+        active("nav_airlinePlan_create")
+        $('#datetimepicker').datetimepicker({
+            language: 'en'
+        });
+//        number = $('#Number').val()
+    });
 })

@@ -22,6 +22,7 @@ POST    /admin/Airport/edit                     AdminAirport.handleEdit
 
 
 GET     /admin/AirlinePlan/create               AdminAirlinePlan.create
+GET     /admin/AirlinePlan/debug                AdminAirlinePlan.debug
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

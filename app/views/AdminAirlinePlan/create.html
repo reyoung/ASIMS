@@ -1,6 +1,109 @@
 #{extends 'admin.html' /}
 #{set title:"新建航线计划" /}
+#{set 'moreScripts'}
+#{js 'bootstrap.min.js' /}
+#{js 'bootstrap-datetimepicker.min.js' /}
+#{/set}
+<div class="row">
+    <form class="form-horizontal" method="POST" action="#">
+        <fieldset>
+            <legend>新建航线计划</legend>
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#BasicSettings" data-toggle="tab">基本设置</a></li>
+                    <li><a href="#StopoverSettings" data-toggle="tab">经停站</a></li>
+                    <li><a href="#RepeatSettings" data-toggle="tab">重复</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="BasicSettings">
+                        <div class="control-group error">
+                            <label for="Number" class="control-label">航线编号:</label>
+                            <input type="text" id="Number" name="Number" placeholder="CZ00032"/>
+                            <span class="help-inline error">Error, Cannot Be Empty</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="LeaveTime" id="LeaveTimeLbl" class="control-label">起飞日期: </label>
+                            <div id="datetimepicker" class="input-append">
+                                <input data-format="yyyy/MM/dd hh:mm:ss" type="text" name="LeaveTime" id="LeaveTime"/>
+                    <span class="add-on">
+                      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                      </i>
+                    </span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="FlyTime" id="FlyTimeLbl" class="control-label">飞行时间:</label>
+                            <input type="number" id="FlyTime" name="FlyTime" min=1 />
+                        </div>
+                        <div class="control-group">
+                            <label for="LeavePlace" id="LeavePlaceLbl" class="control-label">始发地:</label>
+                            <select id="LeavePlace" name="LeavePlace">
+                                %{for (ap in airports){}%
+                                <option value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                %{}}%
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="ArrivePlace" id="ArrivePlaceLbl" class="control-label">目的地:</label>
+                            <select id="ArrivePlace" name="ArrivePlace">
+                                %{for (ap in airports) { }%
+                                <option value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                %{} }%
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="StopoverSettings">
+                        <input type="hidden" name="Stopovers" id="Stopovers">
+                        <div class="control-group" style="width: 300px;margin-left: 115px;">
+                            <div id="StopoversInput" class="control-label" style="width: 300px;">
+                                <div>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>经停地名称</th>
+                                            <th><a href="#" class="btn"><i class="icon-plus"></i></a> </th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="RepeatSettings">
+                        <div class="control-group" style="width:300px; margin-left:115px;">
 
+                            <div class="tabbable">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#NoRepeat" data-toggle="tab">无重复</a></li>
+                                    <li><a href="#WeekRepeat" data-toggle="tab">每周</a></li>
+                                    <li><a href="#MonthRepeat" data-toggle="tab">每月</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="NoRepeat">
+                                    </div>
+                                    <div class="tab-pane" id="WeekRepeat">
+                                        <label class="checkbox" for="week1"><input type="checkbox" id="week1">周一</label>
+                                        <label class="checkbox" for="week2"><input type="checkbox" id="week2">周二</label>
+                                        <label class="checkbox" for="week3"><input type="checkbox" id="week3">周三</label>
+                                        <label class="checkbox" for="week4"><input type="checkbox" id="week4">周四</label>
+                                        <label class="checkbox" for="week5"><input type="checkbox" id="week5">周五</label>
+                                        <label class="checkbox" for="week6"><input type="checkbox" id="week6">周六</label>
+                                        <label class="checkbox" for="week7"><input type="checkbox" id="week7">周日</label>
+                                    </div>
+                                    <div class="tab-pane" id="MonthRepeat">
+                                        <input type="number" id="month" min="1" max="31" placeholder="日">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="Repeat" id="Repeat">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="创建" class="btn btn-info" style="margin-left:340px;">
+        </fieldset>
+    </form>
+</div>
 
 #{js 'admin/airlinePlan/create.js' /}
