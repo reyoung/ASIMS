@@ -4,5 +4,6 @@ require(["admin/active"],function(active){
         $('#datetimepicker').datetimepicker({
             language: 'en'
         });
+//        number = $('#Number').val()
     });
 })
