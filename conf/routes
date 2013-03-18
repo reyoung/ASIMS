@@ -21,8 +21,11 @@ GET     /admin/Airport/{id}/edit                AdminAirport.edit
 POST    /admin/Airport/edit                     AdminAirport.handleEdit
 
 
+GET     /admin/AirlinePlan/                     AdminAirlinePlan.list
 GET     /admin/AirlinePlan/create               AdminAirlinePlan.create
 GET     /admin/AirlinePlan/debug                AdminAirlinePlan.debug
+DELETE  /admin/Airport/{id}                     AdminAirlinePlan.delete
+DELETE  /admin/Airport/                         AdminAirlinePlan.delete
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

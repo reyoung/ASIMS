@@ -14,12 +14,13 @@ public class Page<T> {
     public int     Index;
     public int     Length;
     public long    Count;
-
+//    public fj.data.List<T> FData;
     public Page(List<T> data, int index, int length, long count) {
         Data = data;
         Index = index;
         Length = length;
         Count = count;
+//        FData = fj.data.List.list(Data.toArray((T[]) new Object[Data.size()]));
     }
 
     public boolean hasPrev(){

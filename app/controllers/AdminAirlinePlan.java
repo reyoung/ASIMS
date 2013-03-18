@@ -2,9 +2,11 @@ package controllers;
 
 import models.AirlinePlan;
 import models.Airport;
+import models.Page;
 import play.mvc.Controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 //import fj.data.List;
 /**
@@ -25,10 +27,31 @@ public class AdminAirlinePlan  extends Controller{
         AirlinePlan alp  = new AirlinePlan();
         alp.FlyTime = 60;
         alp.Repeat="N";
-        alp.LeaveTime = new Timestamp(2012,12,21,10,10,10,10);
+
+        alp.LeaveTime = new Timestamp(new Date().getTime());
         alp.LeavePlace = aps.get(0);
         alp.ArrivePlace = aps.get(1);
         alp.Number = "CZ300212";
         alp.save();
+    }
+
+
+    public static void delete(Long id){
+        /**
+         * @todo
+         */
+        renderJSON(false);
+    }
+
+    public static void list(Integer page, Integer pageSize){
+        if(page==null||page<1){
+            page = 1;
+        }
+        if(pageSize==null||pageSize<1){
+            pageSize = 10;
+        }
+        List<AirlinePlan> airlinePlans = AirlinePlan.all().fetch(page,pageSize);
+        Page<AirlinePlan> pages = new Page<AirlinePlan>(airlinePlans,page,pageSize,AirlinePlan.count());
+        render(pages);
     }
 }

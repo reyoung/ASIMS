@@ -7,6 +7,7 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -49,4 +50,19 @@ public class AirlinePlan extends Model {
     @Required
     @OneToMany()
     public List<Airport> StopoverPlaces;
+
+    public String getReadableLeaveTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(this.LeaveTime);
+    }
+    public String getReadableFlyTime(){
+        return String.valueOf(FlyTime);
+    }
+    public String getReadableStopovers(){
+        if (StopoverPlaces.size()==0){
+            return "无" ;
+        } else {
+            return null;
+        }
+    }
 }

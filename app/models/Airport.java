@@ -62,4 +62,13 @@ public class Airport extends Model {
         CityId = cityId;
         CountryId = countryId;
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s %s %s",this.getCountry(),this.getCity(),this.Name);
+    }
+
+    public String simpleToString(){
+        return String.format("%s %s",this.getCountry(),this.getCity());
+    }
 }
