@@ -1,0 +1,31 @@
+#{extends 'admin.html' /}
+#{set title:'查询航空公司' /}
+
+<div class="row">
+    #{pager_header page:pages, prev:@{AdminAirCompany.list(pages.prev())}, next:@{AdminAirCompany.list(pages.next())}, offset:"span3 offset9" /}
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                %{for(com in pages.Data){}%
+                <tr>
+                    <td>${com.Name}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="@{AdminAirCompany.edit(com.id)}" class="btn btn-info">修改</a>
+                            <button class="btn btn-danger" data-id="${com.id}">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                %{}}%
+            </tbody>
+        </table>
+    </div>
+    #{pager_header page:pages, prev:@{AdminAirCompany.list(pages.prev())}, next:@{AdminAirCompany.list(pages.next())}, offset:"span3 offset9" /}
+</div>
+#{js 'admin/airCompany/list.js' /}
