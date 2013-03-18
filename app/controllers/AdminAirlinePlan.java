@@ -1,5 +1,6 @@
 package controllers;
 
+import models.AirCompany;
 import models.AirlinePlan;
 import models.Airport;
 import models.Page;
@@ -18,10 +19,14 @@ import java.util.List;
  */
 public class AdminAirlinePlan  extends Controller{
     public static void create(){
-        List<Airport> airports=Airport.findAll();
-        render(airports);
+        beforeRenderCreate();
+        render();
     }
-
+    public static boolean beforeRenderCreate(){
+        renderArgs.put("airports",Airport.findAll());
+        renderArgs.put("companies", AirCompany.findAll());
+        return true;
+    }
     public static void handleCreate(String Number,String LeaveTime,Integer FlyTime,
                                     Long LeavePlace,Long ArrivePlace,String Stopovers,
                                     String Repeat
@@ -65,7 +70,7 @@ public class AdminAirlinePlan  extends Controller{
         try {
             AirlinePlan alp = AirlinePlan.findById(id);
             renderArgs.put("model",alp);
-            renderArgs.put("airports",Airport.findAll());
+            beforeRenderCreate();
         } catch (Throwable e) {
             badRequest();
         }

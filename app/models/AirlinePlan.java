@@ -37,6 +37,11 @@ public class AirlinePlan extends Model {
     @Max(value = 255)
     public String Repeat;
 
+
+    @OneToOne
+    @JoinColumn(name = "Company",nullable = false)
+    public AirCompany Company;
+
     @Required
     @OneToOne()
     @JoinColumn(name = "LeavePlace", nullable = false)

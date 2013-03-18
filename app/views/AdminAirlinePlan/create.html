@@ -88,6 +88,18 @@
                                 %{} }%
                             </select>
                         </div>
+                        <div class="control-group">
+                            <label for="Company" id="CompanyLbl" class="control-label">所属航空公司:</label>
+                            <select id="Company" name="Company">
+                                %{for (com in companies){}%
+                                    #{if model!=null&&model.Company.id==com.id}
+                                        <option selected value="${com.id}">${com.Name}</option>
+                                    #{/if}#{else}
+                                        <option value="${com.id}">${com.Name}</option>
+                                    #{/else}
+                                %{}}%
+                            </select>
+                        </div>
                     </div>
                     <div class="tab-pane" id="StopoverSettings">
                         <input type="hidden" name="Stopovers" id="Stopovers">
