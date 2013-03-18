@@ -1,0 +1,19 @@
+#{extends 'admin.html' /}
+#{set title:"新增航空公司" /}
+
+<div class="row">
+    <form method="POST" action="@{AdminAirCompany.handleCreate}" class="form-horizontal">
+        <fieldset>
+            <legend>
+                新增航空公司
+            </legend>
+            <div class="control-group">
+                <label for="Name" class="control-label">航空公司名称：</label>
+                <input type="text" name="Name" id="Name">
+            </div>
+            <input type="submit" class="btn btn-info" style="margin-left:330px;" value="新增">
+        </fieldset>
+    </form>
+</div>
+
+#{js 'admin/airCompany/create.js' /}

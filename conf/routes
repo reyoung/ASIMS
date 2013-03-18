@@ -30,5 +30,10 @@ DELETE  /admin/AirlinePlan/                     AdminAirlinePlan.delete
 GET     /admin/AirlinePlan/{id}/edit            AdminAirlinePlan.edit
 POST    /admin/AirlinePlan/edit                 AdminAirlinePlan.handleEdit
 
+GET     /admin/AirCompany/                      AdminAirCompany.list
+GET     /admin/AirCompany/create                AdminAirCompany.create
+POST    /admin/AirCompany/create                AdminAirCompany.handleCreate
+
+
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}
