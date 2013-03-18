@@ -22,6 +22,12 @@ public class AdminAirlinePlan  extends Controller{
         render(airports);
     }
 
+    public static void handleCreate(String Number,String LeaveTime,Integer FlyTime,
+                                    Long LeavePlace,Long ArrivePlace,String Stopovers,
+                                    String Repeat
+                                    ) {
+        badRequest();
+    }
     public static void debug(){
         List<Airport> aps = Airport.all().fetch(2);
         AirlinePlan alp  = new AirlinePlan();
@@ -53,5 +59,23 @@ public class AdminAirlinePlan  extends Controller{
         List<AirlinePlan> airlinePlans = AirlinePlan.all().fetch(page,pageSize);
         Page<AirlinePlan> pages = new Page<AirlinePlan>(airlinePlans,page,pageSize,AirlinePlan.count());
         render(pages);
+    }
+
+    public static void edit(Long id) {
+        try {
+            AirlinePlan alp = AirlinePlan.findById(id);
+            renderArgs.put("model",alp);
+            renderArgs.put("airports",Airport.findAll());
+        } catch (Throwable e) {
+            badRequest();
+        }
+        render("AdminAirlinePlan/create.html");
+    }
+
+    public static void handleEdit(String Number,String LeaveTime,Integer FlyTime,
+                                    Long LeavePlace,Long ArrivePlace,String Stopovers,
+                                    String Repeat,Long editId
+    ) {
+        badRequest();
     }
 }

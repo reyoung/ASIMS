@@ -65,4 +65,8 @@ public class AirlinePlan extends Model {
             return null;
         }
     }
+    public String getEditLeaveTime()  {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return sdf.format(this.LeaveTime);
+    }
 }

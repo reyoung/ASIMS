@@ -1,13 +1,29 @@
 #{extends 'admin.html' /}
+#{if model==null}
 #{set title:"新建航线计划" /}
+#{/if} #{else}
+#{set title:"修改航线计划" /}
+#{/else}
 #{set 'moreScripts'}
 #{js 'bootstrap.min.js' /}
 #{js 'bootstrap-datetimepicker.min.js' /}
 #{/set}
 <div class="row">
-    <form class="form-horizontal" method="POST" action="#">
+    <form class="form-horizontal" method="POST" action="
+    #{if model==null}
+    @{AdminAirlinePlan.handleCreate}
+    #{/if}#{else}
+    @{AdminAirlinePlan.handleEdit}
+    #{/else}
+    ">
         <fieldset>
-            <legend>新建航线计划</legend>
+            <legend>
+                #{if model==null}
+                    新建航线计划
+                #{/if}#{else}
+                    修改航线计划
+                #{/else}
+            </legend>
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#BasicSettings" data-toggle="tab">基本设置</a></li>
@@ -16,15 +32,24 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="BasicSettings">
-                        <div class="control-group error">
+                        <div class="control-group">
                             <label for="Number" class="control-label">航线编号:</label>
+                            #{if model==null }
                             <input type="text" id="Number" name="Number" placeholder="CZ00032"/>
-                            <span class="help-inline error">Error, Cannot Be Empty</span>
+                            #{/if}#{else}
+                            <input type="text" id="Number" name="Number" value="${model.Number}"/>
+                            #{/else}
+                            <span class="help-inline" style="visibility:hidden;">Error, Cannot Be Empty</span>
                         </div>
                         <div class="control-group">
                             <label for="LeaveTime" id="LeaveTimeLbl" class="control-label">起飞日期: </label>
                             <div id="datetimepicker" class="input-append">
-                                <input data-format="yyyy/MM/dd hh:mm:ss" type="text" name="LeaveTime" id="LeaveTime"/>
+
+                                <input data-format="yyyy/MM/dd hh:mm:ss" type="text" name="LeaveTime" id="LeaveTime"
+                                #{if model!=null}
+                                value="${model.getEditLeaveTime()}"
+                                #{/if}
+                                        />
                     <span class="add-on">
                       <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                       </i>
@@ -33,13 +58,21 @@
                         </div>
                         <div class="control-group">
                             <label for="FlyTime" id="FlyTimeLbl" class="control-label">飞行时间:</label>
-                            <input type="number" id="FlyTime" name="FlyTime" min=1 />
+                            #{if model==null}
+                            <input type="number" id="FlyTime" name="FlyTime" min=1 placeholder="分钟"/>
+                            #{/if}#{else}
+                            <input type="number" id="FlyTime" name="FlyTime" min=1 value="${model.FlyTime}"/>
+                            #{/else}
                         </div>
                         <div class="control-group">
                             <label for="LeavePlace" id="LeavePlaceLbl" class="control-label">始发地:</label>
                             <select id="LeavePlace" name="LeavePlace">
                                 %{for (ap in airports){}%
-                                <option value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                    #{if model!=null&& model.LeavePlace.id == ap.id}
+                                        <option selected value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                    #{/if}#{else}
+                                        <option value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                    #{/else}
                                 %{}}%
                             </select>
                         </div>
@@ -47,7 +80,11 @@
                             <label for="ArrivePlace" id="ArrivePlaceLbl" class="control-label">目的地:</label>
                             <select id="ArrivePlace" name="ArrivePlace">
                                 %{for (ap in airports) { }%
-                                <option value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                    #{if model!=null&&model.ArrivePlace.id==ap.id}
+                                        <option selected value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                    #{/if}#{else}
+                                        <option value="${ap.id}">${ap.getCountry()} ${ap.getCity()} ${ap.Name}</option>
+                                    #{/else}
                                 %{} }%
                             </select>
                         </div>
@@ -64,6 +101,16 @@
                                             <th><a href="#" class="btn"><i class="icon-plus"></i></a> </th>
                                         </tr>
                                         </thead>
+                                        <tbody>
+                                            %{if(model!=null&&model.StopoverPlaces.size()!=0){}%
+                                                %{for(sp in model.StopoverPlaces){}%
+                                                    <tr>
+                                                        <td>${sp}</td>
+                                                        <td><a href="#" class="btn"><i class="icon-minus"></i> </a> </td>
+                                                    </tr>
+                                                %{}}%
+                                            %{}}%
+                                        </tbody>
                                     </table>
                                 </div>
 
@@ -96,11 +143,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="Repeat" id="Repeat">
+                            <input type="hidden" name="Repeat" id="Repeat"
+                                #{if model!=null}
+                                    value=${model.Repeat}
+                                #{/if}
+                                    />
                         </div>
                     </div>
                 </div>
             </div>
+            #{if model!=null}
+            <input type="hidden" value="${model.id}" name="editId" id="editId">
+            #{/if}
             <input type="submit" value="创建" class="btn btn-info" style="margin-left:340px;">
         </fieldset>
     </form>
