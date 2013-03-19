@@ -8,3 +8,4 @@ db/*
 .classpath
 .settings
 eclipse
+nbproject
