@@ -2,8 +2,7 @@
 #{set title:"查询航线计划" /}
 
 <div class="row">
-    #{pager_header page:pages, prev:@{AirlinePlan.list(pages.prev())}, next:@{AirlinePlan.list(pages.next())},
-    offset:"span3 offset9" /}
+    #{pager_header page:pages, prev:@{AirlinePlan.list(pages.prev())}, next:@{AirlinePlan.list(pages.next())}, offset:"span3 offset9" /}
     <div class="row">
         <table class="table table-bordered table-hover">
             <thead>
@@ -37,7 +36,6 @@
             </tbody>
         </table>
     </div>
-    #{pager_header page:pages, prev:@{AirlinePlan.list(pages.prev())}, next:@{AirlinePlan.list(pages.next())},
-    offset:"span3 offset9" /}
+    #{pager_header page:pages, prev:@{AirlinePlan.list(pages.prev())}, next:@{AirlinePlan.list(pages.next())},offset:"span3 offset9" /}
 </div>
 #{js 'admin/airlinePlan/list.js' /}

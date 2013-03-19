@@ -33,7 +33,8 @@ POST    /admin/AirlinePlan/edit                 AdminAirlinePlan.handleEdit
 GET     /admin/AirCompany/                      AdminAirCompany.list
 GET     /admin/AirCompany/create                AdminAirCompany.create
 POST    /admin/AirCompany/create                AdminAirCompany.handleCreate
-
+GET     /admin/AirCompany/{id}/edit             AdminAirCompany.edit
+POST    /admin/AirCompany/edit                  AdminAirCompany.handleEdit
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

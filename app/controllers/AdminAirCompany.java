@@ -1,7 +1,12 @@
 package controllers;
 
 import models.AirCompany;
+import models.Page;
+import play.data.validation.Required;
+import play.data.validation.Validation;
 import play.mvc.Controller;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,17 +21,55 @@ public class AdminAirCompany extends Controller{
     }
 
     public static void list(Integer page,Integer pageSize){
-
+        if(page==null||page<1){
+            page = 1;
+        }
+        if(pageSize==null || pageSize<1){
+            pageSize = 10;
+        }
+        List<AirCompany> companies = AirCompany.all().fetch(page,pageSize);
+        Page<AirCompany> pages = new Page<AirCompany>(companies,page,pageSize,AirCompany.count());
+        render(pages);
     }
 
-    public static void handleCreate(String Name){
-        AirCompany com = new AirCompany();
-        com.Name = Name;
-        boolean ok = com.validateAndCreate();
-        if (ok){
-            list(null,null);
-        } else {
+    public static void edit(Long id) {
+        try {
+            AirCompany model = AirCompany.findById(id);
+            renderArgs.put("model",model);
+        } catch (Throwable ex){
             badRequest();
         }
+        render("AdminAirCompany/create.html");
+    }
+
+    public static void handleEdit(@Required Long id,@Required String Name){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        try {
+            AirCompany com = AirCompany.findById(id);
+            com.Name = Name;
+            com.save();
+        } catch (Throwable ex){
+            badRequest();
+        }
+        list(null,null);
+    }
+
+    public static void handleCreate(@Required String Name){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        AirCompany com = new AirCompany();
+        com.Name = Name;
+        try{
+            boolean ok = com.validateAndCreate();
+            if(!ok){
+                badRequest();
+            }
+        } catch (Throwable ex){
+            badRequest();
+        }
+        list(null,null);
     }
 }
