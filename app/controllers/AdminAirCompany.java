@@ -2,6 +2,7 @@ package controllers;
 
 import models.AirCompany;
 import models.Page;
+import play.Logger;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.mvc.Controller;
@@ -40,6 +41,30 @@ public class AdminAirCompany extends Controller{
             badRequest();
         }
         render("AdminAirCompany/create.html");
+    }
+
+    public static void getByName(@Required String Name){
+        if (Validation.hasErrors()){
+            badRequest();
+        }
+        AirCompany com = AirCompany.find("byName",Name).first();
+        if(com!=null){
+            renderJSON(com);
+        }else {
+            renderJSON(false);
+        }
+    }
+
+    public static void getById(@Required Long id){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        AirCompany com = AirCompany.findById(id);
+        if(com!=null){
+            renderJSON(com);
+        } else {
+            renderJSON(false);
+        }
     }
 
     public static void handleEdit(@Required Long id,@Required String Name){

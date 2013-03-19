@@ -35,6 +35,8 @@ GET     /admin/AirCompany/create                AdminAirCompany.create
 POST    /admin/AirCompany/create                AdminAirCompany.handleCreate
 GET     /admin/AirCompany/{id}/edit             AdminAirCompany.edit
 POST    /admin/AirCompany/edit                  AdminAirCompany.handleEdit
+GET     /admin/AirCompany/byName/{Name}.json    AdminAirCompany.getByName
+GET     /admin/AirCompany/{id}.json             AdminAirCompany.getById
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}
