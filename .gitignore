@@ -4,3 +4,7 @@
 tmp
 db/*
 *~
+.project
+.classpath
+.settings
+eclipse
