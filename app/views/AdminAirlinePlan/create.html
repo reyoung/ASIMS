@@ -39,7 +39,7 @@
                             #{/if}#{else}
                             <input type="text" id="Number" name="Number" value="${model.Number}"/>
                             #{/else}
-                            <span class="help-inline" style="visibility:hidden;">Error, Cannot Be Empty</span>
+                            <span class="help-inline"></span>
                         </div>
                         <div class="control-group">
                             <label for="LeaveTime" id="LeaveTimeLbl" class="control-label">起飞日期: </label>
@@ -50,11 +50,13 @@
                                 value="${model.getEditLeaveTime()}"
                                 #{/if}
                                         />
-                    <span class="add-on">
-                      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                      </i>
-                    </span>
+
+                            <span class="add-on">
+                              <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                              </i>
+                            </span>
                             </div>
+                            <span class="help-inline"></span>
                         </div>
                         <div class="control-group">
                             <label for="FlyTime" id="FlyTimeLbl" class="control-label">飞行时间:</label>
@@ -63,6 +65,7 @@
                             #{/if}#{else}
                             <input type="number" id="FlyTime" name="FlyTime" min=1 value="${model.FlyTime}"/>
                             #{/else}
+                            <span class="help-inline"></span>
                         </div>
                         <div class="control-group">
                             <label for="LeavePlace" id="LeavePlaceLbl" class="control-label">始发地:</label>
@@ -75,6 +78,7 @@
                                     #{/else}
                                 %{}}%
                             </select>
+                            <span class="help-inline"></span>
                         </div>
                         <div class="control-group">
                             <label for="ArrivePlace" id="ArrivePlaceLbl" class="control-label">目的地:</label>
@@ -87,6 +91,7 @@
                                     #{/else}
                                 %{} }%
                             </select>
+                            <span class="help-inline"></span>
                         </div>
                         <div class="control-group">
                             <label for="Company" id="CompanyLbl" class="control-label">所属航空公司:</label>
@@ -99,6 +104,7 @@
                                     #{/else}
                                 %{}}%
                             </select>
+                            <span class="help-inline"></span>
                         </div>
                     </div>
                     <div class="tab-pane" id="StopoverSettings">
@@ -125,9 +131,9 @@
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
+                        <span class="help-inline"></span>
                     </div>
                     <div class="tab-pane" id="RepeatSettings">
                         <div class="control-group" style="width:300px; margin-left:115px;">
