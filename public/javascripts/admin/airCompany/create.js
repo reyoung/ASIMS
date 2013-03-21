@@ -1,7 +1,7 @@
 require(["admin/active"],function (act){
     $(function (){
         act("nav_airCompany_create")
-        var isAdd = true;
+        
         //提交时检查表单里的内容。
         $("form.form-horizontal").submit(function(e){
         	var name = $("input#Name").val();
@@ -12,8 +12,8 @@ require(["admin/active"],function (act){
         		
         	}
         	else{
-        	     checkName();
-        	     if(isAdd){
+        	   ok =  checkName();
+        	     if(!ok){
         	    	 e.preventDefault();
         	     }
         	}
@@ -22,12 +22,12 @@ require(["admin/active"],function (act){
         //获得输入名称的url
         function checkName(){
         	var companyname = $("input#Name").val();
-        	var url = "http://" +window.location.host+"/admin/AirCompany/byName/" + companyname + ".json";
-            loadJason(url);
+        	var url = "http://127.0.0.1:9000/admin/AirCompany/byName/" + companyname + ".json";
+            return loadJson(url);
         }
        
         //检验新增的公司是否在数据库中
-        function loadJason(url){ 
+        function loadJson(url){ 
         	var xmlhttp;
         	if(window.XMLHttpRequest){
             	xmlhttp = new XMLHttpRequest();
@@ -35,6 +35,7 @@ require(["admin/active"],function (act){
             else{
             	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
+        	return_val = true
         	
         	xmlhttp.onreadystatechange = function(){
         		if(xmlhttp.readyState == 4){
@@ -44,13 +45,14 @@ require(["admin/active"],function (act){
         					$("span").text("该公司名已存在请重新输入");
 	        				$("span").attr("style","visibility:visible");
 	        				$("div.control-group").attr("class","control-group error");
-	        				isAdd = false;
+	        				return_val = false;
         				}
         			}
         		}
         	};
-        	xmlhttp.open("GET",url,true);
+        	xmlhttp.open("GET",url,false);
         	xmlhttp.send();
+        	return  return_val
         }
        
         //重新输入公司名时取消提示
