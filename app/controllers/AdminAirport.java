@@ -17,7 +17,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class AdminAirport extends Controller {
-    public static void list(Integer page,Integer pageSize, String filter,String status) {
+    public static void list(Integer page,Integer pageSize,String status) {
+        String filter = null;
         if (page == null){
             page = 1;
         }
@@ -51,7 +52,7 @@ public class AdminAirport extends Controller {
 
         boolean OK = new Airport(Name,CountryId,CityId).validateAndCreate();
 //        renderArgs.put("status","created");
-        list(1,10,"%","created");
+        list(1,10,"created");
     }
 
     public static void remove(@Required Long id){
@@ -83,7 +84,7 @@ public class AdminAirport extends Controller {
             m.CityId = CityId;
             m.CountryId = CountryId;
             m.save();
-            list(1,10,"%","");
+            list(1,10,"");
         }
     }
 }

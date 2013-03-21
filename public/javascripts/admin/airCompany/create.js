@@ -22,7 +22,7 @@ require(["admin/active"],function (act){
         //获得输入名称的url
         function checkName(){
         	var companyname = $("input#Name").val();
-        	var url = "http://127.0.0.1:9000/admin/AirCompany/byName/" + companyname + ".json";
+        	var url = "http://"+location.host+"/admin/AirCompany/byName/" + companyname + ".json";
             return loadJson(url);
         }
        

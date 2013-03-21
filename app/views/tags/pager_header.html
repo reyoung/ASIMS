@@ -3,14 +3,14 @@
     <div class="${_offset}">
     <ul class="pager">
         #{if _page.hasPrev()}
-        <li ><a href="${_prev}">前一页</a></li>
+        <li ><a href="${_action +"?page="+_page.prev()}">前一页</a></li>
         #{/if}
         #{else}
         <li class="disabled"><a href="#">前一页</a></li>
         #{/else}
         #{doBody /}
         #{if _page.hasNext()}
-        <li ><a href="${_next}">下一页</a></li>
+        <li ><a href="${_action +"?page="+_page.next()}">下一页</a></li>
         #{/if}
         #{else}
         <li class="disabled"><a href="#">下一页</a></li>
