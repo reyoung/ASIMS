@@ -27,7 +27,7 @@ public class Page<T> {
         return Index>1;
     }
     public boolean hasNext(){
-        return Index < Count/Length;
+        return Index < Count/Length+1;
     }
     public int prev(){
         return Index -1;
