@@ -43,6 +43,18 @@ public class AdminAirCompany extends Controller{
         render("AdminAirCompany/create.html");
     }
 
+    public static void delete(Long id){
+        int rows = 0;
+        try {
+            rows = AirCompany.delete("Id",id);
+        } catch (Throwable ex){
+            renderJSON(false);
+        }
+        renderJSON(rows);
+    }
+
+
+
     public static void getByName(@Required String Name){
         if (Validation.hasErrors()){
             badRequest();
