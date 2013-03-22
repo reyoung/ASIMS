@@ -40,3 +40,8 @@ AirlinePlan(ap_UA898):
   LeavePlace: ap_tj
   ArrivePlace: ap_NewYork
   StopoverPlaces: [ap_Washington]
+
+# 初始角色信息
+Role(r_root):
+  Name: 超级管理员
+  Privilege: -1

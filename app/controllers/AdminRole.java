@@ -89,7 +89,7 @@ public class AdminRole extends Controller {
 			pageSize = 10;
 		}
 		List<Role> lstRole = Role.all().fetch(page, pageSize);
-		Page<Role> pages = new Page(lstRole,page,pageSize,Role.count());
+		Page<Role> pages = new Page<Role>(lstRole,page,pageSize,Role.count());
 		render(pages);
 	}
 }
