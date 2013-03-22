@@ -17,4 +17,8 @@ require(["admin/active","libs/functools"],function(active,f){
     $("#CountryId").change(updateCity)
     updateCity()
     $("#CityId")[0].selectedIndex = $("#city_id_json").text()
+
+
+    //* TODO Check The Airport Name Not Empty
+
 })
