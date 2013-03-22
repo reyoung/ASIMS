@@ -33,7 +33,7 @@ public class Airport extends Model {
 
     static public String[][] CountryCityTable = {
             {"中国","天津","上海"},
-            {"美国","纽约","新奥尔良","休斯顿"}
+            {"美国","纽约","新奥尔良","休斯顿","华盛顿"}
     };
 
     public String getCity(){
@@ -65,7 +65,7 @@ public class Airport extends Model {
 
     @Override
     public String toString(){
-        return String.format("%s %s %s",this.getCountry(),this.getCity(),this.Name);
+        return String.format("%s %s %s机场",this.getCountry(),this.getCity(),this.Name);
     }
 
     public String simpleToString(){

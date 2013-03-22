@@ -39,7 +39,7 @@ public class AdminAirlinePlan  extends Controller{
         alp.FlyTime = 60;
         alp.Repeat="N";
 
-        alp.LeaveTime = new Timestamp(new Date().getTime());
+        alp.LeaveTime = new Date();
         alp.LeavePlace = aps.get(0);
         alp.ArrivePlace = aps.get(1);
         alp.Number = "CZ300212";
