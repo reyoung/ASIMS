@@ -34,9 +34,9 @@ public class AdminRole extends Controller {
 		} catch (Throwable ex) {
 			// TODO: handle exception
 			badRequest();
-		}finally{
-			list(null,null);
 		}
+		list(null,null);
+		
 	}
 
 	public static void edit(Long id) {
@@ -64,9 +64,9 @@ public class AdminRole extends Controller {
 		} catch (Throwable ex) {
 			// TODO: handle exception
 			badRequest();
-		}finally{
-			list(null,null);
 		}
+		list(null,null);
+		
 	}
 	
 	public static void delete(Long id) {
@@ -85,7 +85,7 @@ public class AdminRole extends Controller {
 		if(page == null || page < 1) {
 			page = 1;
 		}
-		if(pageSize == null || pageSize > 10) {
+		if(pageSize == null || pageSize < 1) {
 			pageSize = 10;
 		}
 		List<Role> lstRole = Role.all().fetch(page, pageSize);
