@@ -1,0 +1,40 @@
+#{extends 'admin.html' /}
+#{set title:'创建角色' /}
+<div class="row">
+    <form class="form-horizontal" method="POST">
+        <fieldset>
+            <legend>创建新的角色</legend>
+            <div class="control-group">
+                <label for="Name" class="control-label">角色名称:</label>
+                <input type="text" name="Name" id="Name" />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group" style="width:340px;margin-left:100px;">
+                <input type="hidden" name="Privilege" id="Privilege" />
+                <span>权限表: </span>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>权限名</th>
+                            <th>可读</th>
+                            <th>可写</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #{role_helper_tbl name:"用户",id:"0" /}
+                        #{role_helper_tbl name:"部门",id:"1" /}
+                        #{role_helper_tbl name:"角色",id:"2" /}
+                        #{role_helper_tbl name:"新闻",id:"3" /}
+                        #{role_helper_tbl name:"附件",id:"4" /}
+                        #{role_helper_tbl name:"航线计划",id:"5" /}
+                        #{role_helper_tbl name:"航线状态", id:"6" /}
+                        #{role_helper_tbl name:"机场设施", id:"7" /}
+                        #{role_helper_tbl name:"航空公司", id:"8" /}
+                        #{role_helper_tbl name:"机场名", id:"9" /}
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-info" value="创建" style="margin-left:300px;">
+            </div>
+        </fieldset>
+    </form>
+</div>
