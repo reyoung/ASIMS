@@ -1,2 +1,42 @@
+# 航空公司初始数据
 AirCompany(ac_east):
   Name: 中国东方航空公司
+AirCompany(ac_south):
+  Name: 中国南方航空公司
+AirCompany(ac_a2b):
+  Name: 英国A2B航空公司
+# 机场初始数据
+Airport(ap_tj):
+  Name: 滨海国际
+  CityId: 0
+  CountryId: 0
+Airport(ap_sh):
+  Name: 虹桥
+  CityId: 1
+  CountryId: 0
+Airport(ap_NewYork):
+  Name: 肯尼迪
+  CityId: 0
+  CountryId: 1
+Airport(ap_Washington):
+  Name: 杜勒斯
+  CityId: 3
+  CountryId: 1
+AirlinePlan(ap_CA1523):
+  Number: CA1523
+  LeaveTime: 2013-3-22 15:50:00
+  FlyTime: 115
+  Repeat: W1234567
+  Company: ac_east
+  LeavePlace: ap_tj
+  ArrivePlace: ap_sh
+
+AirlinePlan(ap_UA898):
+  Number: UA898
+  LeaveTime: 2013-3-22 18:25:00
+  FlyTime: 1475
+  Repeat: W135
+  Company: ac_a2b
+  LeavePlace: ap_tj
+  ArrivePlace: ap_NewYork
+  StopoverPlaces: [ap_Washington]
