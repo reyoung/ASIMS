@@ -61,7 +61,7 @@ require(["admin/active"],function(active){
                 type:"delete",
                 url:"@{AdminAirport.remove}"+deleteID,
                 error:function (){
-                    alert("Network Error")
+                    alert("由于外键引用不可以被删除")
                 },
                 success:function(p1,p2){
                     ok = JSON.parse(p1)
