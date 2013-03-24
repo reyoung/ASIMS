@@ -9,6 +9,25 @@ require(["admin/active"],function(active){
             $("#StopOver").val(1)
         }
 
+        function StopoversMinusClick(){
+            rmId = $(this).attr("stopovers-id")
+            //! Remove Hidden Field
+            curData = JSON.parse($("#Stopovers").val())
+            i = 0
+            for (i=0;i<curData.length; ++i){
+                if (curData[i]==rmId){
+                    break;
+                }
+            }
+            curData.splice(i,1)
+            $("#Stopovers").val(JSON.stringify(curData))
+
+            //! Remove Dom
+            tr = $(this)[0].parentNode.parentNode
+            tbody = tr.parentNode
+            tbody.removeChild(tr)
+        }
+
         $("#stopover_cls_btn").click(ResetStopovers)
 
         $("#Stopover_Add").click(function (){
@@ -34,7 +53,10 @@ require(["admin/active"],function(active){
             AppendIdToStopoversTable(add_id)
             ResetStopovers();
             $('#Stopover_Modal').modal('hide')
+            $("tbody a.btn").click(StopoversMinusClick)
         })
+
+        $("tbody a.btn").click(StopoversMinusClick)
 
         $("form.form-horizontal").submit(function(e){
     	    var number = $("#Number").val();
@@ -106,11 +128,9 @@ require(["admin/active"],function(active){
     	    //确定重复的形式
     	    if(checked_week.length != 0){
     	    	$("#Repeat").val("W" + checked_week.join(""));
-    	    	
     	    }
     	    else if(repeat_month != null && repeat_month.length != 0){
     	    	$("#Repeat").val("M" + repeat_month);
-    	    	
     	    }
     	    else{
     	    	$("#Repeat").val("N");
