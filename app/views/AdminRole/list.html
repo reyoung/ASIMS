@@ -1,0 +1,32 @@
+#{extends 'admin.html' /}
+#{set title:"查询角色" /}
+<div class="row">
+    %{lstUrl =  play.mvc.Router.reverse("AdminRole.list").url}%
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>权限名</th>
+                    <th>权限</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                %{for(r in pages.Data){ }%
+                    <tr>
+                        <td>${r.Name}</td>
+                        <td>${r.Privilege}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="@{AdminRole.edit(r.id)}" class="btn btn-info">修改</a>
+                                <button class="btn btn-danger" data-id="${r.id}">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                %{}}%
+            </tbody>
+        </table>
+    </div>
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+</div>

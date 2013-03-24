@@ -55,13 +55,59 @@ public class AirlinePlan extends Model {
 
     @OneToMany()
     public List<Airport> StopoverPlaces;
+    public String switchNumber(String cha){
+    	if(cha.equals("1")){
+    		cha="一";
+    	}else if(cha.equals("2")){
+    		cha="二";
+    	}else if(cha.equals("2")){
+    		cha="二";
+    	}else if(cha.equals("3")){
+    		cha="三";
+    	}else if(cha.equals("4")){
+    		cha="四";
+    	}else if(cha.equals("5")){
+    		cha="五";
+    	}else if(cha.equals("6")){
+    		cha="六";
+    	}else if(cha.equals("7")){
+    		cha="日";
+    	}
+		return cha;
+    }
 
     public String getReadableLeaveTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        return sdf.format(this.LeaveTime);
+        String strLeaveTime=null;
+    	SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        if(this.Repeat.subSequence(0, 1).equals("N")){
+        	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        	strLeaveTime=sdf.format(this.LeaveTime)+"起飞";
+        }else if(this.Repeat.subSequence(0, 1).equals("W")){
+        	if(this.Repeat.equals("W1234567")){
+        		strLeaveTime="每天";
+        	}else{
+        		strLeaveTime="每周";
+            	for(int i=1;i<Repeat.length();i++){
+            		String cha=Repeat.substring(i,i+1);
+            		strLeaveTime+=switchNumber(cha)+",";
+            		}
+                strLeaveTime=strLeaveTime.subSequence(0, strLeaveTime.length()-1)+df.format(this.LeaveTime)+"起飞";
+        	}
+        }else if(this.Repeat.subSequence(0, 1).equals("M")){
+    		strLeaveTime="每月"+Repeat.subSequence(1, Repeat.length())+"号"+df.format(this.LeaveTime)+"起飞";
+        }
+        return strLeaveTime;
+
+        
+      
     }
     public String getReadableFlyTime(){
-        return String.valueOf(FlyTime);
+    	
+    	int day=FlyTime/1440;
+    	int hour=(FlyTime/60)%24;
+    	int minute=FlyTime%60;
+    	String strFlyTime="飞行时间为："+day+"天"+hour+"小时"+minute+"分钟";
+        return strFlyTime;
     }
     public String getReadableStopovers(){
         if (StopoverPlaces.size()==0){
