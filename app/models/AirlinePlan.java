@@ -83,7 +83,7 @@ public class AirlinePlan extends Model {
         	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         	strLeaveTime=sdf.format(this.LeaveTime)+"起飞";
         }else if(this.Repeat.subSequence(0, 1).equals("W")){
-        	if(this.Repeat.subSequence(0, 1).equals("W1234567")){
+        	if(this.Repeat.equals("W1234567")){
         		strLeaveTime="每天";
         	}else{
         		strLeaveTime="每周";
