@@ -4,7 +4,38 @@ require(["admin/active"],function(active){
         $('#datetimepicker').datetimepicker({
             language: 'en'
         });
-        
+
+        function ResetStopovers(){
+            $("#StopOver").val(1)
+        }
+
+        $("#stopover_cls_btn").click(ResetStopovers)
+
+        $("#Stopover_Add").click(function (){
+            function AppendIdToStopoversHidden(id){
+                curData = $("#Stopovers").val()
+                if(curData=="") {
+                    curData = Array(0);
+                } else {
+                    curData = JSON.parse(curData)
+                }
+                curData.push(id)
+                $("#Stopovers").val(JSON.stringify(curData))
+            }
+            function AppendIdToStopoversTable(id){
+                tbody = $("#StopoversInput table tbody")
+                originText = tbody.html()
+                name = $("#StopOver option[value="+id+"]").text()
+                tbody.html(originText+"<tr><td>"+name+"</td><td><a href=\"#\" stopovers-id=\""+id+"\" class=\"btn\"><i class=\"icon-minus\"></i> </a> </td></tr>")
+            }
+
+            add_id = $("#StopOver").val()
+            AppendIdToStopoversHidden(add_id)
+            AppendIdToStopoversTable(add_id)
+            ResetStopovers();
+            $('#Stopover_Modal').modal('hide')
+        })
+
         $("form.form-horizontal").submit(function(e){
     	    var number = $("#Number").val();
     	    var leave_time = $("#LeaveTime").val();
