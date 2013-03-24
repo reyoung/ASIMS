@@ -5,10 +5,23 @@ require(["admin/active"],function(active){
             language: 'en'
         });
 
+        if ($("#Repeat").val()!=""){
+            repeat = $("#Repeat").val()
+            if(repeat[0]=="W"){
+                //! Active Week Select.
+                $("#RepeatSettings li:eq(1) a").tab("show")
+                for (i=1;i<repeat.length; ++i){
+                    $("#week"+repeat[i]).attr("checked","checked")
+                }
+            } else if(repeat[0]=="M"){
+                $("#RepeatSettings li:eq(2) a").tab("show")
+                repeat.replace("M","")
+                $("#month").val(repeat)
+            }
+        }
         function ResetStopovers(){
             $("#StopOver").val(1)
         }
-
         function StopoversHiddenInit(){
             Stopovers = $("#StopoversInput tbody a.btn")
             data = Array(0)
