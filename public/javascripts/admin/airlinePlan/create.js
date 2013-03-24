@@ -9,6 +9,18 @@ require(["admin/active"],function(active){
             $("#StopOver").val(1)
         }
 
+        function StopoversHiddenInit(){
+            Stopovers = $("#StopoversInput tbody a.btn")
+            data = Array(0)
+            for (i=0;i<Stopovers.length; ++i){
+                rmId = $(Stopovers[i]).attr("stopovers-id")
+                data.push(rmId)
+            }
+            $("#Stopovers").val(JSON.stringify(data))
+        }
+
+        StopoversHiddenInit();
+
         function StopoversMinusClick(){
             rmId = $(this).attr("stopovers-id")
             //! Remove Hidden Field
@@ -53,10 +65,10 @@ require(["admin/active"],function(active){
             AppendIdToStopoversTable(add_id)
             ResetStopovers();
             $('#Stopover_Modal').modal('hide')
-            $("tbody a.btn").click(StopoversMinusClick)
+            $("#StopoversInput tbody a.btn").click(StopoversMinusClick)
         })
 
-        $("tbody a.btn").click(StopoversMinusClick)
+        $("#StopoversInput tbody a.btn").click(StopoversMinusClick)
 
         $("form.form-horizontal").submit(function(e){
     	    var number = $("#Number").val();
