@@ -4,7 +4,72 @@ require(["admin/active"],function(active){
         $('#datetimepicker').datetimepicker({
             language: 'en'
         });
-        
+
+        function ResetStopovers(){
+            $("#StopOver").val(1)
+        }
+
+        function StopoversHiddenInit(){
+            Stopovers = $("#StopoversInput tbody a.btn")
+            data = Array(0)
+            for (i=0;i<Stopovers.length; ++i){
+                rmId = $(Stopovers[i]).attr("stopovers-id")
+                data.push(rmId)
+            }
+            $("#Stopovers").val(JSON.stringify(data))
+        }
+
+        StopoversHiddenInit();
+
+        function StopoversMinusClick(){
+            rmId = $(this).attr("stopovers-id")
+            //! Remove Hidden Field
+            curData = JSON.parse($("#Stopovers").val())
+            i = 0
+            for (i=0;i<curData.length; ++i){
+                if (curData[i]==rmId){
+                    break;
+                }
+            }
+            curData.splice(i,1)
+            $("#Stopovers").val(JSON.stringify(curData))
+
+            //! Remove Dom
+            tr = $(this)[0].parentNode.parentNode
+            tbody = tr.parentNode
+            tbody.removeChild(tr)
+        }
+
+        $("#stopover_cls_btn").click(ResetStopovers)
+
+        $("#Stopover_Add").click(function (){
+            function AppendIdToStopoversHidden(id){
+                curData = $("#Stopovers").val()
+                if(curData=="") {
+                    curData = Array(0);
+                } else {
+                    curData = JSON.parse(curData)
+                }
+                curData.push(id)
+                $("#Stopovers").val(JSON.stringify(curData))
+            }
+            function AppendIdToStopoversTable(id){
+                tbody = $("#StopoversInput table tbody")
+                originText = tbody.html()
+                name = $("#StopOver option[value="+id+"]").text()
+                tbody.html(originText+"<tr><td>"+name+"</td><td><a href=\"#\" stopovers-id=\""+id+"\" class=\"btn\"><i class=\"icon-minus\"></i> </a> </td></tr>")
+            }
+
+            add_id = $("#StopOver").val()
+            AppendIdToStopoversHidden(add_id)
+            AppendIdToStopoversTable(add_id)
+            ResetStopovers();
+            $('#Stopover_Modal').modal('hide')
+            $("#StopoversInput tbody a.btn").click(StopoversMinusClick)
+        })
+
+        $("#StopoversInput tbody a.btn").click(StopoversMinusClick)
+
         $("form.form-horizontal").submit(function(e){
     	    var number = $("#Number").val();
     	    var leave_time = $("#LeaveTime").val();
@@ -75,11 +140,9 @@ require(["admin/active"],function(active){
     	    //确定重复的形式
     	    if(checked_week.length != 0){
     	    	$("#Repeat").val("W" + checked_week.join(""));
-    	    	
     	    }
     	    else if(repeat_month != null && repeat_month.length != 0){
     	    	$("#Repeat").val("M" + repeat_month);
-    	    	
     	    }
     	    else{
     	    	$("#Repeat").val("N");

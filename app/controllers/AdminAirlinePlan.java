@@ -4,6 +4,7 @@ import models.AirCompany;
 import models.AirlinePlan;
 import models.Airport;
 import models.Page;
+import play.Logger;
 import play.mvc.Controller;
 
 import java.sql.Timestamp;
@@ -81,6 +82,7 @@ public class AdminAirlinePlan  extends Controller{
                                     Long LeavePlace,Long ArrivePlace,String Stopovers,
                                     String Repeat,Long editId
     ) {
+        Logger.debug(Repeat);
         badRequest();
     }
 }
