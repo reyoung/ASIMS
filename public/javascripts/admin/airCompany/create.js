@@ -7,6 +7,7 @@ require(["admin/active"],function (act){
         	var name = $("input#Name").val();
         	if( name == null || name.length == 0){
         		e.preventDefault();
+        		$("span").text("航空公司名称不能为空");
         		$("span").attr("style","visibility:visible");
         		$("div.control-group").attr("class","control-group error");
         		
