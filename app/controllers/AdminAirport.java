@@ -5,6 +5,7 @@ import models.Airport;
 import models.Page;
 import play.Logger;
 import play.data.validation.Required;
+import play.data.validation.Validation;
 import play.mvc.Controller;
 
 import java.util.List;
@@ -18,16 +19,14 @@ import java.util.List;
  */
 public class AdminAirport extends Controller {
     public static void list(Integer page,Integer pageSize,String status) {
-        String filter = null;
+        String filter;
         if (page == null){
             page = 1;
         }
         if (pageSize==null){
             pageSize = 10;
         }
-        if (filter == null){
-            filter = "%";
-        }
+        filter = "%";
         List<Airport> airports= Airport.find("byNameLike",filter).fetch(page,pageSize);
         long all = Airport.count();
         Page<Airport> pages = new Page<Airport>(airports,page,pageSize,all);
@@ -76,7 +75,7 @@ public class AdminAirport extends Controller {
                                   @Required String Name,
                                   @Required Integer CityId,
                                   @Required Integer CountryId) {
-        if (validation.hasErrors()) {
+        if (Validation.hasErrors()) {
             badRequest();
         } else {
             Airport m = Airport.findById(id);

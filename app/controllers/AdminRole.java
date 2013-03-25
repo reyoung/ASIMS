@@ -51,7 +51,7 @@ public class AdminRole extends Controller {
 	
 	public static void handleEdit(@Required Long id,@Required String Name,
 			@Required int Privilege) {
-		if(validation.hasErrors()){
+		if(Validation.hasErrors()){
 			badRequest();
 		}
 		try {
@@ -81,7 +81,6 @@ public class AdminRole extends Controller {
 	}
 	
 	public static void list(Integer page, Integer pageSize) {
-		// TODO Auto-generated method stub
 		if(page == null || page < 1) {
 			page = 1;
 		}
