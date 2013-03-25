@@ -84,17 +84,17 @@ public class AirlinePlan extends Model {
         	strLeaveTime=sdf.format(this.LeaveTime)+"起飞";
         }else if(this.Repeat.subSequence(0, 1).equals("W")){
         	if(this.Repeat.subSequence(0, 1).equals("W1234567")){
-        		strLeaveTime="每天";
+        		strLeaveTime="每天"+df.format(this.LeaveTime);
         	}else{
         		strLeaveTime="每周";
             	for(int i=1;i<Repeat.length();i++){
             		String cha=Repeat.substring(i,i+1);
             		strLeaveTime+=switchNumber(cha)+",";
             		}
-                strLeaveTime=strLeaveTime.subSequence(0, strLeaveTime.length()-1)+df.format(this.LeaveTime)+"起飞";
+                strLeaveTime=strLeaveTime.subSequence(0, strLeaveTime.length()-1)+df.format(this.LeaveTime);
         	}
         }else if(this.Repeat.subSequence(0, 1).equals("M")){
-    		strLeaveTime="每月"+Repeat.subSequence(1, Repeat.length())+"号"+df.format(this.LeaveTime)+"起飞";
+    		strLeaveTime="每月"+Repeat.subSequence(1, Repeat.length())+"号"+df.format(this.LeaveTime);
         }
         return strLeaveTime;
 
@@ -106,7 +106,14 @@ public class AirlinePlan extends Model {
     	int day=FlyTime/1440;
     	int hour=(FlyTime/60)%24;
     	int minute=FlyTime%60;
-    	String strFlyTime="飞行时间为："+day+"天"+hour+"小时"+minute+"分钟";
+    	String strFlyTime=null;
+    	if(day!=0){
+    		strFlyTime+=day+"天";
+    	}else if(hour!=0){
+    		strFlyTime+=hour+"小时";
+    	}else if(minute!=0){
+    		strFlyTime+=minute+"分钟";
+    	}
         return strFlyTime;
     }
     public String getReadableStopovers(){
