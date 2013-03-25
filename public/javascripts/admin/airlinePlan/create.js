@@ -89,7 +89,7 @@ require(["admin/active"],function(active){
     	    var fly_time = $("#FlyTime").val();
     	    var leave_place = $("#LeavePlace").val();
     	    var arrive_place = $("#ArrivePlace").val();
-    	    var middle_place = $("#StopoversInput.tbody").val();
+    	    var stop_place_array = JSON.parse($("#Stopovers").val());
     	    var repeat_month = $("#month").val();
     	    var checked_week = new Array();
     	    var j = 0;
@@ -143,6 +143,23 @@ require(["admin/active"],function(active){
     	    	$("div.control-group:eq(4)").attr("class","control-group error");
     	    	
     	    }
+    	    //检查始发地和中转地是否相同
+    	   for(var i=0;i<stop_place_array.length;i++){
+    		    if(leave_place == stop_place_array[i]){
+	    	    	e.preventDefault();
+	    	    	$("span.help-inline:eq(6)").text("始发地和中转地不能相同")
+	    	    	$("span.help-inline:eq(6)").attr("style","color:red;");
+	    	    	break;
+    		    }
+    		    if(arrive_place == stop_place_array[i]){
+    		    	e.preventDefault();
+	    	    	$("span.help-inline:eq(6)").text("目的地和中转地不能相同")
+	    	    	$("span.help-inline:eq(6)").attr("style","align:center;color:red;");
+	    	    	break;
+    		    }
+    	   }
+    	   
+    	    //重新输入取消提示
     	    $("#Number,#LeaveTime,#FlyTime,#LeavePlace,#ArrivePlace").focus(function(){
     	    	$("span.help-inline").text("");
     	    	var divclass = $("div").hasClass("control-group error");
@@ -150,11 +167,17 @@ require(["admin/active"],function(active){
             		$("div.control-group.error").attr("class","control-group");
             	}
     	    });
+    	    $("#StopoversInput tbody a.btn").click(function(){
+            	$("span.help-inline:eq(6)").text("");
+            });
+    	    
     	    //确定重复的形式
-    	    if(checked_week.length != 0){
+    	    var week_active = $("#RepeatSettings li:eq(1)").attr("class");
+    	    var month_active = $("#RepeatSettings li:eq(2)").attr("class");
+    	    if(checked_week.length != 0 && week_active == "active"){
     	    	$("#Repeat").val("W" + checked_week.join(""));
     	    }
-    	    else if(repeat_month != null && repeat_month.length != 0){
+    	    else if(repeat_month != null && repeat_month.length != 0 && month_active == "active"){
     	    	$("#Repeat").val("M" + repeat_month);
     	    }
     	    else{
