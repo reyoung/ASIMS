@@ -1,3 +1,6 @@
+#{if Config.JAVASCRIPT_USE_MINIFY }
+<script type="text/javascript" src="@{'/public/javascripts/'}/${_arg.replace(".js",".min.js")}">
+#{/if} #{else}
 <script type="text/javascript" src="@{'/public/javascripts/'}/${_arg}">
-
+#{/else}
 </script>

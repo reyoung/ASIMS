@@ -7,7 +7,7 @@ require(["admin/active"],function (act){
         	var delete_url = "http://" + host + "/admin/AirCompany/" + data_id;
         	$.ajaxSetup({
         		type: "DELETE",
-        		async: false,
+        		async: false
         	}); 
         	var responseResult = $.ajax({url:delete_url}).responseText;
         	if(responseResult){
