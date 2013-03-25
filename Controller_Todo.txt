@@ -1,2 +1,4 @@
 # 完成AdminAirlinePlan中的delete(Long id)方法
 	按照对应ID删除AirlinePlan
+
+# 完成AdminAirlinePlan中的HandleCreate和HandleEdit方法
