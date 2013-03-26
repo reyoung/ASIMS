@@ -64,7 +64,5 @@ require(["admin/active"],function (act){
         		$("div.control-group.error").attr("class","control-group");
         	}
         });
-       
-        
     })
 })

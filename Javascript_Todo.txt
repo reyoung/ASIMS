@@ -1,27 +1,26 @@
-# ���������Ļ��������
-	* ������������У���������Ϊ��
-		��Airport/create.js�м��
+# TIPS:
+	是不是可以考虑把一些东西封装成函数或者类呢？
+		例如，删除操作的ajax，判断表单是否为空，这个会有非常多的javascript是这两个功能。目前不知道你是怎么组织代码的。不过似乎可以将这些功能封装成模块了。
 
-# ���߼ƻ��������������,��AirlinePlan/create.js��
-	(����Ƚϴ󣬿���һ��С��һ��С�����)
+# 航线计划查询的删除Ajax,在AirlinePlan/list.js中
+	对应 Routes: DELETE  /admin/AirlinePlan/{id}                 AdminAirlinePlan.delete
 
-	���߱�Ų���Ϊ��
-	������ڲ���Ϊ�գ���Ҫ�������ڵĸ�ʽ������������2013/02/25 16:05:04
-	����ʱ�䲻��Ϊ�գ���Ϊ�������Ҵ���1
-	ʼ���أ�Ŀ�ĵأ���ͣվ������ͬ
+# 在http://127.0.0.1:9000/admin/AirCompany/中，也就是aircompany的list中。
+	如果删除失败，alert("由于外键关系，无法删除。")
 
-	��ͣվ������
-		��ʾһ���������Ӿ�ͣվ��
-		ȷ�����Ӿ�ͣվ
-	
-	�ظ���Ϣ�Ļ��
-		���ظ���Ϣת�����ַ������ŵ�idΪRepeat��Hidden��
-		
-		���ظ�Ϊ	"N"
-		ÿ���ظ�Ϊ	"W"+���ڼ�
-				����: W135	Ϊÿ��1��3��5�ظ�
-				��:   W1234567	Ϊÿ�춼�ظ�
-		ÿ���ظ�Ϊ	"M"+ÿ�¼���
-				����: M1	Ϊÿ��1���ظ�
+# 在Role的list中，增加删除方法
 
-# ���߼ƻ���ѯ��ɾ��Ajax,��AirlinePlan/list.js��	
+	网页地址是：http://127.0.0.1:9000/admin/Role/
+	javascript地址是: admin/role/list.js
+
+# 验证表单http://127.0.0.1:9000/admin/Role/create
+	1、id为Name的Input在提交的时候，不能为空
+	2、对于每一个选取的Checkbox，在提交时有如下操作：
+		每一个checkbox有p-id， p-rw两个attr。其中p-id为数字，p-rw为"r"或"w"
+		需要构造出一个整数。这个整数的每两位为一组权限。其中低位为读权限，高位为写权限。
+		例如有两个权限，其
+			p-id = 0 的权限为 r/w (也就是p-rw为"r"和"w"的两个checkbox全部check了)
+			p-id = 1 的权限为 r
+			
+			那么构造出来的整数，二进制为 0111(后两位是表示p-id=0,可读可写。前两位表示p-id=1，不可写，可读)，
+		将这个够造出来的整数的*十进制*形式，写入id为Privilege的hidden。例如，刚才的例子，Privilege的val就应该是3

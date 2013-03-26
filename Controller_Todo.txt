@@ -1,22 +1,4 @@
-# 对于角色表
-1、建立AdminRole的Controller
-2、建立 GET	/admin/Role/create的Action
-3、建立 POST	/admin/Role/create的Action，来接受create表单的信息。
-	其中有
-		Name:String	名称
-		Privilege:Integer	权限
-	如果两个参数没有全部获得，返回badRequest错误
-4、建立GET	/admin/Role/	的Action
-	这个Action是列举出当前所有权限的Action
-	参数有:
-		Page:Integer	页号
-		PageSize: Integer 页的大小
+# 完成AdminAirlinePlan中的delete(Long id)方法
+	按照对应ID删除AirlinePlan
 
-	如果二者某一个为空，那么将他们赋成默认值(Page默认为1，PageSize默认为10)
-
-	查询数据库Role，获得一个List<Role>，这个List为当前页所有的Role
-
-	Render给前台
-
-
-
+# 完成AdminAirlinePlan中的HandleCreate和HandleEdit方法
