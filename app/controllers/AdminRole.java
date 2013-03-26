@@ -42,7 +42,7 @@ public class AdminRole extends Controller {
 	public static void edit(Long id) {
 		try {
 			Role role = Role.findById(id);
-			renderArgs.put("roleModel", role);
+			renderArgs.put("model", role);
 		} catch (Throwable ex) {
 			badRequest();
 		}
