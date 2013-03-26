@@ -49,4 +49,10 @@ public class Role extends Model{
 		return new PrivilegeType(Privilege, USER_TABLE_POS);
 	}
 
+    public String getReadablePrivilege(){
+        /**
+         * @todo Complete This Method
+         */
+        return "";
+    }
 }

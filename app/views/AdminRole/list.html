@@ -16,7 +16,7 @@
                 %{for(r in pages.Data){ }%
                     <tr>
                         <td>${r.Name}</td>
-                        <td>${r.Privilege}</td>
+                        <td>${r.getReadablePrivilege()}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="@{AdminRole.edit(r.id)}" class="btn btn-info">修改</a>
