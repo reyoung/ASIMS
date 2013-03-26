@@ -1,17 +1,6 @@
-require(["admin/active"],function(act){
+require(["admin/active","field_checker"],function(act,field){
     $(function (){
         act("nav_role_create")
-
-        function CheckField(field_id, method){
-            field = $("#"+field_id)
-            errStr = method(field.val(), field)
-            if(errStr!=true){
-                $(field[0].parentNode).attr("class","control-group error")
-                $("#"+field_id+" ~ .help-inline").text(errStr)
-                return false
-            }
-            return true
-        }
 
         //! Handle Edit Create
         if ($("#Privilege").val().length!=0){
@@ -31,7 +20,7 @@ require(["admin/active"],function(act){
                 }
             })
         }
-
+        field.def(["Name"])
         $("form").submit(function (){
             function makePrivilege(){
                 privilege = 0
@@ -49,10 +38,9 @@ require(["admin/active"],function(act){
                         privilege |= flag
                     }
                 })
-                console.log(privilege)
                 $("#Privilege").val(privilege)
             }
-            if (!CheckField("Name",function (str){
+            if (!field.chk("Name",function (str){
                 if(str.length!=0){
                     return true
                 } else {
