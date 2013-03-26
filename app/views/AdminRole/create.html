@@ -1,16 +1,34 @@
 #{extends 'admin.html' /}
+#{if model == null }
 #{set title:'创建角色' /}
+#{/if}#{else}
+#{set title:'修改角色' /}
+#{/else}
 <div class="row">
     <form class="form-horizontal" method="POST">
         <fieldset>
-            <legend>创建新的角色</legend>
+            <legend>
+            #{if model == null }
+                创建新的角色
+            #{/if}#{else}
+                修改角色
+            #{/else}
+            </legend>
             <div class="control-group">
                 <label for="Name" class="control-label">角色名称:</label>
-                <input type="text" name="Name" id="Name" />
+                <input type="text" name="Name" id="Name"
+                        #{if model != null}
+                        value = "${model.Name}"
+                        #{/if}
+                        />
                 <span class="help-inline"></span>
             </div>
             <div class="control-group" style="width:340px;margin-left:100px;">
-                <input type="hidden" name="Privilege" id="Privilege" />
+                <input type="hidden" name="Privilege" id="Privilege"
+                        #{if model!=null}
+                        value = "${model.Privilege}"
+                        #{/if}
+                        />
                 <span>权限表: </span>
                 <table class="table">
                     <thead>
