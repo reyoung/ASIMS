@@ -1,6 +1,7 @@
-require(["admin/active","admin/add"],function(act,fun){
+require(["admin/active","admin/delete"],function(act,opt){
     $(function (){
 //        console.log("Role List Page.")
-        console.log(fun.Add (1,3))
+        	opt("/admin/Role/");
+          
     })
 })
