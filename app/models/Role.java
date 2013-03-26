@@ -80,7 +80,7 @@ public class Role extends Model{
         /**
          * @todo Complete This Method
          */
-    	String strReadablePrivilege=null;
+    	String strReadablePrivilege="";
     	if(getUserTablePrivilege().Readable||getUserTablePrivilege().Writable){
     		strReadablePrivilege+="用户表";
     	    if(getUserTablePrivilege().Readable){strReadablePrivilege+="可读";}
@@ -141,6 +141,11 @@ public class Role extends Model{
     	    if(getAirportTablePrivilege().Writable){strReadablePrivilege+="可写";}
     	    strReadablePrivilege+=",";
     	}
-        return strReadablePrivilege.substring(0, strReadablePrivilege.length()-1);
+    	if(strReadablePrivilege.length()!=0){
+    		strReadablePrivilege+=strReadablePrivilege.substring(0, strReadablePrivilege.length()-1);
+    	}else{
+    		strReadablePrivilege="你没有任何权限！";
+    	}
+        return strReadablePrivilege;
     }
 }
