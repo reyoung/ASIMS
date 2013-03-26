@@ -1,6 +1,6 @@
 #!/bin/sh
 COMPILER_CMD="java -jar 3rdParty/compiler.jar"
-COMPILER_OPT=" --charset utf-8"
+COMPILER_OPT=" --charset utf-8 "
 MIN_EXT_NAME=".min.js"
 
 handleWithCorrectFile(){
