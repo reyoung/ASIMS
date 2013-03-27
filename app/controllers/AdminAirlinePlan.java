@@ -11,6 +11,7 @@ import play.mvc.Controller;
 
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +42,7 @@ public class AdminAirlinePlan extends Controller {
 	public static void handleCreate(@Required String Number,
 			@Required String LeaveTime, @Required Integer FlyTime,
 			@Required Long LeavePlace, @Required Long ArrivePlace,
-			@Required Long Company, String Stopovers, String Repeat) {
+			@Required Long Company, String Stopovers, String Repeat) throws ParseException {
 		Logger.debug(
 				"validation: Number = %s\nLeaveTime = %s\nFlyTime = %d\nLeavePlace = %d\nArrivePlace = %d\nAirCompany = %d",
 				Number, LeaveTime, FlyTime, LeavePlace, ArrivePlace, Company);
@@ -49,7 +50,7 @@ public class AdminAirlinePlan extends Controller {
 			Logger.debug("Validation Errors.");
 			badRequest();
 		}
-		try {
+//		try {
 			AirlinePlan alp = new AirlinePlan();
 			alp.Number = Number;
 			alp.FlyTime = FlyTime;
@@ -77,9 +78,10 @@ public class AdminAirlinePlan extends Controller {
 			if (!ok) {
 				badRequest();
 			}
-		} catch (Throwable ex) {
-			badRequest();
-		}
+//		} catch (Throwable ex) {
+//
+//			badRequest();
+//		}
 		list(null, null);
 	}
 

@@ -1,0 +1,57 @@
+#{extends 'admin.html' /}
+#{if model==null }
+#{set title:'新增机场设施' /}
+#{/if} #{else}
+#{set title:'修改机场设施' /}
+#{/else}
+<div class="row">
+    <form  class="form-horizontal" method="POST" >
+        <fieldset>
+            <legend>新增机场设施</legend>
+            <div class="control-group">
+                <label for="Name" class="control-label">资源名称:</label>
+                <input type="text" id="Name" name="Name"
+                        #{if model!=null}
+                        value=${model.Name}
+                        #{/if}
+                        />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Position" class="control-label">位置:</label>
+                <input type="text" id="Position" name="Position"
+                        #{if model!=null}
+                        value=${model.Position}
+                        #{/if}
+                        />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Amount" class="control-label">数量:</label>
+                <input type="number" id="Amount" name="Amount" min="1"
+                        #{if model!=null}
+                        value=${model.Amount}
+                        #{/if}
+                        />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Comment" class="control-label">备注:</label>
+                <input type="text" id="Comment" name="Comment" />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-info" style="margin-left:150px;">
+                        #{if model==null}
+                        新建
+                        #{/if}#{else}
+                        修改
+                        #{/else}
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+#{js 'admin/airResource/create.js' /}

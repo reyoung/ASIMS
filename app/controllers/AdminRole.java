@@ -69,8 +69,10 @@ public class AdminRole extends Controller {
 		
 	}
 	
-	public static void delete(Long id) {
-		//删除行数
+	public static void delete(@Required Long id) {
+		if (Validation.hasErrors()){
+            renderJSON(false);
+        }
 		int rows = 0;
 		try {
 			rows = Role.delete("Id", id);
