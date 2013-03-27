@@ -1,0 +1,46 @@
+#{extends 'admin.html' /}
+#{set title:'新增物业设施' /}
+<div class="row">
+    <form class="form-horizontal" method="POST">
+        <fieldset>
+            <legend>新增物业设施</legend>
+            <div class="control-group">
+                <label for="Name" class="control-label">设施名称:</label>
+                <input type="text" name="Name" id="Name" />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Position" class="control-label">位置:</label>
+                <input type="text" name="Position" id="Position" />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Amount" class="control-label">数量:</label>
+                <input type="number" min="1" name="Amount" id="Amount" />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Telephone" class="control-label">电话:</label>
+                <input type="tel" name="Telephone" id="Telephone" />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Comment" class="control-label">备注:</label>
+                <input type="text" name="Comment" id="Comment" />
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-info" style="margin-left:150px;">
+                        #{if model==null}
+                        新建
+                        #{/if}#{else}
+                        修改
+                        #{/else}
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+#{js 'admin/propertyResource/create.js' /}

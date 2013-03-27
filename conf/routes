@@ -55,5 +55,10 @@ GET     /admin/AirportResource/{id}/edit        AdminAirportResource.edit
 POST    /admin/AirportResource/{id}/edit        AdminAirportResource.handleEdit
 DELETE  /admin/AirportResource/{id}             AdminAirportResource.delete
 
+#Admin Property Resource
+
+GET     /admin/PropertyResource/create          AdminPropertyResource.create
+
+
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}
