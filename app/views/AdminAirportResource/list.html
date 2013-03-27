@@ -1,1 +1,45 @@
 #{extends 'admin.html' /}
+#{set title:'查询机场设施' /}
+<div class="row">
+    %{lstUrl = play.mvc.Router.reverse("AdminAirportResource.list").url}%
+    #{pager_header page:pages, action:lstUrl, offset:"span6 offset6"}
+    <li>
+        <form class="form-search" style="display:inline;" method="get">
+        <input name="filter" type="text" class="input-medium search-query" placeholder="资源名称">
+        <button type="submit" class="btn">搜索</button>
+        </form>
+    </li>
+    #{/pager_header}
+
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>资源名称</th>
+                    <th>位置</th>
+                    <th>数量</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                %{for(f in pages.Data){ }%
+                <tr>
+                    <td>${f.Name}</td>
+                    <td>${f.Position}</td>
+                    <td>${f.Amount}</td>
+                    <td>${f.Comment}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="@{AdminAirportResource.edit(f.id)}" class="btn btn-info">修改</a>
+                            <button class="btn btn-danger" data-id="${f.id}">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                %{}}%
+            </tbody>
+        </table>
+    </div>
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9"}
+    #{/pager_header}
+</div>
