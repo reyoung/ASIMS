@@ -3,5 +3,4 @@ require(["admin/active","admin/delete"],function(act,opt){
     	act("nav_airportResource_list") //! Active The Navigation List.
     	opt("/admin/AirportResource/");
     });
-
 })

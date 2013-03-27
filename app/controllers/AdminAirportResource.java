@@ -21,8 +21,10 @@ public class AdminAirportResource extends Controller {
     public static void create(){
         render();
     }
-    public static void edit(Long id){
-        render();
+    public static void edit(@Required Long id){
+        if (Validation.hasErrors()) badRequest();
+        Facility model = Facility.findById(id);
+        render("AdminAirportResource/create.html",model);
     }
 
     public static void delete(@Required Long id){
@@ -37,7 +39,19 @@ public class AdminAirportResource extends Controller {
         }
         renderJSON(row);
     }
-
+    public static void handleEdit(@Required Long id,
+                                  @Required String Name,
+                                  @Required String Position,
+                                  @Required Integer Amount,
+                                  String Comment){
+        if (Validation.hasErrors()) badRequest();
+        Facility fc = Facility.findById(id);
+        fc.Name = Name;
+        fc.Position = Position;
+        fc.Amount = Amount;
+        fc.save();
+        list(null,null,null);
+    }
     public static void handleCreate(@Required String Name,
                                     @Required String Position,
                                     @Required Integer Amount, String Comment){

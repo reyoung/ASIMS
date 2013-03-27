@@ -52,6 +52,7 @@ GET     /admin/AirportResource/                 AdminAirportResource.list
 GET     /admin/AirportResource/create           AdminAirportResource.create
 POST    /admin/AirportResource/create           AdminAirportResource.handleCreate
 GET     /admin/AirportResource/{id}/edit        AdminAirportResource.edit
+POST    /admin/AirportResource/{id}/edit        AdminAirportResource.handleEdit
 DELETE  /admin/AirportResource/{id}             AdminAirportResource.delete
 
 # Catch all
