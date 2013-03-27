@@ -45,3 +45,16 @@ AirlinePlan(ap_UA898):
 Role(r_root):
   Name: 超级管理员
   Privilege: -1
+
+# 初始化机场设施
+Facility(f_as_board):
+  Name: 登机门
+  Position: 一层南侧
+  Amount: 1
+  Type: 100
+
+Facility(f_as_luggage):
+  Name: 行李转盘
+  Position: 一层西侧、二层西侧
+  Amount: 2
+  Type: 100
