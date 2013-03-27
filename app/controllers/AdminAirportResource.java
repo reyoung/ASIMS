@@ -54,11 +54,17 @@ public class AdminAirportResource extends Controller {
         if (pageSize == null || pageSize<1){
             pageSize = 10;
         }
+        if (filter == null){
+            filter = "";
+        }
+        filter = "%"+filter+"%";
 
-        List<Facility> model = Facility.find("Type >= ? and Type < ?" ,Facility.AirportResourceType,Facility.PropertyResourceType)
+        List<Facility> model = Facility.find("Type >= ? and Type < ? and Name like ?" ,Facility.AirportResourceType,
+                Facility.PropertyResourceType,filter)
                 .fetch(page,pageSize);
         Page<Facility> pages = new Page<Facility>(model,page,pageSize,
-                Facility.count("Type >= ? and Type < ?",Facility.AirportResourceType,Facility.PropertyResourceType)
+                Facility.count("Type >= ? and Type < ? and Name like ?",Facility.AirportResourceType,
+                        Facility.PropertyResourceType,filter)
                 );
         render(pages);
     }
