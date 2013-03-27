@@ -47,8 +47,10 @@ GET     /admin/Role/{id}/edit                   AdminRole.edit
 DELETE  /admin/Role/{id}                        AdminRole.delete
 
 #Admin Airport Resource
-
+GET     /admin/AirportResource/                 AdminAirportResource.list
 GET     /admin/AirportResource/create           AdminAirportResource.create
+POST    /admin/AirportResource/create           AdminAirportResource.handleCreate
+
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

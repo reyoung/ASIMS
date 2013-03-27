@@ -1,7 +1,7 @@
 #{extends 'admin.html' /}
 #{set title:'新增机场设施' /}
 <div class="row">
-    <form  class="form-horizontal" method="POST">
+    <form  class="form-horizontal" method="POST" action="@{AdminAirportResource.handleCreate}">
         <fieldset>
             <legend>新增机场设施</legend>
             <div class="control-group">

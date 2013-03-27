@@ -20,10 +20,10 @@ require(["admin/active","field_checker"],function (act,fc){
             }) && ok
             ok = fc.chk("Amount",function (num) {
                 num = parseInt(num)
-                if (num > 1){
+                if (num >= 1){
                     return true
                 } else {
-                    return "数量必须为数字，且大于1"
+                    return "数量必须为数字，且大于0"
                 }
             }) && ok
             return ok
