@@ -40,7 +40,7 @@ GET     /admin/AirCompany/byName/{Name}.json    AdminAirCompany.getByName
 GET     /admin/AirCompany/{id}.json             AdminAirCompany.getById
 
 #admin roles
-GET	    /admin/Role/				            AdminRole.list
+GET	    /admin/Role/				    AdminRole.list
 GET	    /admin/Role/create			            AdminRole.create
 POST	/admin/Role/create			            AdminRole.handleCreate
 GET     /admin/Role/{id}/edit                   AdminRole.edit
