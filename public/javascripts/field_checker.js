@@ -1,7 +1,7 @@
 define([],function (){
         function CheckField(field_id, method){
-            field = $("#"+field_id)
-            errStr = method(field.val(), field)
+            var field = $("#"+field_id)
+            var errStr = method(field.val(), field)
             if(errStr!=true){
                 $(field[0].parentNode).attr("class","control-group error")
                 $("#"+field_id+" ~ .help-inline").text(errStr)
@@ -21,7 +21,7 @@ define([],function (){
                 return Object.prototype.toString.call(obj) == '[object Array]';
             }
             if (isArray(field_id)){
-                for (i=0;i<field_id.length;++i){
+                for (var i=0;i<field_id.length;++i){
                     __ResetCheckOneField(field_id[i])
                 }
             } else {

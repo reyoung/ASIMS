@@ -15,9 +15,12 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Facility extends Model {
+    public static int AirportResourceType = 100;
+    public static int PropertyResourceType = 200;
+//    public static String [] AirportResourceTypes = {"值机柜台","登机门","行李转盘","特种车"};
+
     @Column(name = "Name", nullable = false, length = 255)
     public String Name;
-
 
     @Column(name = "Position", nullable = true, length = 255)
     public String Position;
