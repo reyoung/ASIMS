@@ -109,9 +109,9 @@ public class AirlinePlan extends Model {
     	String strFlyTime="";
     	if(day!=0){
     		strFlyTime+=day+"天";
-    	}else if(hour!=0){
+    	}if(hour!=0){
     		strFlyTime+=hour+"小时";
-    	}else if(minute!=0){
+    	}if(minute!=0){
     		strFlyTime+=minute+"分钟";
     	}
         return strFlyTime;
