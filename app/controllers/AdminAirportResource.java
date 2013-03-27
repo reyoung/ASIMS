@@ -2,6 +2,7 @@ package controllers;
 
 import models.Facility;
 import models.Page;
+import play.Logger;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.mvc.Controller;
@@ -24,8 +25,17 @@ public class AdminAirportResource extends Controller {
         render();
     }
 
-    public static void delete(Long id){
-        renderJSON(false);
+    public static void delete(@Required Long id){
+        if (Validation.hasErrors()){
+            renderJSON(false);
+        }
+        int row = 0;
+        try {
+            row = Facility.delete("Id",id);
+        } catch (Throwable e){
+            renderJSON(false);
+        }
+        renderJSON(row);
     }
 
     public static void handleCreate(@Required String Name,
