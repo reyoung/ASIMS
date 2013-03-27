@@ -44,6 +44,16 @@ GET	    /admin/Role/				            AdminRole.list
 GET	    /admin/Role/create			            AdminRole.create
 POST	/admin/Role/create			            AdminRole.handleCreate
 GET     /admin/Role/{id}/edit                   AdminRole.edit
+POST    /admin/Role/{id}/edit                   AdminRole.handleEdit
+DELETE  /admin/Role/{id}                        AdminRole.delete
+
+#Admin Airport Resource
+GET     /admin/AirportResource/                 AdminAirportResource.list
+GET     /admin/AirportResource/create           AdminAirportResource.create
+POST    /admin/AirportResource/create           AdminAirportResource.handleCreate
+GET     /admin/AirportResource/{id}/edit        AdminAirportResource.edit
+POST    /admin/AirportResource/{id}/edit        AdminAirportResource.handleEdit
+DELETE  /admin/AirportResource/{id}             AdminAirportResource.delete
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}
