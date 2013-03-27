@@ -77,7 +77,7 @@ public class AirlinePlan extends Model {
     }
 
     public String getReadableLeaveTime() {
-        String strLeaveTime=null;
+        String strLeaveTime="";
     	SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         if(this.Repeat.subSequence(0, 1).equals("N")){
         	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -106,7 +106,7 @@ public class AirlinePlan extends Model {
     	int day=FlyTime/1440;
     	int hour=(FlyTime/60)%24;
     	int minute=FlyTime%60;
-    	String strFlyTime=null;
+    	String strFlyTime="";
     	if(day!=0){
     		strFlyTime+=day+"天";
     	}else if(hour!=0){
