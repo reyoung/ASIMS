@@ -1,4 +1,4 @@
-define(["libs/functools"],function (functools){
+define([],function (){
         function CheckField(field_id, method){
             field = $("#"+field_id)
             errStr = method(field.val(), field)
@@ -12,11 +12,10 @@ define(["libs/functools"],function (functools){
 
         function ResetCheckField(field_id) {
             function __ResetCheckOneField(f){
-                function Method(fid){
-                    $($("#"+fid)[0].parentNode).attr("class","control-group")
-                    $("#"+fid+" ~ .help-inline").text("")
-                }
-                $("#"+f).focus(functools.curry(Method,f))
+                $("#"+f).focus(function (){
+                    $($("#"+f)[0].parentNode).attr("class","control-group")
+                    $("#"+f+" ~ .help-inline").text("")
+                })
             }
             function isArray(obj){
                 return Object.prototype.toString.call(obj) == '[object Array]';
