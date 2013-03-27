@@ -53,7 +53,11 @@ public class AirlinePlan extends Model {
     @JoinColumn(name = "ArrivePlace",nullable = false)
     public Airport ArrivePlace;
 
-    @OneToMany()
+    @ManyToMany//(targetEntity = AirlinePlan.class)
+    @JoinTable(name = "FK_TBL_STOPOVERS",
+        joinColumns = @JoinColumn(name = "AirlinePlanID"),
+        inverseJoinColumns = @JoinColumn(name = "AirportID")
+    )
     public List<Airport> StopoverPlaces;
     public String switchNumber(String cha){
     	if(cha.equals("1")){
