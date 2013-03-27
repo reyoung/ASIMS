@@ -28,7 +28,7 @@ define([],function (){
                 __ResetCheckOneField(field_id)
             }
         }
-        retv = new Object();
+        var retv = new Object();
         retv.check = CheckField
         retv.define = ResetCheckField
         retv.chk = CheckField
