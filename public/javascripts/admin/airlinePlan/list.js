@@ -1,7 +1,7 @@
 require(["admin/active","admin/delete"],function(act,opt){
     $(function (){
-    	act("nav_airportResource_list") //! Active The Navigation List.
-    	opt("/admin/AirportResource/");
+    	act("nav_airlinePlan_list") //! Active The Navigation List.
+    	opt("/admin/AirlinePlan/");
     });
 
 })
