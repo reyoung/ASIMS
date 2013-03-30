@@ -1,29 +1,23 @@
-require(["admin/active"],function (act){
+require(["admin/active","field_checker"],function (act,fc){
     $(function (){
         act("nav_airCompany_create")
-        
+        fc.def("Name")
         //提交时检查表单里的内容。
         $("form.form-horizontal").submit(function(e){
-        	var name = $("input#Name").val();
-        	if( name == null || name.length == 0){
-        		e.preventDefault();
-        		$("span").text("航空公司名称不能为空");
-        		$("span").attr("style","visibility:visible");
-        		$("div.control-group").attr("class","control-group error");
-        		
-        	}
-        	else{
-        	   ok =  checkName();
-        	     if(!ok){
-        	    	 e.preventDefault();
-        	     }
-        	}
+            return fc.chk("Name",function (text){
+                if(text.length==0){
+                    return "航空公司名称不能为空"
+                } else if(!checkName(text)) {
+                    return "该公司名已存在请重新输入"
+                } else {
+                    return true
+                }
+            })
         });
         
         //获得输入名称的url
-        function checkName(){
-        	var companyname = $("input#Name").val();
-        	var url = "http://"+location.host+"/admin/AirCompany/byName/" + companyname + ".json";
+        function checkName(companyName){
+        	var url = "http://"+location.host+"/admin/AirCompany/byName/" + companyName + ".json";
             return loadJson(url);
         }
        
@@ -43,9 +37,6 @@ require(["admin/active"],function (act){
         			if((xmlhttp.status >= 200 && xmlhttp.status < 300) || xmlhttp.status == 304){
         				var json = xmlhttp.responseText
         				if(json != "false"){
-        					$("span").text("该公司名已存在请重新输入");
-	        				$("span").attr("style","visibility:visible");
-	        				$("div.control-group").attr("class","control-group error");
 	        				return_val = false;
         				}
         			}
@@ -55,14 +46,5 @@ require(["admin/active"],function (act){
         	xmlhttp.send();
         	return  return_val
         }
-       
-        //重新输入公司名时取消提示
-        $("#Name").focus(function(){
-        	$("span").attr("style","visibility:hidden");
-        	var divclass = $("div").hasClass("control-group error");
-        	if(divclass){
-        		$("div.control-group.error").attr("class","control-group");
-        	}
-        });
     })
 })
