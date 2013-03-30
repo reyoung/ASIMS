@@ -58,3 +58,29 @@ Facility(f_as_luggage):
   Position: 一层西侧、二层西侧
   Amount: 2
   Type: 100
+
+Facility(f_pr_poster):
+  Name: 邮局
+  Position: 一层西侧
+  Amount: 1
+  Telephone: 01062726789
+  Comment: 营业时间 9:00 - 17:00
+  Type: 200
+
+Facility(f_pr_shop):
+  Name: 商店
+  Position: 二层南侧
+  Amount: 1
+  Telephone: 01062721234
+  Comment: 营业时间 9:00 - 17:00
+  Type: 200
+
+Facility(f_pr_doctor):
+  Name: 医务室
+  Position: 二层南侧
+  Amount: 1
+  Telephone: 01062725678
+  Comment: 营业时间 24小时营业
+  Type: 200
+
+
