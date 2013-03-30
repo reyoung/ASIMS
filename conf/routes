@@ -59,6 +59,8 @@ DELETE  /admin/AirportResource/{id}             AdminAirportResource.delete
 GET     /admin/PropertyResource                 AdminPropertyResource.list
 GET     /admin/PropertyResource/create          AdminPropertyResource.create
 POST    /admin/PropertyResource/create          AdminPropertyResource.handleCreate
-
+GET     /admin/PropertyResource/{id}/edit       AdminPropertyResource.edit
+POST    /admin/PropertyResource/{id}/edit       AdminPropertyResource.handleEdit
+DELETE  /admin/PropertyResource/{id}            AdminAirportResource.delete
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

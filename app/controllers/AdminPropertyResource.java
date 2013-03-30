@@ -38,7 +38,6 @@ public class AdminPropertyResource extends Controller {
         Page<Facility> pages =
                 new Page<Facility>(data,page,pageSize,
                 Facility.count("Type >=? and Name like ?",Facility.PropertyResourceType,filter));
-        Logger.debug(""+data.size());
         render(pages);
     }
 
@@ -61,6 +60,42 @@ public class AdminPropertyResource extends Controller {
             badRequest();
         } else {
             list(null,null,null);
+        }
+    }
+
+    public static void edit(@Required Long id){
+        if(Validation.hasErrors()) badRequest();
+        Facility model = Facility.findById(id);
+        if (model==null|| model.Type < Facility.PropertyResourceType){
+            notFound();
+        }
+        render("AdminPropertyResource/create.html",model);
+    }
+    public static void handleEdit(@Required Long id,
+                                  @Required String Name,
+                                  @Required String Position,
+                                  @Required Integer Amount,
+                                  @Required String Telephone,
+                                  String Comment){
+        if(Validation.hasErrors()) badRequest();
+        Facility model = Facility.findById(id);
+        model.Name = Name;
+        model.Position = Position;
+        model.Amount = Amount;
+        model.Telephone = Telephone;
+        model.Comment = Comment;
+        model.save();
+        list(null,null,null);
+    }
+
+    public static void delete(@Required Long id){
+        if(Validation.hasErrors()) badRequest();
+        Facility fc =  Facility.findById(id);
+        if (fc.Type >= Facility.PropertyResourceType){
+            fc.delete();
+            render(true);
+        } else {
+            badRequest();
         }
     }
 }

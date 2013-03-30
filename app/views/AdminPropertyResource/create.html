@@ -1,32 +1,50 @@
 #{extends 'admin.html' /}
+#{if model==null }
 #{set title:'新增物业设施' /}
+#{/if}#{else}
+#{set title:'修改物业设施' /}
+#{/else}
 <div class="row">
     <form class="form-horizontal" method="POST">
         <fieldset>
+            #{if model==null}
             <legend>新增物业设施</legend>
+            #{/if}#{else}
+            <legend>修改物业设施</legend>
+            #{/else}
             <div class="control-group">
                 <label for="Name" class="control-label">设施名称:</label>
-                <input type="text" name="Name" id="Name" />
+                <input type="text" name="Name" id="Name"
+                        #{if model!=null}value="${model.Name}"#{/if}
+                        />
                 <span class="help-inline"></span>
             </div>
             <div class="control-group">
                 <label for="Position" class="control-label">位置:</label>
-                <input type="text" name="Position" id="Position" />
+                <input type="text" name="Position" id="Position"
+                        #{if model!=null}value="${model.Position}"#{/if}
+                        />
                 <span class="help-inline"></span>
             </div>
             <div class="control-group">
                 <label for="Amount" class="control-label">数量:</label>
-                <input type="number" min="1" name="Amount" id="Amount" />
+                <input type="number" min="1" name="Amount" id="Amount"
+                        #{if model!=null}value="${model.Amount}"#{/if}
+                        />
                 <span class="help-inline"></span>
             </div>
             <div class="control-group">
                 <label for="Telephone" class="control-label">电话:</label>
-                <input type="tel" name="Telephone" id="Telephone" />
+                <input type="tel" name="Telephone" id="Telephone"
+                        #{if model!=null}value="${model.Telephone}"#{/if}
+                        />
                 <span class="help-inline"></span>
             </div>
             <div class="control-group">
                 <label for="Comment" class="control-label">备注:</label>
-                <input type="text" name="Comment" id="Comment" />
+                <input type="text" name="Comment" id="Comment"
+                        #{if model!=null}value="${model.Comment}"#{/if}
+                        />
                 <span class="help-inline"></span>
             </div>
             <div class="control-group">
