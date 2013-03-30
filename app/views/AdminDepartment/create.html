@@ -1,0 +1,46 @@
+#{extends 'admin.html' /}
+#{if model==null}
+#{set title:"新增部门" /}
+#{/if}#{else}
+#{set title:"修改部门" /}
+#{/else}
+
+<div class="row">
+    <form method="POST" class="form-horizontal" action="
+        #{if model==null}
+        @{AdminDepartment.handleCreate}
+        #{/if}#{else}
+        @{AdminDepartment.handleEdit}
+        #{/else}
+    " >
+        <fieldset>
+            <legend>
+                #{if model ==null}
+                新增部门
+                #{/if} #{else}
+                修改部门
+                #{/else}
+            </legend>
+            <div class="control-group">
+                <label for="Name" class="control-label">部门名称：</label>
+                <input type="text" name="Name" id="Name"
+                        #{if model != null}
+                            value="${model.Name}"
+                        #{/if}
+                        /><span  class="help-inline"></span>
+                #{if model!=null}
+                <input type="hidden" name="id" id="id" value="${model.id}">
+                #{/if}
+            </div>
+            <input type="submit" class="btn btn-info" style="margin-left:330px;"
+                   #{if model==null}
+                   value="新增"
+                   #{/if} #{else}
+                   value="修改"
+                   #{/else}
+            />
+        </fieldset>
+    </form>
+</div>
+
+#{js 'admin/airCompany/create.js' /}

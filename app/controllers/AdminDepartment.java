@@ -10,7 +10,7 @@ import play.data.validation.Validation;
 import play.mvc.Controller;
 
 public class AdminDepartment extends Controller{
-	public static void creat(){
+	public static void create(){
 		render();
 	}
 	public static void handleCreate(@Required String Name) {
