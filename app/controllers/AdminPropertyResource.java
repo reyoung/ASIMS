@@ -2,6 +2,7 @@ package controllers;
 
 import models.Facility;
 import models.Page;
+import play.Logger;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.mvc.Controller;
@@ -37,6 +38,7 @@ public class AdminPropertyResource extends Controller {
         Page<Facility> pages =
                 new Page<Facility>(data,page,pageSize,
                 Facility.count("Type >=? and Name like ?",Facility.PropertyResourceType,filter));
+        Logger.debug(""+data.size());
         render(pages);
     }
 
@@ -53,6 +55,7 @@ public class AdminPropertyResource extends Controller {
         fc.Amount = Amount;
         fc.Telephone = Telephone;
         fc.Comment = Comment;
+        fc.Type = Facility.PropertyResourceType;
         boolean  ok = fc.validateAndCreate();
         if (!ok){
             badRequest();
