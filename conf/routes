@@ -55,7 +55,14 @@ GET     /admin/AirportResource/{id}/edit        AdminAirportResource.edit
 POST    /admin/AirportResource/{id}/edit        AdminAirportResource.handleEdit
 DELETE  /admin/AirportResource/{id}             AdminAirportResource.delete
 
+#Admin Property Resource
 
+GET     /admin/PropertyResource                 AdminPropertyResource.list
+GET     /admin/PropertyResource/create          AdminPropertyResource.create
+POST    /admin/PropertyResource/create          AdminPropertyResource.handleCreate
+GET     /admin/PropertyResource/{id}/edit       AdminPropertyResource.edit
+POST    /admin/PropertyResource/{id}/edit       AdminPropertyResource.handleEdit
+DELETE  /admin/PropertyResource/{id}            AdminAirportResource.delete
 #Admin Department 
 GET	    /admin/Department/				    	AdminDepartment.list
 GET	    /admin/Department/create			    AdminDepartment.create

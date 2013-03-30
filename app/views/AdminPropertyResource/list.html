@@ -1,0 +1,47 @@
+#{extends 'admin.html' /}
+#{set title:'查询物业设施'/}
+<div class="row">
+    %{lstUrl = play.mvc.Router.reverse("AdminAirport.list").url}%
+    #{pager_header page:pages, action:lstUrl, offset:"span6 offset6"}
+    <li>
+        <form class="form-search" style="display:inline;" method="get">
+            <input name="filter" type="text" class="input-medium search-query" placeholder="资源名称">
+            <button type="submit" class="btn">搜索</button>
+        </form>
+    </li>
+    #{/pager_header}
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>名称</td>
+                    <td>位置</td>
+                    <td>备注</td>
+                    <td>数量</td>
+                    <td>电话</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                %{for(item in pages.Data){}%
+                <tr>
+                    <td>${item.Name}</td>
+                    <td>${item.Position}</td>
+                    <td>${item.Comment}</td>
+                    <td>${item.Amount}</td>
+                    <td>${item.Telephone}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="@{AdminPropertyResource.edit(item.id)}" class="btn btn-info">修改</a>
+                            <button class="btn btn-danger" data-id="${item.id}">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                %{}}%
+            </tbody>
+        </table>
+    </div>
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9"}
+    #{/pager_header}
+</div>
+#{js 'admin/propertyResource/list.js' /}
