@@ -12,13 +12,14 @@ import play.mvc.Controller;
  * User:Guosheng Date:2013-3-22 Time:下午07:01:07
  */
 
-public class AdminRole extends Controller {
+public class AdminRole extends BaseAdminController {
 	
 	//反解析create.html的uri
+    @Check("Role+W")
 	public static void create(){
 		render();
 	}
-
+    @Check("Role+W")
 	public static void handleCreate(@Required String Name,
 			@Required int Privilege) {
 		if(Validation.hasErrors()){
@@ -38,7 +39,7 @@ public class AdminRole extends Controller {
 		list(null,null);
 		
 	}
-
+    @Check("Role+RW")
 	public static void edit(Long id) {
 		try {
 			Role role = Role.findById(id);
@@ -48,7 +49,7 @@ public class AdminRole extends Controller {
 		}
 		render("AdminRole/create.html");
 	}
-	
+    @Check("Role+RW")
 	public static void handleEdit(@Required Long id,@Required String Name,
 			@Required int Privilege) {
 		if(Validation.hasErrors()){
@@ -68,7 +69,7 @@ public class AdminRole extends Controller {
 		list(null,null);
 		
 	}
-	
+    @Check("Role+W")
 	public static void delete(@Required Long id) {
 		if (Validation.hasErrors()){
             renderJSON(false);
@@ -81,7 +82,7 @@ public class AdminRole extends Controller {
 		}
 		renderJSON(rows);
 	}
-	
+    @Check("Role+R")
 	public static void list(Integer page, Integer pageSize) {
 		if(page == null || page < 1) {
 			page = 1;

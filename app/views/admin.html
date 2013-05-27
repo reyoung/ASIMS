@@ -6,7 +6,7 @@
 #{/set}
 
 
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="#">ASIMS</a>
@@ -15,11 +15,20 @@
                     <li><a href="#">首页</a></li>
                     <li class="active"><a href="#">后台</a></li>
                 </ul>
+                <ul class="nav pull-right">
+                    #{if user!=null}
+                    <li><a href="#">您好，${user.LoginName}</a></li>
+                    <li><a href="@{Secure.logout()}">注销</a> </li>
+                    #{/if}#{else}
+                    <li><a href="@{Secure.login()}"></a></li>
+                    #{/else}
+                </ul>
+
             </div>
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container" style="padding-top: 60px;">
     <div class="row-fluid">
         <div class="span2 well">
             <ul class="nav nav-list" >
@@ -38,9 +47,6 @@
                 <li class="nav-header">机场设施</li>
                 <li id="nav_airportResource_list"><a href="@{AdminAirportResource.list}"><i class="icon-list-alt"></i>查询</a></li>
                 <li id="nav_airportResource_create"><a href="@{AdminAirportResource.create}"><i class="icon-plus"></i>新增</a></li>
-                <li class="nav-header">部门</li>
-                <li id="nav_Department_list"><a href="@{AdminDepartment.list}"><i class="icon-list-alt"></i>查询</a></li>
-                <li id="nav_Department_create"><a href="@{AdminDepartment.create}"><i class="icon-plus"></i>新增</a></li>
                 <li class="nav-header">物业设施</li>
                 <li id="nav_propertyResource_list"><a href="@{AdminPropertyResource.list}"><i class="icon-list-alt"></i>查询</a></li>
                 <li id="nav_propertyResource_create"><a href="@{AdminPropertyResource.create}"><i class="icon-plus"></i>新增</a> </li>

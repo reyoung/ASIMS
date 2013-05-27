@@ -17,7 +17,9 @@ import java.util.List;
  * Time: 11:33 PM
  * To change this template use File | Settings | File Templates.
  */
-public class AdminAirport extends Controller {
+public class AdminAirport extends BaseAdminController {
+
+    @Check("Airport+R")
     public static void list(Integer page,Integer pageSize,String status) {
         String filter;
         if (page == null){
@@ -33,6 +35,7 @@ public class AdminAirport extends Controller {
         render(pages,status);
     }
 
+    @Check("Airport+W")
     public static void create(){
         String[] countries = Airport.getAllCountry();
         AdminAirport.renderArgs.put("countries",countries);
@@ -41,6 +44,8 @@ public class AdminAirport extends Controller {
         Logger.debug("Table Json Is "+tableJson);
         render();
     }
+
+    @Check("Airport+W")
     public static void handleCreate(@Required String Name,
                                     @Required Integer CountryId,
                                     @Required Integer CityId){
@@ -54,6 +59,7 @@ public class AdminAirport extends Controller {
         list(1,10,"created");
     }
 
+    @Check("Airport+W")
     public static void remove(@Required Long id){
         if (id==null){
             badRequest();
@@ -63,6 +69,7 @@ public class AdminAirport extends Controller {
         renderJSON(rows!=0);
     }
 
+    @Check("Airport+RW")
     public static void edit(@Required Long id){
         Airport model = Airport.findById(id);
         String[] countries = Airport.getAllCountry();
@@ -71,6 +78,7 @@ public class AdminAirport extends Controller {
         AdminAirport.renderArgs.put("tableJson",tableJson);
         render("AdminAirport/create.html",model);
     }
+    @Check("Airport+W")
     public static void handleEdit(@Required Long id,
                                   @Required String Name,
                                   @Required Integer CityId,

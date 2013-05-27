@@ -63,15 +63,9 @@ POST    /admin/PropertyResource/create          AdminPropertyResource.handleCrea
 GET     /admin/PropertyResource/{id}/edit       AdminPropertyResource.edit
 POST    /admin/PropertyResource/{id}/edit       AdminPropertyResource.handleEdit
 DELETE  /admin/PropertyResource/{id}            AdminAirportResource.delete
-#Admin Department 
-GET	    /admin/Department/				    	AdminDepartment.list
-GET	    /admin/Department/create			    AdminDepartment.create
-POST	/admin/Department/create			    AdminDepartment.handleCreate
-GET     /admin/Department/{id}/edit             AdminDepartment.edit
-POST    /admin/Department/{id}/edit             AdminDepartment.handleEdit
-DELETE  /admin/Department/{id}                  AdminDepartment.delete
 
 
+*       /admin/                                 module:secure
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}
