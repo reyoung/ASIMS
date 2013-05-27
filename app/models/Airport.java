@@ -71,4 +71,6 @@ public class Airport extends Model {
     public String simpleToString(){
         return String.format("%s %s",this.getCountry(),this.getCity());
     }
+
+
 }

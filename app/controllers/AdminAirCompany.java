@@ -2,10 +2,13 @@ package controllers;
 
 import models.AirCompany;
 import models.Page;
+import models.User;
 import play.Logger;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.mvc.Controller;
+import play.mvc.With;
+import play.mvc.*;
 
 import java.util.List;
 
@@ -16,11 +19,23 @@ import java.util.List;
  * Time: 9:18 PM
  * To change this template use File | Settings | File Templates.
  */
+
+@With(Secure.class)
 public class AdminAirCompany extends Controller{
+    @Before
+    public static void setConnectedUser() {
+        if(Security.isConnected()) {
+            User user = User.find("LoginName = ?", Security.connected()).first();
+            renderArgs.put("user", user);
+        }
+    }
+
+    @Check("AirCompany+W")
     static public void create(){
         render();
     }
 
+    @Check("AirCompany+R")
     public static void list(Integer page,Integer pageSize){
         if(page==null||page<1){
             page = 1;
@@ -33,6 +48,7 @@ public class AdminAirCompany extends Controller{
         render(pages);
     }
 
+    @Check("AirCompany+W")
     public static void edit(Long id) {
         try {
             AirCompany model = AirCompany.findById(id);
@@ -43,6 +59,7 @@ public class AdminAirCompany extends Controller{
         render("AdminAirCompany/create.html");
     }
 
+    @Check("AirCompany+W")
     public static void delete(Long id){
         int rows = 0;
         try {
@@ -54,7 +71,7 @@ public class AdminAirCompany extends Controller{
     }
 
 
-
+    @Check("AirCompany+R")
     public static void getByName(@Required String Name){
         if (Validation.hasErrors()){
             badRequest();
@@ -67,6 +84,7 @@ public class AdminAirCompany extends Controller{
         }
     }
 
+    @Check("AirCompany+R")
     public static void getById(@Required Long id){
         if(Validation.hasErrors()){
             badRequest();
@@ -79,6 +97,7 @@ public class AdminAirCompany extends Controller{
         }
     }
 
+    @Check("AirCompany+W")
     public static void handleEdit(@Required Long id,@Required String Name){
         if(Validation.hasErrors()){
             badRequest();
@@ -92,7 +111,7 @@ public class AdminAirCompany extends Controller{
         }
         list(null,null);
     }
-
+    @Check("AirCompany+W")
     public static void handleCreate(@Required String Name){
         if(Validation.hasErrors()){
             badRequest();
