@@ -38,6 +38,8 @@ public class Security extends  Secure.Security {
                 pt = user.UserRole.getRoleTablePrivilege();
             } else if(strs[0].equals("PropertyResource")){
                 pt = user.UserRole.getPropertyResourceTablePrivilege();
+            } else if(strs[0].equals("User")){
+                pt = user.UserRole.getUserTablePrivilege();
             }
 
             if(strs[1].toUpperCase().contains("R")){

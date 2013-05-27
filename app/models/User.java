@@ -1,8 +1,5 @@
 package models;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Columns;
 import play.Logger;
@@ -37,6 +34,10 @@ public class User extends Model {
     @Email
     public String Email;
 
+    @Column(name = "RealName", nullable = true, length=255)
+    public String RealName;
+
+
     @Column(name = "Telephone",nullable = true, length = 64)
     @Phone
     public String Telephone;
@@ -60,6 +61,23 @@ public class User extends Model {
     public Role UserRole;
 
 
+    public String getDepartmentName(){
+        if(Department==null||Department.isEmpty()){
+            return "无部门";
+        } else {
+            return Department;
+        }
+    }
+
+    public void hashPassword(){
+        try {
+            MessageDigest md5  = MessageDigest.getInstance("MD5");
+            byte [] result = md5.digest(md5.digest(this.Password.getBytes()));
+            BigInteger bigInt = new BigInteger(1,result);
+            Password = bigInt.toString(16).toUpperCase();
+        } catch (NoSuchAlgorithmException ignored){
+        }
+    }
     public static User Login(String uname, String pwd){
         Logger.debug("On Login With %s,%s",uname,pwd);
         try {

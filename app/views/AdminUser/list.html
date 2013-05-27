@@ -1,0 +1,52 @@
+#{extends 'admin.html' /}
+#{set title:"查询用户" /}
+<div class="row">
+    %{lstUrl =  play.mvc.Router.reverse("AdminRole.list").url}%
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+    <div class="row">
+          <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                    <th>登录名称</th>
+                    <th>姓名</th>
+                    <th>电子邮件</th>
+                    <th>电话号码</th>
+                    <th>手机号码</th>
+                    <th>性别</th>
+                    <th>部门名称</th>
+                    <th>工号</th>
+                    <th>角色</th>
+                    <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              %{for(usr in pages.Data){}%
+              <tr>
+                  <td>${usr.LoginName}</td>
+                  <td>${usr.RealName}</td>
+                  <td>${usr.Email}</td>
+                  <td>${usr.Telephone}</td>
+                  <td>${usr.Mobile}</td>
+                  <td>#{if usr.IsMale}
+                      男
+                      #{/if}#{else}
+                      女
+                      #{/else}
+                  </td>
+                  <td>${usr.getDepartmentName()}</td>
+                  <td>${usr.UserNumber}</td>
+                  <td>${usr.UserRole.Name}</td>
+                  <td>
+                      <div class="btn-group">
+                          <a href="@{AdminUser.edit(usr.id)}" class="btn btn-info">修改</a>
+                          <button class="btn btn-danger" data-id="${usr.id}">删除</button>
+                      </div>
+                  </td>
+              </tr>
+              %{}}%
+              </tbody>
+          </table>
+    </div>
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+</div>
+#{js 'admin/user/list.js' /}
