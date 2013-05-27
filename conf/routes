@@ -57,7 +57,7 @@ DELETE  /admin/AirportResource/{id}             AdminAirportResource.delete
 
 #Admin Property Resource
 
-GET     /admin/PropertyResource                 AdminPropertyResource.list
+GET     /admin/PropertyResource/                 AdminPropertyResource.list
 GET     /admin/PropertyResource/create          AdminPropertyResource.create
 POST    /admin/PropertyResource/create          AdminPropertyResource.handleCreate
 GET     /admin/PropertyResource/{id}/edit       AdminPropertyResource.edit
@@ -65,6 +65,12 @@ POST    /admin/PropertyResource/{id}/edit       AdminPropertyResource.handleEdit
 DELETE  /admin/PropertyResource/{id}            AdminAirportResource.delete
 
 
+
+#Admin User
+GET     /admin/User/                             AdminUser.list
+GET     /admin/User/create                      AdminUser.create
+POST    /admin/User/create                      AdminUser.handleCreate
+GET     /admin/User/{id}/edit                   AdminUser.edit
 *       /admin/                                 module:secure
 
 # Catch all

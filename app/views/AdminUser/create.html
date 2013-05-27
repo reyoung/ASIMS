@@ -1,0 +1,81 @@
+#{extends 'admin.html' /}
+#{if model == null }
+#{set title:'创建用户' /}
+#{/if}#{else}
+#{set title:'修改用户' /}
+#{/else}
+<div class="row">
+    <form class="form-horizontal" method="POST">
+        <fieldset>
+            <legend>
+                创建用户
+            </legend>
+            <div class="control-group">
+                <label for="LoginName" class="control-label">登录名称: </label>
+                <input type="text" id="LoginName" name="u.LoginName"/>*
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Password" class="control-label">密码: </label>
+                <input type="password" id="Password" name="u.Password" /> *
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="PasswordRepeat" class="control-label">重复密码: </label>
+                <input type="password" id="PasswordRepeat" /> *
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Email" class="control-label">电子邮箱: </label>
+                <input type="text" id="Email" name="u.Email" /> *
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="UserNumber" class="control-label">工号: </label>
+                <input type="text" id="UserNumber" name="u.UserNumber" />*
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="RealName" class="control-label">真实姓名: </label>
+                <input type="text" id="RealName" name="u.RealName" />
+                <span class="help-inline"></span>
+            </div>
+
+            <div class="control-group">
+                <label for="IsMale" class="control-label">性别: </label>
+                <select id="IsMale" name="u.IsMale">
+                    <option value="true">男</option>
+                    <option value="false">女</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="Department" class="control-label">部门名称</label>
+                <input type="text" id="Department" name="u.Department" />
+                <span class="help-inline"></span>
+            </div>
+
+            <div class="control-group">
+                <label for="Telephone" class="control-label">联系电话: </label>
+                <input type="text" id="Telephone" name="u.Telephone" />
+                <span class="help-inline"></span>
+            </div>
+
+            <div class="control-group">
+                <label for="Mobile" class="control-label">联系手机: </label>
+                <input type="text" id="Mobile" name="u.Mobile"/>
+                <span class="help-inline"></span>
+            </div>
+
+            <div class="control-group">
+                <label for="UserRole" class="control-label">角色: </label>
+                <select id="UserRole" name="RoleId">
+                    %{for(r in roles){ }%
+                    <option value="${r.id}">${r.Name}</option>
+                    %{}}%
+                </select>
+            </div>
+            <input type="submit" class="btn btn-info" value="创建" style="margin-left:300px;" />
+        </fieldset>
+    </form>
+</div>
