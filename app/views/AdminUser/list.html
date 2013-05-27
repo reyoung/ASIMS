@@ -8,6 +8,7 @@
               <thead>
                 <tr>
                     <th>登录名称</th>
+                    <th>姓名</th>
                     <th>电子邮件</th>
                     <th>电话号码</th>
                     <th>手机号码</th>
@@ -22,6 +23,7 @@
               %{for(usr in pages.Data){}%
               <tr>
                   <td>${usr.LoginName}</td>
+                  <td>${usr.RealName}</td>
                   <td>${usr.Email}</td>
                   <td>${usr.Telephone}</td>
                   <td>${usr.Mobile}</td>

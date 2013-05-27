@@ -69,7 +69,6 @@ public class User extends Model {
         }
     }
 
-    @PrePersist
     public void hashPassword(){
         try {
             MessageDigest md5  = MessageDigest.getInstance("MD5");
