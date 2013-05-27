@@ -17,16 +17,21 @@ import java.util.List;
  * EMail: reyoung@126.com
  * Blog: www.reyoung.me
  */
-public class AdminAirportResource extends Controller {
+public class AdminAirportResource extends BaseAdminController {
+
+    @Check("AirportResource+W")
     public static void create(){
         render();
     }
+
+    @Check("AirportResource+RW")
     public static void edit(@Required Long id){
         if (Validation.hasErrors()) badRequest();
         Facility model = Facility.findById(id);
         render("AdminAirportResource/create.html",model);
     }
 
+    @Check("AirportResource+W")
     public static void delete(@Required Long id){
         if (Validation.hasErrors()){
             renderJSON(false);
@@ -39,6 +44,7 @@ public class AdminAirportResource extends Controller {
         }
         renderJSON(row);
     }
+    @Check("AirportResource+W")
     public static void handleEdit(@Required Long id,
                                   @Required String Name,
                                   @Required String Position,
@@ -52,6 +58,7 @@ public class AdminAirportResource extends Controller {
         fc.save();
         list(null,null,null);
     }
+    @Check("AirportResource+W")
     public static void handleCreate(@Required String Name,
                                     @Required String Position,
                                     @Required Integer Amount, String Comment){
@@ -71,6 +78,7 @@ public class AdminAirportResource extends Controller {
             list(null,null,null);
         }
     }
+    @Check("AirportResource+R")
     public static void list(Integer page, Integer pageSize, String filter){
         if (page == null || page <1){
             page = 1;

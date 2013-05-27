@@ -20,16 +20,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 
-@With(Secure.class)
-public class AdminAirCompany extends Controller{
-    @Before
-    public static void setConnectedUser() {
-        if(Security.isConnected()) {
-            User user = User.find("LoginName = ?", Security.connected()).first();
-            renderArgs.put("user", user);
-        }
-    }
 
+public class AdminAirCompany extends BaseAdminController {
     @Check("AirCompany+W")
     static public void create(){
         render();

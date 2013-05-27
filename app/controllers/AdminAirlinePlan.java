@@ -21,14 +21,18 @@ import org.eclipse.jdt.internal.codeassist.ThrownExceptionFinder;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import play.mvc.With;
 
 //import fj.data.List;
 /**
  * Created with IntelliJ IDEA. User: reyoung Date: 3/17/13 Time: 3:07 PM To
  * change this template use File | Settings | File Templates.
  */
-public class AdminAirlinePlan extends Controller {
-	public static void create() {
+
+public class AdminAirlinePlan extends BaseAdminController {
+
+    @Check("Airport+R,AirCompany+R,AirlinePlan+RW")
+    public static void create() {
 		beforeRenderCreate();
 		render();
 	}
@@ -38,7 +42,7 @@ public class AdminAirlinePlan extends Controller {
 		renderArgs.put("companies", AirCompany.findAll());
 		return true;
 	}
-
+    @Check("AirlinePlan+W")
 	public static void handleCreate(@Required String Number,
 			@Required String LeaveTime, @Required Integer FlyTime,
 			@Required Long LeavePlace, @Required Long ArrivePlace,
@@ -98,6 +102,7 @@ public class AdminAirlinePlan extends Controller {
 		alp.save();
 	}
 
+    @Check("AirlinePlan+W")
 	public static void delete(Long id) {
 		int rows = 0;
 		try {
@@ -108,6 +113,7 @@ public class AdminAirlinePlan extends Controller {
 		renderJSON(rows);
 	}
 
+    @Check("AirlinePlan+R,AirCompany+R,Airport+R")
 	public static void list(Integer page, Integer pageSize) {
 		if (page == null || page < 1) {
 			page = 1;
@@ -122,6 +128,7 @@ public class AdminAirlinePlan extends Controller {
 		render(pages);
 	}
 
+    @Check("AirlinePlan+RW,AirCompany+R,Airport+R")
 	public static void edit(Long id) {
 		try {
 			AirlinePlan alp = AirlinePlan.findById(id);
@@ -133,6 +140,7 @@ public class AdminAirlinePlan extends Controller {
 		render("AdminAirlinePlan/create.html");
 	}
 
+    @Check("AirlinePlan+W")
 	public static void handleEdit(@Required String Number,
 			@Required String LeaveTime, @Required Integer FlyTime,
 			@Required Long LeavePlace, @Required Long ArrivePlace,

@@ -17,11 +17,13 @@ import java.util.List;
  * EMail: reyoung@126.com
  * Blog: www.reyoung.me
  */
-public class AdminPropertyResource extends Controller {
+public class AdminPropertyResource extends BaseAdminController {
+
+    @Check("PropertyResource+W")
     public static void create(){
         render();
     }
-
+    @Check("PropertyResource+R")
     public static void list(Integer page, Integer pageSize, String filter){
         if(page==null || page <1){
             page = 1;
@@ -42,6 +44,7 @@ public class AdminPropertyResource extends Controller {
     }
 
 
+    @Check("PropertyResource+W")
     public static void handleCreate(@Required String Name,
                                     @Required String Position,
                                     @Required Integer Amount,
@@ -63,6 +66,7 @@ public class AdminPropertyResource extends Controller {
         }
     }
 
+    @Check("PropertyResource+RW")
     public static void edit(@Required Long id){
         if(Validation.hasErrors()) badRequest();
         Facility model = Facility.findById(id);
@@ -71,6 +75,7 @@ public class AdminPropertyResource extends Controller {
         }
         render("AdminPropertyResource/create.html",model);
     }
+    @Check("PropertyResource+RW")
     public static void handleEdit(@Required Long id,
                                   @Required String Name,
                                   @Required String Position,
@@ -88,6 +93,7 @@ public class AdminPropertyResource extends Controller {
         list(null,null,null);
     }
 
+    @Check("PropertyResource+W")
     public static void delete(@Required Long id){
         if(Validation.hasErrors()) badRequest();
         Facility fc =  Facility.findById(id);

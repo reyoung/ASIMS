@@ -83,6 +83,7 @@ Facility(f_pr_doctor):
   Comment: 营业时间 24小时营业
   Type: 200
 
+# 默认用户admin,密码1234554321
 User(u_admin):
   LoginName: admin
   Password: B12B2AC910BC8057BC3E5121C24F6D89

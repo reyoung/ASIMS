@@ -2,7 +2,7 @@ package models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import org.hibernate.annotations.Columns;
+
 import play.db.jpa.Model;
 /**
  * 
@@ -34,13 +34,13 @@ public class Role extends Model{
 	
 	
 	public static int USER_TABLE_POS = 0;
-	public static int DEPARTMENT_TABLE_POS = 1;
+	public static int PROPERTYRESOURCE_TABLE_POS = 1;
 	public static int ROLE_TABLE_POS = 2;
     public static int NEWS_TABLE_POS = 3;
 	public static int ATTACHMENT_TABLE_POS = 4;
 	public static int AIRLINEPLAN_TABLE_POS = 5;
 	public static int AIRLINESTATUS_TABLE_POS = 6;
-	public static int FACILITY_TABLE_POS = 7;
+	public static int AIRPORTRESOURCE_TABLE_POS = 7;
 	public static int AIRCOMPANY_TABLE_POS = 8;
 	public static int AIRPORT_TABLE_POS = 9;
 
@@ -48,8 +48,8 @@ public class Role extends Model{
 	public PrivilegeType getUserTablePrivilege(){
 		return new PrivilegeType(Privilege, USER_TABLE_POS);
 	}
-	public PrivilegeType getDepartmentTablePrivilege(){
-		return new PrivilegeType(Privilege, DEPARTMENT_TABLE_POS);
+	public PrivilegeType getPropertyResourceTablePrivilege(){
+		return new PrivilegeType(Privilege, PROPERTYRESOURCE_TABLE_POS);
 	}
 	public PrivilegeType getRoleTablePrivilege(){
 		return new PrivilegeType(Privilege, ROLE_TABLE_POS);
@@ -66,8 +66,8 @@ public class Role extends Model{
 	public PrivilegeType getAirlineStatusTablePrivilege(){
 		return new PrivilegeType(Privilege, AIRLINESTATUS_TABLE_POS);
 	}
-	public PrivilegeType getFacilityTablePrivilege(){
-		return new PrivilegeType(Privilege, FACILITY_TABLE_POS);
+	public PrivilegeType getAirportResourceTablePrivilege(){
+		return new PrivilegeType(Privilege, AIRPORTRESOURCE_TABLE_POS);
 	}
 	public PrivilegeType getAirCompanyTablePrivilege(){
 		return new PrivilegeType(Privilege, AIRCOMPANY_TABLE_POS);
@@ -87,10 +87,10 @@ public class Role extends Model{
     	    if(getUserTablePrivilege().Writable){strReadablePrivilege+="可写";}
     	    strReadablePrivilege+=",";
     	}
-    	if(getDepartmentTablePrivilege().Readable||getDepartmentTablePrivilege().Writable){
+    	if(getPropertyResourceTablePrivilege().Readable|| getPropertyResourceTablePrivilege().Writable){
     		strReadablePrivilege+="部门表";
-    	    if(getDepartmentTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getDepartmentTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	    if(getPropertyResourceTablePrivilege().Readable){strReadablePrivilege+="可读";}
+    	    if(getPropertyResourceTablePrivilege().Writable){strReadablePrivilege+="可写";}
     	    strReadablePrivilege+=",";
     	}
     	if(getRoleTablePrivilege().Readable||getRoleTablePrivilege().Writable){
@@ -123,10 +123,10 @@ public class Role extends Model{
     	    if(getAirlineStatusTablePrivilege().Writable){strReadablePrivilege+="可写";}
     	    strReadablePrivilege+=",";
     	}
-    	if(getFacilityTablePrivilege().Readable||getFacilityTablePrivilege().Writable){
+    	if(getAirportResourceTablePrivilege().Readable|| getAirportResourceTablePrivilege().Writable){
     		strReadablePrivilege+="机场设施表";
-    	    if(getFacilityTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getFacilityTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	    if(getAirportResourceTablePrivilege().Readable){strReadablePrivilege+="可读";}
+    	    if(getAirportResourceTablePrivilege().Writable){strReadablePrivilege+="可写";}
     	    strReadablePrivilege+=",";
     	}
     	if(getAirCompanyTablePrivilege().Readable||getAirCompanyTablePrivilege().Writable){
