@@ -1,0 +1,84 @@
+#{extends 'admin.html' /}
+#{if model==null}
+#{set title:"新增新闻" /}
+#{/if}#{else}
+#{set title:"修改新闻" /}
+#{/else}
+
+#{set 'moreScripts' }
+#{js 'swfupload.js' /}
+#{/set}
+
+<div class="row">
+    <form method="POST" class="form-horizontal">
+        <fieldset>
+            <legend>
+                新增新闻
+            </legend>
+            <div class="control-group">
+                <label for="Title" class="control-label">
+                    新闻标题:
+                </label>
+                <div class="controls">
+                    <input class="span6" type="text" min=5 max=80 id="Title" name="n.Title" />
+                </div>
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <label for="Type" class="control-label">
+                    新闻类型:
+                </label>
+                <div class="controls">
+                    <select class="span4" id="Type" name="n.Type">
+                        <option>机场介绍</option>
+                        <option>航班信息</option>
+                        <option>机场资源</option>
+                        <option>物业设施</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Content" class="control-label">
+                    新闻正文:
+                </label>
+                <div class="controls">
+                    <textarea class="span8" id="Content" name="u.Content" rows="16" ></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Attachments" class="control-label">附件: </label>
+                <div class="controls">
+                    <table id="Attachments" class="table">
+                        <thead id="AttachmentTHead"></thead>
+                        <tbody id="AttachmentTBody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="spanSWFUploadButton" class="control-label">上传附件</label>
+                <div class="controls">
+                    <div class="span6 progress  progress-striped active">
+                        <div class="bar" style="width: 0%;" id="progressbar"></div>
+                    </div>
+                    <div class="span1">
+                        <div  id="spanSWFUploadButton"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" class="offset7 btn btn-info" value="创建" />
+                </div>
+            </div>
+        </fieldset>
+
+    </form>
+</div>
+<script type="text/javascript">
+    SWF_URL = "@{'/public/swf/swfupload.swf'}"
+    BTN_IMG = "@{'/public/img/XPButtonNoText_61x22.png'}"
+</script>
+#{js 'admin/News/create.js' /}
