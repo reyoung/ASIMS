@@ -85,6 +85,23 @@ public class AdminNews extends BaseAdminController {
         render("AdminNews/create.html", model);
     }
 
+
+    public static void delete(@Required Long id){
+        Logger.debug("On Delete");
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+
+        News n = News.findById(id);
+        if(n==null){
+            renderJSON("false");
+        } else {
+            Long retv = n.id;
+            n.delete();
+            renderJSON(retv);
+        }
+    }
+
     public static void handleEdit(@Required Long id, @Required News n, @Required String files_id){
         if(Validation.hasErrors()){
             badRequest();

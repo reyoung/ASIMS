@@ -64,6 +64,15 @@ public class News extends Model {
     public List<Attachment> getAttachments(){
         return Attachment.find("BelongNews",this).fetch();
     }
+
+    @PreRemove
+    public void removeAllAttachments(){
+        List<Attachment> attachments = getAttachments();
+        for(Attachment a: attachments){
+            a.delete();
+        }
+    }
+
     @PrePersist
     public void beforePersistent(){
         if(CreateDate==null){
