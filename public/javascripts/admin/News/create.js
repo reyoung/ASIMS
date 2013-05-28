@@ -1,6 +1,15 @@
 require(["admin/active","field_checker"],function(act,field){
     act("nav_news_create")
     $(function (){
+        $(".form-horizontal").submit(function(){
+            var ids = []
+            $(".attachment-del-btn").each(function(){
+                ids.push(parseInt($(this).attr("data-id"),10))
+            })
+            $("#files_id").val(JSON.stringify(ids))
+            return true
+        })
+
         function OnAttachBtnClick(event){
             event.preventDefault();
             var idToDelete = $(this).attr("data-id")
@@ -32,6 +41,7 @@ require(["admin/active","field_checker"],function(act,field){
         }
 
         function FileQueued(file){
+            console.log(file)
             swfu.startUpload(file.id)
             return true
         }
@@ -56,25 +66,31 @@ require(["admin/active","field_checker"],function(act,field){
             return true
         }
 
+        function FileQueueError(file,errcode,msg){
+            if(errcode===SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT ){
+                alert("请选择小于20MB的文件")
+            }
+        }
+
         var upload_url = "http://" +  location.host + "/admin/Attachment/upload";
         swfu = new SWFUpload({
         	upload_url : upload_url,
         	flash_url : "http://"+location.host+ SWF_URL,
         	file_size_limit : "20MB",
-			button_width: "61",
-			button_height: "22",
+			button_width: "63",
+			button_height: "21",
             button_image_url : BTN_IMG,
 			button_placeholder_id: "spanSWFUploadButton",
 			button_text: '<span class="theFont">上传</span>',
 			button_text_style: ".theFont { font-size: 12; }",
 			button_text_left_padding: 12,
 			button_text_top_padding: 3,
-			debug: true,
             upload_start_handler : UploadStart
         });
         swfu.fileQueued = FileQueued
         swfu.uploadError = UploadError
         swfu.uploadProgress = UploadProgress
         swfu.uploadSuccess = UploadSuccess
+        swfu.fileQueueError =  FileQueueError
     })
 })

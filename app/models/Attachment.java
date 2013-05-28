@@ -19,7 +19,7 @@ import java.util.Date;
 @Entity(name = "Attachment")
 public class Attachment extends Model {
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "NewsId", nullable = true)
     public News BelongNews;
 

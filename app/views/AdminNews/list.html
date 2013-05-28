@@ -1,0 +1,39 @@
+#{extends 'admin.html' /}
+#{set title:'查询新闻' /}
+<div class="row">
+    %{lstUrl = play.mvc.Router.reverse("AdminAirCompany.list").url}%
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>标题</th>
+                <th>作者</th>
+                <th>时间</th>
+                <th>类型</th>
+                <th>附件数量</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            %{for(n in pages.Data){}%
+            <tr>
+                <td>${n.Title}</td>
+                <td>${n.Author.LoginName}</td>
+                <td>${n.CreateDate}</td>
+                <td>${n.getTypeDescription()}</td>
+                <td>${n.getAttachments().size()}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="@{AdminNews.edit(n.id)}" class="btn btn-info">修改</a>
+                        <button class="btn btn-danger" data-id="${n.id}">删除</button>
+                    </div>
+                </td>
+            </tr>
+            %{}}%
+            </tbody>
+        </table>
+    </div>
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+</div>
+#{js 'admin/News/list.js' /}

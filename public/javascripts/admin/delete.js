@@ -14,7 +14,7 @@ define(function(){
 	        	alert("由于外键关系，无法删除。");
 	        }
 	        else{
-	        	window.location.reload();	
+	        	window.location.reload();
 	        }
 		});
 	}
