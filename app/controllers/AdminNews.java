@@ -48,14 +48,16 @@ public class AdminNews extends BaseAdminController {
             badRequest();
         }
 
-        Gson gson = new Gson();
-        Type listType = new TypeToken<List<Long>>(){}.getType();
-
-        List<Long> array = gson.fromJson(files_id, listType);
+        List<Long> array = getAttachmentIDS(files_id);
 
         n.Author = (User) renderArgs.get("user");
 
         n.save();
+        UpdateAttachmentsNews(n, array);
+        list(null,null);
+    }
+
+    private static void UpdateAttachmentsNews(News n, List<Long> array) {
         for (Long id: array){
             Attachment att = Attachment.findById(id);
             if(att!=null){
@@ -63,7 +65,42 @@ public class AdminNews extends BaseAdminController {
                 att.save();
             }
         }
-        Logger.debug("Attachments Count %d",n.getAttachments().size());
-        ok();
+    }
+
+    private static List<Long> getAttachmentIDS(String files_id) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Long>>(){}.getType();
+
+        return gson.fromJson(files_id, listType);
+    }
+
+    public static void edit(@Required Long id){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        News model = News.findById(id);
+        if(model==null){
+            badRequest();
+        }
+        render("AdminNews/create.html", model);
+    }
+
+    public static void handleEdit(@Required Long id, @Required News n, @Required String files_id){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+
+        News news = News.findById(id);
+        if(news==null){
+            badRequest();
+        }
+        assert news != null;
+        news.Title  = n.Title;
+        news.Author =  (User) renderArgs.get("user");
+        news.Content = n.Content;
+        news.Type = n.Type;
+        news.save();
+        UpdateAttachmentsNews(news, getAttachmentIDS(files_id));
+        list(null,null);
     }
 }

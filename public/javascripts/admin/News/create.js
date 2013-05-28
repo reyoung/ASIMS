@@ -1,7 +1,6 @@
 require(["admin/active","field_checker"],function(act,field){
     act("nav_news_create")
     $(function (){
-
         $(".form-horizontal").submit(function(){
             var ids = []
             $(".attachment-del-btn").each(function(){

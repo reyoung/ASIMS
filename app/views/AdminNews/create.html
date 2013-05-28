@@ -13,14 +13,22 @@
     <form method="POST" class="form-horizontal">
         <fieldset>
             <legend>
+                #{if model==null}
                 新增新闻
+                #{/if}#{else}
+                修改新闻
+                #{/else}
             </legend>
             <div class="control-group">
                 <label for="Title" class="control-label">
                     新闻标题:
                 </label>
                 <div class="controls">
-                    <input class="span6" type="text" min=5 max=80 id="Title" name="n.Title" />
+                    <input class="span6" type="text" min=5 max=80 id="Title" name="n.Title"
+                            #{if model!=null}
+                            value="${model.Title}"
+                            #{/if}
+                            />
                 </div>
                 <span class="help-inline"></span>
             </div>
@@ -30,10 +38,10 @@
                 </label>
                 <div class="controls">
                     <select class="span4" id="Type" name="n.Type">
-                        <option value="0">机场介绍</option>
-                        <option value="1">航班信息</option>
-                        <option value="2">机场资源</option>
-                        <option value="3">物业设施</option>
+                        <option value="0" #{if model!=null && model.Type==0} selected #{/if}>机场介绍</option>
+                        <option value="1" #{if model!=null && model.Type==1} selected #{/if}>航班信息</option>
+                        <option value="2" #{if model!=null && model.Type==2} selected #{/if}>机场资源</option>
+                        <option value="3" #{if model!=null && model.Type==3} selected #{/if}>物业设施</option>
                     </select>
                 </div>
             </div>
@@ -42,7 +50,7 @@
                     新闻正文:
                 </label>
                 <div class="controls">
-                    <textarea class="span8" id="Content" name="n.Content" rows="16" ></textarea>
+                    <textarea class="span8" id="Content" name="n.Content" rows="16">#{if model!=null}${model.Content}#{/if}</textarea>
                 </div>
             </div>
             <div class="control-group">
@@ -51,7 +59,14 @@
                     <table id="Attachments" class="table">
                         <thead id="AttachmentTHead"></thead>
                         <tbody id="AttachmentTBody">
-
+                        #{if model!=null }
+                        %{for(att in model.getAttachments()){}%
+                            <tr>
+                                <td>${att.Title}</td>
+                                <td><button class='attachment-del-btn btn btn-danger' data-id="${att.id}">删除</button></td>
+                            </tr>
+                        %{}}%
+                        #{/if}
                         </tbody>
                     </table>
                 </div>
@@ -71,7 +86,13 @@
             <input type="hidden" name="files_id" id="files_id" />
             <div class="control-group">
                 <div class="controls">
-                    <input type="submit" class="offset7 btn btn-info" value="创建" />
+                    <input type="submit" class="offset7 btn btn-info"
+                           #{if model==null}
+                           value="创建"
+                           #{/if}#{else}
+                           value="修改"
+                           #{/else}
+                            />
                 </div>
             </div>
         </fieldset>
