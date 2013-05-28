@@ -1,6 +1,16 @@
 require(["admin/active","field_checker"],function(act,field){
     act("nav_news_create")
     $(function (){
+
+        $(".form-horizontal").submit(function(){
+            var ids = []
+            $(".attachment-del-btn").each(function(){
+                ids.push(parseInt($(this).attr("data-id"),10))
+            })
+            $("#files_id").val(JSON.stringify(ids))
+            return true
+        })
+
         function OnAttachBtnClick(event){
             event.preventDefault();
             var idToDelete = $(this).attr("data-id")

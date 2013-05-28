@@ -75,9 +75,9 @@ POST    /admin/User/{id}/edit                   AdminUser.handleEdit
 DELETE  /admin/User/{id}                        AdminUser.delete
 
 #Admin News
-GET     /admin/News/                            AdminNews.create
+GET     /admin/News/                            AdminNews.list
 GET     /admin/News/create                      AdminNews.create
-
+POST    /admin/News/create                      AdminNews.handleCreate
 
 #Admin Attachment
 

@@ -30,10 +30,10 @@
                 </label>
                 <div class="controls">
                     <select class="span4" id="Type" name="n.Type">
-                        <option>机场介绍</option>
-                        <option>航班信息</option>
-                        <option>机场资源</option>
-                        <option>物业设施</option>
+                        <option value="0">机场介绍</option>
+                        <option value="1">航班信息</option>
+                        <option value="2">机场资源</option>
+                        <option value="3">物业设施</option>
                     </select>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     新闻正文:
                 </label>
                 <div class="controls">
-                    <textarea class="span8" id="Content" name="u.Content" rows="16" ></textarea>
+                    <textarea class="span8" id="Content" name="n.Content" rows="16" ></textarea>
                 </div>
             </div>
             <div class="control-group">
@@ -68,6 +68,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="files_id" id="files_id" />
             <div class="control-group">
                 <div class="controls">
                     <input type="submit" class="offset7 btn btn-info" value="创建" />

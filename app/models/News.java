@@ -5,6 +5,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,10 +17,10 @@ import java.util.Date;
  */
 @Entity(name = "News")
 public class News extends Model {
-    public static int NT_AirportDescription=0;
-    public static int NT_AirlineInformation=1;
-    public static int NT_AirportResource=2;
-    public static int NT_PropertyResource=3;
+    public static final int NT_AirportDescription=0;
+    public static final int NT_AirlineInformation=1;
+    public static final int NT_AirportResource=2;
+    public static final int NT_PropertyResource=3;
 
 
     @Column(name = "Title",nullable = false, length = 255)
@@ -40,10 +41,29 @@ public class News extends Model {
     public User Author;
 
 
-    @Column(name = "Date", nullable = false)
+    @Column(name = "Date", nullable = false, updatable = false)
     @Required
     public Date CreateDate;
 
+
+    public String getTypeDescription(){
+        switch (this.Type){
+            case NT_AirlineInformation:
+                return "航班信息";
+            case NT_AirportDescription:
+                return "机场描述";
+            case NT_AirportResource:
+                return "机场设施";
+            case NT_PropertyResource:
+                return "物业设施";
+            default:
+                return "";
+        }
+    }
+
+    public List<Attachment> getAttachments(){
+        return Attachment.find("BelongNews",this).fetch();
+    }
     @PrePersist
     public void beforePersistent(){
         if(CreateDate==null){
