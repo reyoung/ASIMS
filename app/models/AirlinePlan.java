@@ -106,7 +106,6 @@ public class AirlinePlan extends Model {
       
     }
     public String getReadableFlyTime(){
-    	
     	int day=FlyTime/1440;
     	int hour=(FlyTime/60)%24;
     	int minute=FlyTime%60;

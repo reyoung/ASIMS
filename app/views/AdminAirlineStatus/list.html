@@ -1,2 +1,51 @@
 #{extends 'admin.html' /}
 #{set title:"查询航线状态" /}
+<div class="row">
+    %{lstUrl = play.mvc.Router.reverse("AdminAirlinePlan.list").url}%
+    #{pager_header page:pages, action:lstUrl, offset:"span7 offset5" }
+    <form class="form form-search" style="display:inline;" method="GET">
+        <input type="text" name="num" class="input-medium search-query" placeholder="航班号" >
+        <select class="input-small search-query" name="type">
+            <option value="0">全部</option>
+            <option value="1">未起飞</option>
+            <option value="4">已起飞</option>
+            <option value="2">已降落</option>
+            <option value="3">已取消</option>
+        </select>
+        <button type="submit" class="btn">搜索</button>
+    </form>
+    #{/pager_header}
+
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>航班号</th>
+                    <th>起飞时间</th>
+                    <th>飞行时间</th>
+                    <th>登机门</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                %{for(s in pages.Data){}%
+                <tr>
+                    <td>${s.Plan.Number}</td>
+                    <td>${s.LeaveTime}</td>
+                    <td>${s.FlyTime}</td>
+                    <td>${s.BoardPort.Name+" "+s.BoardPort.Position}</td>
+                    <td>${s.getStatusString()}</td>
+                    <td>
+                        <button class="btn btn-info" data-id="${s.id}">起飞</button>
+                        <button class="btn btn-success" data-id="${s.id}">到达</button>
+                        <button class="btn btn-danger" data-id="${s.id}">取消</button>
+                    </td>
+                </tr>
+                %{}}%
+            </tbody>
+        </table>
+    </div>
+
+    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+</div>

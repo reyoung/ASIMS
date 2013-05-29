@@ -26,6 +26,7 @@ public class AirlineStatus  extends Model {
     public final static int AS_DONE_ON_TIME = AS_DONE+1;
     public final static int AS_DONE_DELAY= AS_DONE+2;
     public final static int AS_CANCEL = 300;
+    public final static int AS_FLYING = 400;
 
 
     @ManyToOne
@@ -44,4 +45,31 @@ public class AirlineStatus  extends Model {
 
     @Column(nullable = false)
     public int Status = AS_PLAN_ON_TIME;
+
+    public String getStatusString(){
+        if(Status>= AS_PLANING && Status < AS_DONE){
+            switch (Status){
+                case AS_PLAN_DELAY:
+                    return "未起飞-航班延迟";
+                case AS_PLAN_ON_TIME:
+                    return "未起飞-正点";
+                default:
+                    return "未起飞";
+            }
+        } else if(Status >= AS_DONE && Status< AS_CANCEL){
+            switch (Status){
+                case AS_DONE_DELAY:
+                    return "已降落-航班延误";
+                case AS_DONE_ON_TIME:
+                    return "已降落-正点";
+                default:
+                    return "已降落";
+            }
+        } else if(Status>=AS_CANCEL && Status<AS_FLYING){
+            return "航班取消";
+        } else if(Status>=AS_FLYING){
+            return "飞行中";
+        } else
+            return null;
+    }
 }
