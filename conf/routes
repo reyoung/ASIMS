@@ -88,5 +88,8 @@ POST    /admin/Attachment/upload               AdminAttachment.upload
 DELETE  /admin/Attachment/{id}                 AdminAttachment.delete
 *       /admin/                                 module:secure
 
+#Admin AirlineStatus
+GET     /admin/AirlineStatus/list              AdminAirlineStatus.list
+
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

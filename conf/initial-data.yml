@@ -94,5 +94,10 @@ User(u_admin):
   UserNumber: a0001
   UserRole: r_root
 
-
+AirlineStatus(as_CA1523):
+  Plan: ap_CA1523
+  LeaveTime: 2013-5-29 15:30:00
+  FlyTime: 0
+  BoardPort: f_as_board
+  Status: 101
 
