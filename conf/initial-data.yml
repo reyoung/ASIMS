@@ -100,4 +100,13 @@ AirlineStatus(as_CA1523):
   FlyTime: 0
   BoardPort: f_as_board
   Status: 101
-
+News(news_01):
+  Title: 白云机场历史
+  Type: 0
+  Author: u_admin
+  CreateDate: 2013-5-30 16:00:00
+  Content: |
+      # 白云机场历史
+      白云机场坐落于东北黑土城，以春节晚会小品《昨天、今天、明天》得名。
+      * 建立于1989年6月3+1日
+      * 于2005年7月8日重修
