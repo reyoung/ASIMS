@@ -6,6 +6,7 @@ import play.db.jpa.Model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import com.petebevin.markdown.MarkdownProcessor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -59,6 +60,18 @@ public class News extends Model {
             default:
                 return "";
         }
+    }
+
+    public String getAuthorName(){
+        if(Author.RealName!=null)
+            return Author.RealName;
+        else
+            return Author.LoginName;
+    }
+
+    public String getContentHtml(){
+        MarkdownProcessor p = new MarkdownProcessor();
+        return p.markdown(Content);
     }
 
     public List<Attachment> getAttachments(){

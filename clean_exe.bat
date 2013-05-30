@@ -1,3 +1,3 @@
 @ECHO OFF
-call clean
+clean.sh
 call exec

@@ -2,9 +2,14 @@ package controllers;
 
 import models.News;
 import models.Page;
+import play.Logger;
 import play.data.validation.Required;
+import play.data.validation.Validation;
 import play.db.jpa.GenericModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,9 +26,8 @@ public class NewsCenter extends BaseNormalController {
                 @Required String type,
                 String titleFilter,
                 String authorFilter,
-                String fromTimeFilter,
-                String toTimeFilter
-                ){
+                String fromTimeFilter
+                ) throws ParseException {
         if(page==null || page <1)
             page = 1;
         if(pageSize==null||pageSize<1)
@@ -52,24 +56,37 @@ public class NewsCenter extends BaseNormalController {
         if(fromTimeFilter==null){
             fromTimeFilter = "";
         }
-        if(toTimeFilter == null){
-            toTimeFilter = "";
-        }
         GenericModel.JPAQuery query = null;
+        SimpleDateFormat sdf = new SimpleDateFormat(
+                "yyyy/MM/dd");
         long count;
-        if(fromTimeFilter.isEmpty()||toTimeFilter.isEmpty()){
-            query = News.find("Title like ? and Author.RealName like ? and Type = ?",
-                    titleFilter,authorFilter,typeCode);
-            count = News.count("Title like ? and Author.RealName like ? and Type = ?",
-                    titleFilter,authorFilter,typeCode);
+        if(fromTimeFilter.isEmpty()){
+            query = News.find("Title like ? and (Author.RealName like ? or Author.LoginName like ?) and Type = ?",
+                    titleFilter,authorFilter,authorFilter,typeCode);
+            count = News.count("Title like ? and (Author.RealName like ? or Author.LoginName like ?) and Type = ?",
+                    titleFilter,authorFilter,authorFilter,typeCode);
         } else {
-            query = News.find("Title like ? and Author.RealName like ? and Type = ? and CreateDate Between ? and ?",
-                    titleFilter,authorFilter,typeCode,fromTimeFilter,toTimeFilter);
-            count = News.count("Title like ? and Author.RealName like ? and Type = ? and CreateDate Between ? and ?",
-                    titleFilter,authorFilter,typeCode,fromTimeFilter,toTimeFilter);
+            Date filter = sdf.parse(fromTimeFilter);
+            query = News.find("Title like ? and (Author.RealName like ? or Author.LoginName like ?) and Type = ? and CreateDate >= ?",
+                    titleFilter,authorFilter,authorFilter,typeCode,filter);
+            count = News.count("Title like ? and (Author.RealName like ? or Author.LoginName like ?) and Type = ? and CreateDate >= ?",
+                    titleFilter,authorFilter,authorFilter,typeCode,filter);
         }
         List<News> news = query.fetch(page,pageSize);
+        News n = News.all().first();
+        Logger.debug("News Type %d",n.Type);
         Page<News> pages = new Page<News>(news,page,pageSize,count);
-        render(pages);
+        render(pages,type);
+    }
+
+    public static void show(@Required Long id, @Required String type){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        News news = News.findById(id);
+        if(news==null){
+            badRequest();
+        }
+        render(news,type);
     }
 }
