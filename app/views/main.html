@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        #{include_css 'bootstrap.min.css' /}
-        #{include_css 'bootstrap-responsive.min.css' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        #{jso 'jquery-1.8.3.min.js'/}
-        #{jso 'bootstrap.min.js'/}
-        #{js 'require.js' /}
-        <script type="text/javascript">
-            requirejs.config({
-                baseUrl:"@{'/public/javascripts/'}"
-            })
-        </script>
-        #{get 'moreScripts' /}
-    </head>
-    <body>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    #{get 'moreStyles' /}
+    #{include_css 'bootstrap.min.css' /}
+    #{include_css 'bootstrap-responsive.min.css' /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+    #{jso 'jquery-1.8.3.min.js'/}
+    #{jso 'bootstrap.min.js'/}
+    #{js 'require.js' /}
+    <script type="text/javascript">
+        requirejs.config({
+        baseUrl:"@{'/public/javascripts/'}"
+        })
+    </script>
+    #{get 'moreScripts' /}
+</head>
+<body>
+<div id="wrap">
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -54,6 +54,24 @@
     </div>
     <div class="container" style="padding-top: 60px;">
         #{doLayout /}
+
     </div>
-    </body>
+    <div class="navbar" style="margin-bottom:0;">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="span12 text-center">
+                        <p>GPL License, Fork Me On Github!</p>
+                    </div>
+                    <div class="span12 text-center">
+                        <p><a href="">隐私权</a> | <a href="">&copy;版权</a> | <a href="">法律声明</a> | <a href="">电子邮件：admin@163.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
 </html>
