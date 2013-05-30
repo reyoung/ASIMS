@@ -90,6 +90,8 @@ DELETE  /admin/Attachment/{id}                 AdminAttachment.delete
 
 #Admin AirlineStatus
 GET     /admin/AirlineStatus/list              AdminAirlineStatus.list
+PUT     /admin/AirlineStatus/{id}              AdminAirlineStatus.updateByID
+
 
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

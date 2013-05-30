@@ -2,10 +2,15 @@ package controllers;
 
 import models.AirlineStatus;
 import models.Page;
+import play.Logger;
+import play.data.validation.Required;
+import play.data.validation.Validation;
 import play.db.jpa.GenericModel;
 
+import java.lang.Integer;
+import java.lang.Long;
 import java.util.List;
-
+import java.util.Date;
 /**
  * Created with IntelliJ IDEA.
  * User: reyoung
@@ -47,4 +52,49 @@ public class AdminAirlineStatus extends BaseAdminController {
                 count);
         render(pages);
     }
+
+
+    public static final int UPDATE_ACTION_FLY = 0;
+    public static final int UPDATE_ACTION_ARRIVED = 1;
+    public static final int UPDATE_ACTION_CANCEL = 2;
+
+    public static void updateByID (@Required Long id,@Required Integer action){
+        if(Validation.hasErrors())badRequest();
+        AirlineStatus st = null;
+        switch (action.intValue()){
+            case UPDATE_ACTION_FLY:
+                st = AirlineStatus.findById(id);
+                if(st!=null && st.Status /100 == 1){
+                    st.Status = AirlineStatus.AS_FLYING;
+                    st.save();
+                    renderJSON(true);
+                }else {
+                    renderJSON(false);
+                }
+            case UPDATE_ACTION_ARRIVED:
+                st = AirlineStatus.findById(id);
+                if(st!=null && st.Status == AirlineStatus.AS_FLYING){
+                    st.Status = AirlineStatus.AS_DONE;
+                    Date current = new Date();
+                    long ms = current.getTime() - st.LeaveTime.getTime();
+                    st.FlyTime = (int)(ms/1000);
+                    st.save();
+                    renderJSON(true);
+                } else {
+                    renderJSON(false);
+                }
+            case UPDATE_ACTION_CANCEL:
+                st = AirlineStatus.findById(id);
+                if(st!=null&&st.Status/100 ==1){
+                    st.Status = AirlineStatus.AS_CANCEL;
+                    st.save();
+                    renderJSON(true);
+                } else {
+                    renderJSON(false);
+                }
+            default:
+                renderJSON(false);
+        }
+    }
+
 }
