@@ -1,0 +1,37 @@
+#{extends 'NewsCenter/base.html' /}
+#{set title: news.Title /}
+<div class="row text-center">
+    <h2>${news.Title}</h2>
+    <p>发布时间 ${news.CreateDate}, 作者 ${news.getAuthorName()}</p>
+    <hr>
+</div>
+<div class="row">
+    ${news.getContentHtml().raw()}
+</div>
+<div class="row">
+    %{attachments = news.getAttachments()}%
+    #{if !attachments.isEmpty()}
+        <hr/>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>附件名</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            %{for (att in attachments) {}%
+                <tr>
+                    <th>${att.Title}</th>
+                    <th><a href="#">下载</a></th>
+                </tr>
+            %{}}%
+            </tbody>
+        </table>
+
+    #{/if}
+</div>
+<script type="text/javascript">
+    var ACT_ID = "nav_${type}";
+</script>
+#{js 'news/show.js' /}

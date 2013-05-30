@@ -1,21 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        #{jso 'jquery-1.8.3.min.js'/}
-        #{js 'require.js' /}
-        <script type="text/javascript">
-            requirejs.config({
-                baseUrl:"@{'/public/javascripts/'}"
-            })
-        </script>
-        #{get 'moreScripts' /}
-    </head>
-    <body>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    #{get 'moreStyles' /}
+    #{include_css 'bootstrap.min.css' /}
+    #{include_css 'bootstrap-responsive.min.css' /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+    #{jso 'jquery-1.8.3.min.js'/}
+    #{jso 'bootstrap.min.js'/}
+    #{js 'require.js' /}
+    <script type="text/javascript">
+        requirejs.config({
+        baseUrl:"@{'/public/javascripts/'}"
+        })
+    </script>
+    #{get 'moreScripts' /}
+</head>
+<body>
+<div id="wrap">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="#">ASIMS</a>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li><a href="#">首页</a></li>
+                        <li class="dropdown" id="news_nav">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                新闻中心<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href='@{NewsCenter.list(null,null,"airport_description",null,null,null)}'>机场介绍</a></li>
+                                <li><a href='@{NewsCenter.list(null,null,"airline_info",null,null,null)}'>航班信息</a></li>
+                                <li><a href='@{NewsCenter.list(null,null,"airport_resource",null,null,null)}'>机场资源</a></li>
+                                <li><a href='@{NewsCenter.list(null,null,"property_resource",null,null,null)}'>物业资源</a></li>
+                            </ul>
+                        </li>
+                        <li id="admin_nav"><a href="#">后台</a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        #{if user!=null}
+                        <li><a href="#">您好，${user.LoginName}</a></li>
+                        <li><a href="@{Secure.logout()}">注销</a> </li>
+                        #{/if}#{else}
+                        <li><a href="@{Secure.login()}"></a></li>
+                        #{/else}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
         #{doLayout /}
-    </body>
+
+    </div>
+    <div class="navbar navbar-fixed-bottom" style="margin-bottom:0;">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="span12 text-center">
+                        <p>GPL License, Fork Me On Github!</p>
+                    </div>
+                    <div class="span12 text-center">
+                        <p><a href="">隐私权</a> | <a href="">&copy;版权</a> | <a href="">法律声明</a> | <a href="">电子邮件：admin@163.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
 </html>

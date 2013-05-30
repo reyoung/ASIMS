@@ -1,0 +1,70 @@
+#{extends 'NewsCenter/base.html' /}
+#{set 'moreScripts'}
+#{jso 'bootstrap-datetimepicker.min.js' /}
+#{/set}
+#{set title:"新闻中心" /}
+<form class="row form-horizontal" method="GET">
+    <fieldset>
+        <legend>
+            查询新闻
+        </legend>
+        <div class="control-group">
+            <label for="Title" class="control-label">新闻标题:</label>
+            <div class="controls">
+                <input type="text" id="Title" name="titleFilter" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="Author" class="control-label">作者: </label>
+            <div class="controls">
+                <input type="text" id="Author" name="authorFilter" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="Time" class="control-label">发表时间: </label>
+            <div class="controls" id="Time">
+                <div id="fromPicker" class="input-append">
+                    <input data-format="yyyy/MM/dd" type="text" name="fromTimeFilter" id="fromTimeFilter"/>
+                            <span class="add-on">
+                              <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                              </i>
+                            </span>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <input type="submit" class="offset4 btn btn-info" value="查找"/>
+        </div>
+    </fieldset>
+</form>
+<div class="row">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>新闻标题</th>
+            <th>发布时间</th>
+            <th>作者</th>
+        </tr>
+        </thead>
+        <tbody>
+        %{for(row in pages.Data){}%
+        <tr>
+            <td><a href="@{NewsCenter.show(row.id,type)}">${row.Title}</a></td>
+            <td>${row.CreateDate}</td>
+            #{if row.Author.RealName == null }
+            <td>${row.Author.LoginName}</td>
+            #{/if}#{else}
+            <td>${row.Author.RealName}</td>
+            #{/else}
+        </tr>
+        %{}}%
+        </tbody>
+    </table>
+</div>
+%{lstUrl =  play.mvc.Router.reverse('NewsCenter.list',['type':type]).url}%
+#{pager_header page:pages, action:"#", offset:"span3 offset9" /}
+
+<script type="text/javascript">
+    var ACT_ID = "nav_${type}";
+</script>
+#{js 'news/list.js' /}

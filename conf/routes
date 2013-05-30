@@ -93,5 +93,10 @@ GET     /admin/AirlineStatus/list              AdminAirlineStatus.list
 PUT     /admin/AirlineStatus/{id}              AdminAirlineStatus.updateByID
 
 
+#News Center
+GET     /news/{type}/{id}                       NewsCenter.show
+GET     /news/{type}/                       NewsCenter.list
+
+
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}
