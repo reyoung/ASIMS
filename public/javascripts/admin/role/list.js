@@ -1,6 +1,6 @@
 require(["admin/active","admin/delete"],function(act,opt){
     $(function (){
-//        console.log("Role List Page.")
+            act("nav_role_list")
         	opt("/admin/Role/");
           
     })

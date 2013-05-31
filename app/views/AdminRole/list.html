@@ -28,6 +28,10 @@
             </tbody>
         </table>
     </div>
-    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+    #{pager_header page:pages, action:lstUrl, offset:"span4 offset9"}
+    <li>
+        <a href="@{AdminRole.create}" class="btn-info">新建</a>
+    </li>
+    #{/pager_header}
 </div>
 #{js 'admin/role/list.js' /}

@@ -1,37 +1,23 @@
 #{extends 'main.html' /}
 
 <div class="row-fluid">
-    <div class="span2 well">
+    <div class="span3 well">
         <ul class="nav nav-list" >
-            <li class="nav-header">用户</li>
-            <li id="nav_user_list"><a href="@{AdminUser.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_user_create"><a href="@{AdminUser.create}"><i class="icon-plus"></i>新增</a> </li>
-            <li class="nav-header">机场操作</li>
-            <li id="nav_airport_list"><a href="@{AdminAirport.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_airport_create"><a href="@{AdminAirport.create}"><i class="icon-plus"></i>新增</a></li>
-            <li class="nav-header">航线计划操作</li>
-            <li id="nav_airlinePlan_list"><a href="@{AdminAirlinePlan.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_airlinePlan_create"><a href="@{AdminAirlinePlan.create}"><i class="icon-plus"></i>新增</a></li>
-            <li class="nav-header">航线状态操作</li>
-            <li id="nav_airlineStatus_list"><a href="@{AdminAirlineStatus.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li class="nav-header">航空公司操作</li>
-            <li id="nav_airCompany_list"><a href="@{AdminAirCompany.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_airCompany_create"><a href="@{AdminAirCompany.create}"><i class="icon-plus"></i>新增</a></li>
-            <li class="nav-header">角色操作</li>
-            <li id="nav_role_list"><a href="@{AdminRole.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_role_create"><a href="@{AdminRole.create}"><i class="icon-plus"></i>新增</a></li>
-            <li class="nav-header">机场设施</li>
-            <li id="nav_airportResource_list"><a href="@{AdminAirportResource.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_airportResource_create"><a href="@{AdminAirportResource.create}"><i class="icon-plus"></i>新增</a></li>
-            <li class="nav-header">物业设施</li>
-            <li id="nav_propertyResource_list"><a href="@{AdminPropertyResource.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_propertyResource_create"><a href="@{AdminPropertyResource.create}"><i class="icon-plus"></i>新增</a> </li>
-            <li class="nav-header">新增新闻</li>
-            <li id="nav_news_list"><a href="@{AdminNews.list}"><i class="icon-list-alt"></i>查询</a></li>
-            <li id="nav_news_create"><a href="@{AdminNews.create}"><i class="icon-plus"></i>新增</a></li>
+            <li id="nav_user_list"><a href="@{AdminUser.list}"><i class="icon-user"></i>用户管理</a></li>
+            <li id="nav_role_list"><a href="@{AdminRole.list}"><i class="icon-list-alt"></i>角色管理</a></li>
+            <li class="divider"></li>
+            <li id="nav_airportResource_list"><a href="@{AdminAirportResource.list}"><i class="icon-th"></i>机场设施管理</a></li>
+            <li id="nav_propertyResource_list"><a href="@{AdminPropertyResource.list}"><i class="icon-glass"></i>物业设施管理</a></li>
+            <li class="divider"></li>
+            <li id="nav_airCompany_list"><a href="@{AdminAirCompany.list}"><i class="icon-folder-close"></i>航空公司管理</a></li>
+            <li id="nav_airport_list"><a href="@{AdminAirport.list}"><i class="icon-map-marker"></i>机场管理</a></li>
+            <li id="nav_airlinePlan_list"><a href="@{AdminAirlinePlan.list}"><i class="icon-plane"></i>航班计划管理</a></li>
+            <li id="nav_airlineStatus_list"><a href="@{AdminAirlineStatus.list}"><i class="icon-plane"></i>航班状态管理</a></li>
+            <li class="divider"></li>
+            <li id="nav_news_list"><a href="@{AdminNews.list}"><i class="icon-pencil"></i>新闻管理</a></li>
         </ul>
     </div>
-    <div class="span9 offset1">
+    <div class="span8 offset1">
         #{doLayout /}
     </div>
 </div>

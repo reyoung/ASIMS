@@ -39,7 +39,24 @@
                                 <li><a href="@{NewsCenter.subscribe}">订阅新闻</a></li>
                             </ul>
                         </li>
-                        <li id="admin_nav"><a href="#">后台</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            后台<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ><a href="@{AdminUser.list}"><i class="icon-user"></i>用户管理</a></li>
+                            <li ><a href="@{AdminRole.list}"><i class="icon-list-alt"></i>角色管理</a></li>
+                            <li class="divider"></li>
+                            <li ><a href="@{AdminAirportResource.list}"><i class="icon-th"></i>机场设施管理</a></li>
+                            <li ><a href="@{AdminPropertyResource.list}"><i class="icon-glass"></i>物业设施管理</a></li>
+                            <li class="divider"></li>
+                            <li ><a href="@{AdminAirCompany.list}"><i class="icon-folder-close"></i>航空公司管理</a></li>
+                            <li ><a href="@{AdminAirport.list}"><i class="icon-map-marker"></i>机场管理</a></li>
+                            <li ><a href="@{AdminAirlinePlan.list}"><i class="icon-plane"></i>航班计划管理</a></li>
+                            <li ><a href="@{AdminAirlineStatus.list}"><i class="icon-plane"></i>航班状态管理</a></li>
+                            <li class="divider"></li>
+                            <li ><a href="@{AdminNews.list}"><i class="icon-pencil"></i>新闻管理</a></li>
+                        </ul>
+                        </li>
                     </ul>
                     <ul class="nav pull-right">
                         #{if user!=null}

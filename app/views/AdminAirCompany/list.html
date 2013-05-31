@@ -26,6 +26,10 @@
             </tbody>
         </table>
     </div>
-    #{pager_header page:pages, action:lstUrl, offset:"span3 offset9" /}
+    #{pager_header page:pages, action:lstUrl, offset:"span4 offset8"}
+    <li>
+        <a href="@{AdminAirCompany.create}" class="btn-info">新增</a>
+    </li>
+    #{/pager_header}
 </div>
 #{js 'admin/airCompany/list.js' /}
