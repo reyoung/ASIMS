@@ -1,0 +1,25 @@
+#{extends 'NewsCenter/base.html' /}
+#{set title: "订阅新闻" /}
+<form class="row form-horizontal" method="GET" action="@{NewsCenter.rss}">
+    <fieldset>
+        <legend>
+            订阅新闻
+        </legend>
+        <div class="control-group">
+            <label for="type" class="control-label">订阅类别:</label>
+            <div class="controls" id="type">
+                <input type="checkbox" data-id="0"/> 机场介绍
+                <input type="checkbox" data-id="1"/> 航班信息
+                <input type="checkbox" data-id="2"/> 机场资源
+                <input type="checkbox" data-id="3"/> 物业资源
+            </div>
+        </div>
+        <input type="hidden" name="filter" />
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" class="btn btn-info" style="margin-left:240px" value="订阅"/>
+            </div>
+        </div>
+    </fieldset>
+</form>
+#{js "news/subscribe.js" /}

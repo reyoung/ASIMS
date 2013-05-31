@@ -1,16 +1,27 @@
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import models.News;
 import models.Page;
 import play.Logger;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.db.jpa.GenericModel;
+import play.mvc.Router;
+import viecili.jrss.generator.RSSFeedGenerator;
+import viecili.jrss.generator.RSSFeedGeneratorFactory;
+import viecili.jrss.generator.elem.Channel;
+import viecili.jrss.generator.elem.RSS;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -88,5 +99,42 @@ public class NewsCenter extends BaseNormalController {
             badRequest();
         }
         render(news,type);
+    }
+    public static void rss(String filter) throws IOException {
+        if(filter==null||filter.isEmpty()){
+            filter = "[0,1,2,3]";
+        }
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Integer>>(){}.getType();
+        List<Integer> filter_type = gson.fromJson(filter,listType);
+        String querystr="";
+        for (Integer l : filter_type) {
+            if (!querystr.isEmpty()) {
+                querystr += " or ";
+            }
+            querystr += "Type = ?";
+        }
+
+        GenericModel.JPAQuery query = News.find(querystr,filter_type.toArray());
+        List<News> news = query.fetch(20);
+
+        RSSFeedGenerator gen = RSSFeedGeneratorFactory.getDefault();
+        RSS rss = new RSS();
+        for(News n : news){
+            Map<String,Object> args = new HashMap<String, Object>();
+            args.put("id",n.id);
+            args.put("type","rss");
+            String url = Router.getFullUrl("NewsCenter.show",args);
+            Channel ch = new Channel(n.Title, url,
+                    n.Content.substring(0,n.Content.length()>100? 100:n.Content.length()));
+            ch.setPubDate(n.CreateDate);
+            rss.addChannel(ch);
+        }
+        String result = gen.generateAsString(rss);
+        renderXml(result);
+    }
+
+    public static void subscribe(){
+        render();
     }
 }
