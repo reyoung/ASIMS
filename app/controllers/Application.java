@@ -7,10 +7,9 @@ import java.util.*;
 
 import models.*;
 
-public class Application extends Controller {
+public class Application extends BaseNormalController {
 
     public static void index() {
-
         render();
     }
 
