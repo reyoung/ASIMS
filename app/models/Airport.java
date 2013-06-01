@@ -1,5 +1,6 @@
 package models;
 
+import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
@@ -30,6 +31,11 @@ public class Airport extends Model {
     @Required
     @Column(name="CountryId",nullable = false)
     public int CountryId;
+
+    static public Long getCurrentAirportID(){
+        return Long.parseLong(Play.configuration.getProperty("current_airport", "1"), 10);
+    }
+
 
     static public String[][] CountryCityTable = {
             {"中国","天津","上海"},

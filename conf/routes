@@ -99,5 +99,12 @@ GET     /news/{type}/                           NewsCenter.list
 GET     /news/rss                               NewsCenter.rss
 GET     /news/subscribe                         NewsCenter.subscribe
 
+# Airline Query
+
+GET     /airline/china/in/                      AirlineQuery.list(type:'0')
+GET     /airline/china/out/                     AirlineQuery.list(type:'1')
+GET     /airline/international/in/              AirlineQuery.list(type:'2')
+GET     /airline/international/out/             AirlineQuery.list(type:'3')
+
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

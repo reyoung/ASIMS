@@ -59,6 +59,11 @@ public class AirlinePlan extends Model {
         inverseJoinColumns = @JoinColumn(name = "AirportID")
     )
     public List<Airport> StopoverPlaces;
+
+    public List<AirlineStatus> getStatus(int max){
+        return AirlineStatus.find("Plan.id = ? order by LeaveTime desc",this.id).fetch(max);
+    }
+
     public String switchNumber(String cha){
     	if(cha.equals("1")){
     		cha="一";
@@ -136,5 +141,28 @@ public class AirlinePlan extends Model {
     public String getEditLeaveTime()  {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         return sdf.format(this.LeaveTime);
+    }
+
+    public static List<Airport> getAirportByType(int type){
+        switch(type){
+            case 0:   //! China In
+                return Airport.find("select distinct plan.LeavePlace from AirlinePlan plan " +
+                        "where plan.ArrivePlace.id = ? and plan.LeavePlace.CountryId = 0"
+                        ,Airport.getCurrentAirportID()).fetch();
+            case 1:  //! China Out
+                return Airport.find("select distinct plan.ArrivePlace from AirlinePlan plan " +
+                    "where plan.LeavePlace.id = ? and plan.ArrivePlace.CountryId = 0"
+                    ,Airport.getCurrentAirportID()).fetch();
+            case 2: //! Inter In
+                return Airport.find("select distinct plan.LeavePlace from AirlinePlan plan " +
+                        "where plan.ArrivePlace.id = ? and plan.LeavePlace.CountryId <> 0"
+                        ,Airport.getCurrentAirportID()).fetch();
+            case 3:
+                return Airport.find("select distinct plan.ArrivePlace from AirlinePlan plan " +
+                        "where plan.LeavePlace.id = ? and plan.ArrivePlace.CountryId <> 0"
+                        ,Airport.getCurrentAirportID()).fetch();
+            default:
+                return null;
+        }
     }
 }

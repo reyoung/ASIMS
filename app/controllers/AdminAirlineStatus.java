@@ -53,7 +53,6 @@ public class AdminAirlineStatus extends BaseAdminController {
         render(pages);
     }
 
-
     public static final int UPDATE_ACTION_FLY = 0;
     public static final int UPDATE_ACTION_ARRIVED = 1;
     public static final int UPDATE_ACTION_CANCEL = 2;

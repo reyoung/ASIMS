@@ -1,2 +1,36 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
+<div class="row-fluid">
+    <div class="span3 well">
+        <ul class="nav nav-list" >
+            <li class="nav-header">航班查询</li>
+            <li><a href="@{AirlineQuery.list(type:'0')}">国内到港</a></li>
+            <li><a href="@{AirlineQuery.list(type:'1')}">国内离港</a></li>
+            <li><a href="@{AirlineQuery.list(type:'2')}">国际到港</a></li>
+            <li><a href="@{AirlineQuery.list(type:'3')}">国际离港</a></li>
+            <li class="nav-header">新闻中心</li>
+            <li><a href='@{NewsCenter.list(null,null,"airport_description",null,null,null)}'>机场介绍</a></li>
+            <li><a href='@{NewsCenter.list(null,null,"airline_info",null,null,null)}'>航班信息</a></li>
+            <li><a href='@{NewsCenter.list(null,null,"airport_resource",null,null,null)}'>机场资源</a></li>
+            <li><a href='@{NewsCenter.list(null,null,"property_resource",null,null,null)}'>物业资源</a></li>
+            <li><a href="@{NewsCenter.subscribe}">订阅新闻</a></li>
+            <li class="nav-header">后台管理</li>
+            <li ><a href="@{AdminUser.list}"><i class="icon-user"></i>用户管理</a></li>
+            <li ><a href="@{AdminRole.list}"><i class="icon-list-alt"></i>角色管理</a></li>
+            <li ><a href="@{AdminAirportResource.list}"><i class="icon-th"></i>机场设施管理</a></li>
+            <li ><a href="@{AdminPropertyResource.list}"><i class="icon-glass"></i>物业设施管理</a></li>
+            <li ><a href="@{AdminAirCompany.list}"><i class="icon-folder-close"></i>航空公司管理</a></li>
+            <li ><a href="@{AdminAirport.list}"><i class="icon-map-marker"></i>机场管理</a></li>
+            <li ><a href="@{AdminAirlinePlan.list}"><i class="icon-plane"></i>航班计划管理</a></li>
+            <li ><a href="@{AdminAirlineStatus.list}"><i class="icon-plane"></i>航班状态管理</a></li>
+            <li ><a href="@{AdminNews.list}"><i class="icon-pencil"></i>新闻管理</a></li>
+        </ul>
+    </div>
+    <div class="span7 offset1">
+        <div class="row">
+            <h2 class="text-center">欢迎使用机场航空静态信息管理系统！</h2>
+            <p>本系统能够实现某航空公司以自有域名在互联网开设企业电子管理平台。企业依托此网站对机场工作人员信息，机场设施，新闻发布等开展综合性的便捷的管理。</p>
+            <p>本系统人机界面友好，系统采用菜单/按钮驱动的图形用户界面，各功能均通过鼠标按键结合菜单方式驱动，形象直观、使用方便；同时，系统应具有在线帮助功能，用户可方便、及时地获得帮助，操作人员无需具备专业计算机背景知识，即可快速掌握各项操作。</p>
+        </div>
+</div>
+</div>

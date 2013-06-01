@@ -1,0 +1,110 @@
+#{extends 'main.html' /}
+%{title=""}%
+%{
+  if(type==0)
+    title="国内到港";
+  else if(type==1)
+    title="国内离港";
+  else if(type==2)
+    title="国际到港";
+  else
+    title="国际离港";
+}%
+#{set title:title /}
+<div class="row-fluid">
+    <div class="span3 well">
+        <ul class="nav nav-list" >
+            <li #{if type==0 } class="active"#{/if}><a href="@{AirlineQuery.list(type:'0')}">国内到港</a></li>
+            <li #{if type==1 } class="active"#{/if}><a href="@{AirlineQuery.list(type:'1')}">国内离港</a></li>
+            <li #{if type==2 } class="active"#{/if}><a href="@{AirlineQuery.list(type:'2')}">国际到港</a></li>
+            <li #{if type==3 } class="active"#{/if}><a href="@{AirlineQuery.list(type:'3')}">国际离港</a></li>
+        </ul>
+    </div>
+    <div class="span7 offset1">
+        <form class="form row  form-horizontal" method="GET" action="#" >
+            <fieldset>
+                <legend>
+                    ${title}
+                </legend>
+            </fieldset>
+            <div class="control-group">
+                <label for="Number" class="control-label">航班号: </label>
+                <div class="controls" id="Number">
+                    <input type="text" placeholder="CA34953" name="airlineNumber" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Airport" class="control-label">
+                    #{if type%2==0}
+                        始发地:
+                    #{/if}#{else}
+                        目的地:
+                    #{/else}
+                </label>
+                <div class="controls" id="Airport">
+                    <select name="airport_id">
+                        <option value="0"></option>
+                        %{for( p in ports){}%
+                        <option value="${p.id}">${p}</option>
+                        %{}}%
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="AirCompany" class="control-label">
+                    航空公司
+                </label>
+                <div class="controls" id="AirCompany">
+                    <input type="text" name="airCompanyName" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" value="查询" class="btn btn-info" style="margin-left:170px" />
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>计划时间</th>
+                        <th>计划飞行时间</th>
+                        <th>航班号</th>
+                        <th>始发地</th>
+                        <th>经停地</th>
+                        <th>目的地</th>
+                        <th>最近航班起飞时间</th>
+                        <th>最近航班状态</th>
+                        <th>登机门</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    %{for(plan in pages.Data){}%
+                    <tr>
+                        <td>${plan.getReadableLeaveTime()}</td>
+                        <td>${plan.getReadableFlyTime()}</td>
+                        <td>${plan.Number}</td>
+                        <td>${plan.LeavePlace}</td>
+                        <td>${plan.getReadableStopovers()}</td>
+                        <td>${plan.ArrivePlace}</td>
+                        %{st = plan.getStatus(1)[0]}%
+                        #{if st==null}
+                        <td>无</td>
+                        <td>未起飞-未计划</td>
+                        <td>无</td>
+                        #{/if}#{else}
+                        <td>${st.LeaveTime}</td>
+                        <td>${st.getStatusString()}</td>
+                        <td>${st.BoardPort.Name} ${st.BoardPort.Position} ${st.BoardPort.Comment}</td>
+                        #{/else}
+                    </tr>
+                    %{}}%
+                </tbody>
+            </table>
+        </div>
+        %{lstUrl =  play.mvc.Router.reverse('AirlineQuery.list',['type':type]).url}%
+        #{pager_header page:pages, action:"#", offset:"span3 offset9" /}
+    </div>
+
+</div>

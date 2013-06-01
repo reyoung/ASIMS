@@ -7,7 +7,7 @@
     #{include_css 'bootstrap.min.css' /}
     #{include_css 'bootstrap-responsive.min.css' /}
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-    #{jso 'jquery-1.8.3.min.js'/}
+    #{jso 'jquery.min.js'/}
     #{jso 'bootstrap.min.js'/}
     #{js 'require.js' /}
     <script type="text/javascript">
@@ -26,6 +26,17 @@
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li><a href="@{Application.index}">首页</a></li>
+                        <li class="dropdown" id="plan_nav">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                航班查询<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a href="@{AirlineQuery.list(type:'0')}">国内到港</a></li>
+                                <li><a href="@{AirlineQuery.list(type:'1')}">国内离港</a></li>
+                                <li><a href="@{AirlineQuery.list(type:'2')}">国际到港</a></li>
+                                <li><a href="@{AirlineQuery.list(type:'3')}">国际离港</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown" id="news_nav">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 新闻中心<b class="caret"></b>
