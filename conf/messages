@@ -1,3 +1,10 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+secure.title=ASIMS系统登录
+secure.username=登录名称:
+secure.password=密码:
+secure.remember=记住我
+secure.signin=登录
+secure.error=错误的用户名或密码
+secure.logout=您已登出
