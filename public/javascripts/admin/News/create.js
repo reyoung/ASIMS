@@ -1,6 +1,28 @@
-require(["admin/active","field_checker"],function(act,field){
+require(["admin/active","field_checker"],function(act,fc){
     act("nav_news_create")
     $(function (){
+        fc.parent = true
+        fc.def(["Title","Content"])
+        $("form").submit(function(){
+            var ok = fc.chk("Title",function(title){
+                if(title.length===0){
+                    return "标题不可为空"
+                } else {
+                    return true
+                }
+            })
+            ok = ok && fc.chk("Content",function(content){
+                if(content.length===0){
+                    return "内容不能为空"
+                } else {
+                    return true
+                }
+            })
+            return ok
+        })
+
+
+
         $(".form-horizontal").submit(function(){
             var ids = []
             $(".attachment-del-btn").each(function(){
