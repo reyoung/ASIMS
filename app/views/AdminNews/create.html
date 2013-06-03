@@ -29,8 +29,9 @@
                             value="${model.Title}"
                             #{/if}
                             />
+                    <span class="help-inline"></span>
                 </div>
-                <span class="help-inline"></span>
+
             </div>
             <div class="control-group">
                 <label for="Type" class="control-label">
@@ -51,6 +52,7 @@
                 </label>
                 <div class="controls">
                     <textarea class="span8" id="Content" name="n.Content" rows="16">#{if model!=null}${model.Content}#{/if}</textarea>
+                    <span class="help-inline"></span>
                 </div>
             </div>
             <div class="control-group">

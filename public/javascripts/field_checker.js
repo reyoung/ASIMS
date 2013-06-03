@@ -1,10 +1,17 @@
 define([],function (){
+        var retv = new Object();
+        retv.parent = false
         function CheckField(field_id, method){
             var field = $("#"+field_id)
             var errStr = method(field.val(), field)
             if(errStr!=true){
-                $(field[0].parentNode).attr("class","control-group error")
-                $("#"+field_id+" ~ .help-inline").text(errStr)
+                if(!retv.parent){
+                    $(field[0].parentNode).attr("class","control-group error")
+                    $("#"+field_id+" ~ .help-inline").text(errStr)
+                } else {
+                    $(field[0].parentNode.parentNode).attr("class","control-group error")
+                    $("#"+field_id+" ~ .help-inline").text(errStr)
+                }
                 return false
             }
             return true
@@ -13,8 +20,13 @@ define([],function (){
         function ResetCheckField(field_id) {
             function __ResetCheckOneField(f){
                 $("#"+f).focus(function (){
-                    $($("#"+f)[0].parentNode).attr("class","control-group")
-                    $("#"+f+" ~ .help-inline").text("")
+                    if(!retv.parent){
+                        $($("#"+f)[0].parentNode).attr("class","control-group")
+                        $("#"+f+" ~ .help-inline").text("")
+                    }else {
+                        $($("#"+f)[0].parentNode.parentNode).attr("class","control-group")
+                        $("#"+f+" ~ .help-inline").text("")
+                    }
                 })
             }
             function isArray(obj){
@@ -28,7 +40,6 @@ define([],function (){
                 __ResetCheckOneField(field_id)
             }
         }
-        var retv = new Object();
         retv.check = CheckField
         retv.define = ResetCheckField
         retv.chk = CheckField
