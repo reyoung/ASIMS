@@ -71,7 +71,7 @@
                     </ul>
                     <ul class="nav pull-right">
                         #{if user!=null}
-                        <li><a href="#">您好，${user.LoginName}</a></li>
+                        <li><a href="@{AdminUser.edit(user.id)}">您好，${user.LoginName}</a></li>
                         <li><a href="@{Secure.logout()}">注销</a> </li>
                         #{/if}#{else}
                         <li><a href="@{Secure.login()}"></a></li>
