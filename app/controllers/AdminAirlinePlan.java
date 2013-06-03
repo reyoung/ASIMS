@@ -140,6 +140,17 @@ public class AdminAirlinePlan extends BaseAdminController {
 		render("AdminAirlinePlan/create.html");
 	}
 
+    @Check("AirlineStatus+W")
+    public static void toStatus(@Required Long id){
+        Logger.debug("%d to Airline Status",id);
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        AirlinePlan plan = AirlinePlan.findById(id);
+        plan.toStatus();
+        AdminAirlineStatus.list(null,null,null,null);
+    }
+
     @Check("AirlinePlan+W")
 	public static void handleEdit(@Required String Number,
 			@Required String LeaveTime, @Required Integer FlyTime,

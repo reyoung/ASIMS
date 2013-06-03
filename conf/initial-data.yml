@@ -51,7 +51,7 @@ Facility(f_as_board):
   Name: 登机门
   Position: 一层南侧
   Amount: 1
-  Type: 100
+  Type: 101
 
 Facility(f_as_luggage):
   Name: 行李转盘

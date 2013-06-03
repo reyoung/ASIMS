@@ -2,12 +2,15 @@ package models;
 
 import javax.persistence.*;
 
+import play.Logger;
 import play.data.validation.Max;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -165,4 +168,81 @@ public class AirlinePlan extends Model {
                 return null;
         }
     }
+
+    public void toStatus(){
+        Date neastDate = null;
+        switch(Repeat.charAt(0)){
+            case 'N':
+                neastDate = this.LeaveTime;
+                break;
+            case 'W':
+            {
+                Date dt = getDateByWeekAndRepeat();
+                neastDate = dt;
+                break;
+            }
+            case 'M':{
+                Date dt = getDateByMonth();
+                neastDate = dt;
+                break;
+            }
+            default:
+                break;
+        }
+        if(neastDate!=null){
+
+            if(AirlineStatus.count("LeaveTime = ? and Plan = ?",neastDate,this)==0){
+                AirlineStatus st = new AirlineStatus();
+                st.Plan = this;
+                st.LeaveTime = neastDate;
+                st.FlyTime = this.FlyTime;
+                st.BoardPort = Facility.getRandBoardPort();
+                st.save();
+            }
+        }
+    }
+
+    private Date getDateByMonth() {
+        Date dt = (Date) this.LeaveTime.clone();
+        Date cur = new Date();
+        int curDate = cur.getDate();
+        int d = Integer.parseInt(Repeat.substring(1, Repeat.length()),10);
+        dt.setDate(d);
+        if(d < curDate){
+            Calendar c = Calendar.getInstance();
+            c.setTime(dt);
+            c.add(Calendar.MONTH,1);
+            dt = c.getTime();
+        }
+        return dt;
+    }
+
+    private Date getDateByWeekAndRepeat() {
+        List<Integer> weekdays = new ArrayList<Integer>();
+        for (int i=1;i<Repeat.length();++i){
+            int wod = Repeat.charAt(i)-'0';
+            if(wod ==7){
+                wod = 1;
+            } else {
+                wod +=1;
+            }
+            weekdays.add(wod);
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        int pass_day = 0;
+        for(pass_day=0;pass_day<7;++pass_day){
+            if(weekdays.contains(day)){
+                break;
+            }
+        }
+        cal.add(Calendar.DATE,pass_day);
+        Date dt = cal.getTime();
+        dt.setHours(this.LeaveTime.getHours());
+        dt.setMinutes(this.LeaveTime.getMinutes());
+        dt.setSeconds(this.LeaveTime.getSeconds());
+        return dt;
+    }
+
 }

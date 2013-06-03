@@ -29,6 +29,8 @@ DELETE  /admin/AirlinePlan/{id}                 AdminAirlinePlan.delete
 DELETE  /admin/AirlinePlan/                     AdminAirlinePlan.delete
 GET     /admin/AirlinePlan/{id}/edit            AdminAirlinePlan.edit
 POST    /admin/AirlinePlan/edit                 AdminAirlinePlan.handleEdit
+GET     /admin/AirlinePlan/{id}/2status         AdminAirlinePlan.toStatus
+
 
 GET     /admin/AirCompany/                      AdminAirCompany.list
 GET     /admin/AirCompany/create                AdminAirCompany.create

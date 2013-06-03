@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 @Entity
 public class Facility extends Model {
     public static int AirportResourceType = 100;
+    public static int AirportBroadPort = 101;
     public static int PropertyResourceType = 200;
 //    public static String [] AirportResourceTypes = {"值机柜台","登机门","行李转盘","特种车"};
 
@@ -36,4 +37,16 @@ public class Facility extends Model {
 
     @Column(name = "Telephone",nullable = true)
     public String Telephone;
+
+
+    public static Facility getRandBoardPort(){
+
+        long ct = Facility.count("Type = ?",AirportBroadPort);
+        if(ct==0){
+            return null;
+        }
+        int page = (int) (Math.random()*ct);
+
+        return (Facility) Facility.find("Type = ?",AirportBroadPort).fetch(page,1).get(0);
+    }
 }
