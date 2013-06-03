@@ -51,7 +51,7 @@
         <tr>
             <td><a href="@{NewsCenter.show(row.id,type)}">${row.Title}</a></td>
             <td>${row.CreateDate}</td>
-            #{if row.Author.RealName == null }
+            #{if row.Author.RealName == null||row.Author.RealName.isEmpty() }
             <td>${row.Author.LoginName}</td>
             #{/if}#{else}
             <td>${row.Author.RealName}</td>
