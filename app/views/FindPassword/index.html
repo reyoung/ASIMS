@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+#{set title:'找回密码' /}
+<div class="row">
+    <form class="form-horizontal span6 offset3" method="post">
+        <fieldset>
+            <legend>找回密码</legend>
+            <div class="control-group">
+                <label for="email" class="control-label">您的注册Email:</label>
+                <div class="controls" >
+                    <input type="email" name="email" id="email" />
+                </div>
+                <span class="help-inline"></span>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" class="btn btn-info" value="找回" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+require(["field_checker","isEmail"],function(fc, ie){
+    $(function(){
+        fc.parent=true
+        fc.def(["email"])
+        $("form").submit(function(){
+            return fc.chk("email",function(e){
+                if(ie(e)){
+                    return true
+                } else {
+                    return "请输入正确格式的EMail"
+                }
+            })
+        })
+    })
+})
+</script>

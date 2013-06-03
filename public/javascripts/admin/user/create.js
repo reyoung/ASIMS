@@ -1,4 +1,4 @@
-require(["admin/active","field_checker"],function(act,fc){
+require(["admin/active","field_checker","isEmail"],function(act,fc,isEmail){
     act("nav_user_list")
     $(function(){
         fc.def(["LoginName","Password","PasswordRepeat","Email","UserNumber","Telephone"])
@@ -28,12 +28,7 @@ require(["admin/active","field_checker"],function(act,fc){
                     return true
                 }
             })
-            function isEmail(strEmail) {
-                if (strEmail.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
-                    return true
-                else
-                    return false
-            }
+
             ok = ok && fc.chk("Email",function (email){
                 if(!isEmail(email)){
                     return "请输入正确格式的Email地址"

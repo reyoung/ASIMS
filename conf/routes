@@ -108,5 +108,8 @@ GET     /airline/china/out/                     AirlineQuery.list(type:'1')
 GET     /airline/international/in/              AirlineQuery.list(type:'2')
 GET     /airline/international/out/             AirlineQuery.list(type:'3')
 
+# Find Passwd
+GET     /user/forget_password/                  FindPassword.index
+POST    /user/forget_password/                  FindPassword.resetPassword
 # Catch all
 #*       /{controller}/{action}                  {controller}.{action}

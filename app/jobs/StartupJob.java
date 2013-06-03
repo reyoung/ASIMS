@@ -1,10 +1,13 @@
 package jobs;
 
 import models.AirCompany;
+import models.AirlinePlan;
 import play.Logger;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.test.Fixtures;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
