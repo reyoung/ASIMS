@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import play.Logger;
 import play.db.jpa.Model;
 /**
  * 
@@ -77,72 +78,50 @@ public class Role extends Model{
 	}
 
     public String getReadablePrivilege(){
-        /**
-         * @todo Complete This Method
-         */
+        Logger.debug("During getReadablePrivilege");
     	String strReadablePrivilege="";
-    	if(getUserTablePrivilege().Readable||getUserTablePrivilege().Writable){
-    		strReadablePrivilege+="用户表";
-    	    if(getUserTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getUserTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getUserTablePrivilege().Writable){
+    		strReadablePrivilege+="用户";
     	    strReadablePrivilege+=",";
     	}
-    	if(getPropertyResourceTablePrivilege().Readable|| getPropertyResourceTablePrivilege().Writable){
-    		strReadablePrivilege+="部门表";
-    	    if(getPropertyResourceTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getPropertyResourceTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getPropertyResourceTablePrivilege().Writable){
+    		strReadablePrivilege+="物业设施";
     	    strReadablePrivilege+=",";
     	}
-    	if(getRoleTablePrivilege().Readable||getRoleTablePrivilege().Writable){
-    		strReadablePrivilege+="角色表";
-    	    if(getRoleTablePrivilege().Readable){strReadablePrivilege+="可读";}
-            if(getRoleTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getRoleTablePrivilege().Writable){
+    		strReadablePrivilege+="角色";
     	    strReadablePrivilege+=",";
     	}
-    	if(getNewsTablePrivilege().Readable||getNewsTablePrivilege().Writable){
-    		strReadablePrivilege+="新闻表";
-    	    if(getNewsTablePrivilege().Readable){strReadablePrivilege+="可读";}
-            if(getNewsTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getNewsTablePrivilege().Writable){
+    		strReadablePrivilege+="新闻";
     	    strReadablePrivilege+=",";
     	}
-    	if(getAttachmentTablePrivilege().Readable||getAttachmentTablePrivilege().Writable){
-    		strReadablePrivilege+="附件表";
-            if(getAttachmentTablePrivilege().Readable){strReadablePrivilege+="可读";}
-            if(getAttachmentTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getAttachmentTablePrivilege().Writable){
+    		strReadablePrivilege+="附件";
+            strReadablePrivilege+=",";
+    	}
+    	if(getAirlinePlanTablePrivilege().Writable){
+    		strReadablePrivilege+="航班计划";
     	    strReadablePrivilege+=",";
     	}
-    	if(getAirlinePlanTablePrivilege().Readable||getAirlinePlanTablePrivilege().Writable){
-    		strReadablePrivilege+="航班计划表";
-    	    if(getAirlinePlanTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getAirlinePlanTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getAirlineStatusTablePrivilege().Writable){
+    		strReadablePrivilege+="航班状态";
     	    strReadablePrivilege+=",";
     	}
-    	if(getAirlineStatusTablePrivilege().Readable||getAirlineStatusTablePrivilege().Writable){
-    		strReadablePrivilege+="航班状态表";
-    	    if(getAirlineStatusTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getAirlineStatusTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if( getAirportResourceTablePrivilege().Writable){
+    		strReadablePrivilege+="机场设施";
     	    strReadablePrivilege+=",";
     	}
-    	if(getAirportResourceTablePrivilege().Readable|| getAirportResourceTablePrivilege().Writable){
-    		strReadablePrivilege+="机场设施表";
-    	    if(getAirportResourceTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getAirportResourceTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getAirCompanyTablePrivilege().Writable){
+    		strReadablePrivilege+="航空公司";
     	    strReadablePrivilege+=",";
     	}
-    	if(getAirCompanyTablePrivilege().Readable||getAirCompanyTablePrivilege().Writable){
-    		strReadablePrivilege+="航空公司表";
-    	    if(getAirCompanyTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getAirCompanyTablePrivilege().Writable){strReadablePrivilege+="可写";}
-    	    strReadablePrivilege+=",";
-    	}
-    	if(getAirportTablePrivilege().Readable||getAirportTablePrivilege().Writable){
-    		strReadablePrivilege+="机场表";
-    	    if(getAirportTablePrivilege().Readable){strReadablePrivilege+="可读";}
-    	    if(getAirportTablePrivilege().Writable){strReadablePrivilege+="可写";}
+    	if(getAirportTablePrivilege().Writable){
+    		strReadablePrivilege+="机场";
     	    strReadablePrivilege+=",";
     	}
     	if(strReadablePrivilege.length()!=0){
-    		strReadablePrivilege+=strReadablePrivilege.substring(0, strReadablePrivilege.length()-1);
+    		strReadablePrivilege=strReadablePrivilege.substring(0, strReadablePrivilege.length()-1);
     	}else{
     		strReadablePrivilege="你没有任何权限！";
     	}
