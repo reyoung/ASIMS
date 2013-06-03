@@ -107,10 +107,18 @@ public class AdminUser extends BaseAdminController {
         oldUser.save();
         list(null,null);
     }
-
+    @Check("User+W")
     public static void delete(@Required Long id){
+
+
+
         if(Validation.hasErrors()){
             badRequest();
+        }
+
+        User user = (User) renderArgs.get("user");
+        if(user.id.equals(id)){
+            renderJSON(false);
         }
         int row = 0;
         try{
