@@ -7,5 +7,5 @@
  * Blog: www.reyoung.me
  */
 public class Config {
-    public static boolean JAVASCRIPT_USE_MINIFY = false;
+    public static boolean JAVASCRIPT_USE_MINIFY = true;
 }
