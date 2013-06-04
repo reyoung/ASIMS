@@ -70,6 +70,31 @@ public class AdminUser extends BaseAdminController {
         list(null,null);
     }
 
+    public static void isNameExist(@Required String name){
+        if(Validation.hasErrors())
+            badRequest();
+        renderJSON(
+                User.count("LoginName = ?",name)!=0
+        );
+    }
+    public static void isEmailExist(@Required String email){
+        if(Validation.hasErrors())
+            badRequest();
+        renderJSON(
+                User.count("Email = ?",email)!=0
+        );
+    }
+
+    public static void isNumberExist(@Required String num){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        renderJSON(
+                User.count("UserNumber = ?",num)!=0
+        );
+    }
+
+
     public static void handleEdit(@Required User u, @Required Long RoleId, @Required Long id){
         User user = User.find("LoginName = ?", Security.connected()).first();
         if(!(user.getId().equals(id) || user.UserRole.getUserTablePrivilege().Writable&&

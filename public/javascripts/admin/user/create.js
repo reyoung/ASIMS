@@ -3,11 +3,23 @@ require(["admin/active","field_checker","isEmail"],function(act,fc,isEmail){
     $(function(){
         fc.def(["LoginName","Password","PasswordRepeat","Email","UserNumber","Telephone"])
         $("form").submit(function(){
+            function getResponse(url){
+                $.ajaxSetup({
+                    type: "GET",
+                	async: false
+                });
+                url = "http://" +  location.host + "/admin/User/" + url;
+                return $.ajax({url:url}).responseText;
+            }
+
+
             var ok = fc.chk("LoginName",function(text){
                 if(text.length==0){
                     return "登录名称不能为空"
                 } else if(text.length>255){
                     return "登录名称不能长于255字符"
+                } else if(JSON.parse(getResponse("byName/"+text))){
+                    return "该登录名称已经存在"
                 } else {
                     return true
                 }
@@ -32,6 +44,8 @@ require(["admin/active","field_checker","isEmail"],function(act,fc,isEmail){
             ok = ok && fc.chk("Email",function (email){
                 if(!isEmail(email)){
                     return "请输入正确格式的Email地址"
+                } else if (JSON.parse(getResponse("byEmail/"+email))){
+                    return "该邮箱已经存在"
                 } else {
                     return true
                 }
@@ -39,6 +53,8 @@ require(["admin/active","field_checker","isEmail"],function(act,fc,isEmail){
             ok = ok && fc.chk("UserNumber",function(number){
                 if(number.length===0){
                     return "工号不能为空"
+                } else if(JSON.parse(getResponse("byNumber/"+number))){
+                    return "该工号已经存在"
                 } else {
                     return true
                 }
