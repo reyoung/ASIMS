@@ -45,8 +45,9 @@ require(["admin/active","field_checker","isEmail"],function(act,fc,isEmail){
             })
             function IsAllDigital(str){
                 for(var i=0;i<str.length;++i){
-                    if(isNaN(parseInt(str[i],10))
+                    if(isNaN(parseInt(str[i],10))){
                         return false
+                    }
                 }
                 return true
             }
