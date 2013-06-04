@@ -2,6 +2,7 @@ package controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import models.Attachment;
 import models.News;
 import models.Page;
 import play.Logger;
@@ -100,6 +101,18 @@ public class NewsCenter extends BaseNormalController {
         }
         render(news,type);
     }
+
+    public static void attachment(@Required Long id){
+        if(Validation.hasErrors()){
+            badRequest();
+        }
+        Attachment att = Attachment.findById(id);
+        if(att==null)
+            badRequest();
+        else
+            renderBinary(att.getFile(),att.Title);
+    }
+
     public static void rss(String filter) throws IOException {
         if(filter==null||filter.isEmpty()){
             filter = "[0,1,2,3]";

@@ -39,6 +39,12 @@ public class Attachment extends Model {
         Logger.debug("OK? "+ok);
     }
 
+
+    public File getFile(){
+        File file = new File("upload/"+this.Path);
+        return file;
+    }
+
     public Attachment(File f){
         this.Title = f.getName();
         this.Path = String.format("%d_%d_%s",f.length(), System.currentTimeMillis(),f.getName());

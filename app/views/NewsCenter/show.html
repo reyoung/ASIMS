@@ -23,7 +23,7 @@
             %{for (att in attachments) {}%
                 <tr>
                     <th>${att.Title}</th>
-                    <th><a href="#">下载</a></th>
+                    <th><a href="@{NewsCenter.attachment(att.id)}">下载</a></th>
                 </tr>
             %{}}%
             </tbody>
