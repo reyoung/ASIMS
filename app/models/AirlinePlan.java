@@ -169,6 +169,11 @@ public class AirlinePlan extends Model {
         }
     }
 
+    public boolean IsStatusContained(Date leavetime){
+        AirlineStatus status = AirlineStatus.find("Plan = ? order by LeaveTime desc",this).first();
+        return status != null && status.LeaveTime.getDate() == leavetime.getDate() && status.LeaveTime.getMonth() == leavetime.getMonth() && status.LeaveTime.getYear() == leavetime.getYear();
+    }
+
     public void toStatus(){
         Date neastDate = null;
         switch(Repeat.charAt(0)){
@@ -191,7 +196,7 @@ public class AirlinePlan extends Model {
         }
         if(neastDate!=null){
 
-            if(AirlineStatus.count("LeaveTime = ? and Plan = ?",neastDate,this)==0){
+            if(!this.IsStatusContained(neastDate)){
                 AirlineStatus st = new AirlineStatus();
                 st.Plan = this;
                 st.LeaveTime = neastDate;
