@@ -36,7 +36,8 @@
     </div>
     #{pager_header page:pages, action:lstUrl, offset:"span4 offset8" }
     <li>
-        <a href="@{AdminNews.create}" class="btn-info">撰写</a>
+        <!--[if !IE]><!--><a href="@{AdminNews.create}" class="btn-info">撰写</a>  <!--<![endif]-->
+        <!--[if IE]><a href="@{AdminNews.create}">撰写</a> <![endif]-->
     </li>
     #{/pager_header}
 </div>

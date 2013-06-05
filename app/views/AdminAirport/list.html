@@ -48,7 +48,8 @@
     </div>
     #{pager_header page:pages, action:lstUrl, offset:"span4 offset8"}
     <li>
-        <a href="@{AdminAirport.create}" class="btn-info">新建</a>
+        <!--[if !IE]><!--><a href="@{AdminAirport.create}" class="btn-info">新建</a><!--<![endif]-->
+        <!--[if IE]><a href="@{AdminAirport.create}">新建</a><![endif]-->
     </li>
     #{/pager_header}
 </div>

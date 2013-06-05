@@ -30,7 +30,8 @@
     </div>
     #{pager_header page:pages, action:lstUrl, offset:"span4 offset9"}
     <li>
-        <a href="@{AdminRole.create}" class="btn-info">新建</a>
+        <!--[if !IE]><!-->  <a  href="@{AdminRole.create}" class="btn-info">新增</a> <!--<![endif]-->
+        <!--[if IE]><a  href="@{AdminRole.create}">新增</a> <![endif]-->
     </li>
     #{/pager_header}
 </div>
