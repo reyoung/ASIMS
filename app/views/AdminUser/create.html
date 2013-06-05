@@ -95,8 +95,17 @@
                     %{}}%
                 </select>
             </div>
-            <input type="submit" class="btn btn-info" value="创建" style="margin-left:300px;" />
+            <input type="submit" class="btn btn-info" #{if model == null} value="创建" #{/if}#{else} value="修改" #{/else} style="margin-left:300px;" />
         </fieldset>
     </form>
 </div>
+#{if model !=null }
+<script type="text/javascript">
+    var IsEdit = true
+</script>
+#{/if}#{else}
+<script type="text/javascript">
+    var IsEdit = false
+</script>
+#{/else}
 #{js 'admin/user/create.js' /}
